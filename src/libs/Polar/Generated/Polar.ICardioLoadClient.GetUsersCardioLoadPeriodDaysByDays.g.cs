@@ -1,0 +1,18 @@
+#nullable enable
+
+namespace Polar
+{
+    public partial interface ICardioLoadClient
+    {
+        /// <summary>
+        /// Get historical data by days<br/>
+        /// Returns historical cardio load data for selected period of days counting from current date.
+        /// </summary>
+        /// <param name="days"></param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::System.Collections.Generic.IList<global::Polar.CardioLoad>> GetUsersCardioLoadPeriodDaysByDaysAsync(
+            int days,
+            global::System.Threading.CancellationToken cancellationToken = default);
+    }
+}

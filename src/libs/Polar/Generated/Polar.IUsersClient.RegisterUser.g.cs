@@ -1,0 +1,32 @@
+#nullable enable
+
+namespace Polar
+{
+    public partial interface IUsersClient
+    {
+        /// <summary>
+        /// Register user<br/>
+        /// Once partner has been authorized by user, partner must register the user before being able to access its data. API user-id and Polar User Id (polar-user-id) are interchangeable terms.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Polar.User> RegisterUserAsync(
+
+            global::Polar.Register request,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Register user<br/>
+        /// Once partner has been authorized by user, partner must register the user before being able to access its data. API user-id and Polar User Id (polar-user-id) are interchangeable terms.
+        /// </summary>
+        /// <param name="memberId">
+        /// Partner's custom identifier for user.<br/>
+        /// Example: User_id_999
+        /// </param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::System.InvalidOperationException"></exception>
+        global::System.Threading.Tasks.Task<global::Polar.User> RegisterUserAsync(
+            string memberId,
+            global::System.Threading.CancellationToken cancellationToken = default);
+    }
+}
