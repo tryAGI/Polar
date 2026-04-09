@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class ExercisesDeprecatedClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_GetGpxSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetGpxSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_GetGpxSecurityRequirement0,
+            };
         partial void PrepareGetGpxArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref int userId,
@@ -55,12 +74,18 @@ namespace Polar
                 exerciseId: ref exerciseId,
                 includePauseTimes: ref includePauseTimes);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetGpxSecurityRequirements,
+                operationName: "GetGpxAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/gpx",
                 baseUri: HttpClient.BaseAddress); 
             __pathBuilder
                 .AddOptionalParameter("includePauseTimes", includePauseTimes?.ToString().ToLowerInvariant()) 
-                ; 
+                ;
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -70,7 +95,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

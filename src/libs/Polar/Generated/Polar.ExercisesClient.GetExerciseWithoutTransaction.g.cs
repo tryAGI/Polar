@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class ExercisesClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_GetExerciseWithoutTransactionSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetExerciseWithoutTransactionSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_GetExerciseWithoutTransactionSecurityRequirement0,
+            };
         partial void PrepareGetExerciseWithoutTransactionArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string exerciseId,
@@ -53,6 +72,12 @@ namespace Polar
                 zones: ref zones,
                 route: ref route);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetExerciseWithoutTransactionSecurityRequirements,
+                operationName: "GetExerciseWithoutTransactionAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: $"/v3/exercises/{exerciseId}",
                 baseUri: HttpClient.BaseAddress); 
@@ -60,7 +85,7 @@ namespace Polar
                 .AddOptionalParameter("samples", samples?.ToString().ToLowerInvariant())
                 .AddOptionalParameter("zones", zones?.ToString().ToLowerInvariant())
                 .AddOptionalParameter("route", route?.ToString().ToLowerInvariant()) 
-                ; 
+                ;
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -70,7 +95,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

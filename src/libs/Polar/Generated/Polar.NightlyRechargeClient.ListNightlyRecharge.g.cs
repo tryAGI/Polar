@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class NightlyRechargeClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_ListNightlyRechargeSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_ListNightlyRechargeSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_ListNightlyRechargeSecurityRequirement0,
+            };
         partial void PrepareListNightlyRechargeArguments(
             global::System.Net.Http.HttpClient httpClient);
         partial void PrepareListNightlyRechargeRequest(
@@ -33,9 +52,15 @@ namespace Polar
             PrepareListNightlyRechargeArguments(
                 httpClient: HttpClient);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_ListNightlyRechargeSecurityRequirements,
+                operationName: "ListNightlyRechargeAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: "/v3/users/nightly-recharge",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -45,7 +70,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

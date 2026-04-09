@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class WebhooksClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_CreateWebhooksDeactivateSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_CreateWebhooksDeactivateSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_CreateWebhooksDeactivateSecurityRequirement0,
+            };
         partial void PrepareCreateWebhooksDeactivateArguments(
             global::System.Net.Http.HttpClient httpClient);
         partial void PrepareCreateWebhooksDeactivateRequest(
@@ -28,9 +47,15 @@ namespace Polar
             PrepareCreateWebhooksDeactivateArguments(
                 httpClient: HttpClient);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_CreateWebhooksDeactivateSecurityRequirements,
+                operationName: "CreateWebhooksDeactivateAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: "/v3/webhooks/deactivate",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
@@ -40,7 +65,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

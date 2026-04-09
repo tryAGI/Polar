@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class DailyActivityClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_ListActivitiesWithoutTransactionSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_ListActivitiesWithoutTransactionSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_ListActivitiesWithoutTransactionSecurityRequirement0,
+            };
         partial void PrepareListActivitiesWithoutTransactionArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref bool? steps,
@@ -48,6 +67,12 @@ namespace Polar
                 activityZones: ref activityZones,
                 inactivityStamps: ref inactivityStamps);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_ListActivitiesWithoutTransactionSecurityRequirements,
+                operationName: "ListActivitiesWithoutTransactionAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: "/v3/users/activities",
                 baseUri: HttpClient.BaseAddress); 
@@ -55,7 +80,7 @@ namespace Polar
                 .AddOptionalParameter("steps", steps?.ToString().ToLowerInvariant())
                 .AddOptionalParameter("activity_zones", activityZones?.ToString().ToLowerInvariant())
                 .AddOptionalParameter("inactivity_stamps", inactivityStamps?.ToString().ToLowerInvariant()) 
-                ; 
+                ;
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -65,7 +90,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
