@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class PhysicalInfoClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_CreatePhysicalInfoTransactionSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_CreatePhysicalInfoTransactionSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_CreatePhysicalInfoTransactionSecurityRequirement0,
+            };
         partial void PrepareCreatePhysicalInfoTransactionArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref int userId);
@@ -39,9 +58,15 @@ namespace Polar
                 httpClient: HttpClient,
                 userId: ref userId);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_CreatePhysicalInfoTransactionSecurityRequirements,
+                operationName: "CreatePhysicalInfoTransactionAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: $"/v3/users/{userId}/physical-information-transactions",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
@@ -51,7 +76,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

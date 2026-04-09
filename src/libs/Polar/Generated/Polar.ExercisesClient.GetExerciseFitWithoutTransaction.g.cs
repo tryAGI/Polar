@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class ExercisesClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_GetExerciseFitWithoutTransactionSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetExerciseFitWithoutTransactionSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_GetExerciseFitWithoutTransactionSecurityRequirement0,
+            };
         partial void PrepareGetExerciseFitWithoutTransactionArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref string exerciseId);
@@ -38,9 +57,15 @@ namespace Polar
                 httpClient: HttpClient,
                 exerciseId: ref exerciseId);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetExerciseFitWithoutTransactionSecurityRequirements,
+                operationName: "GetExerciseFitWithoutTransactionAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: $"/v3/exercises/{exerciseId}/fit",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -50,7 +75,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

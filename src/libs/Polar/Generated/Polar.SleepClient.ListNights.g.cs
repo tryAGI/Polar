@@ -5,6 +5,25 @@ namespace Polar
 {
     public partial class SleepClient
     {
+
+
+        private static readonly global::Polar.EndPointSecurityRequirement s_ListNightsSecurityRequirement0 =
+            new global::Polar.EndPointSecurityRequirement
+            {
+                Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
+                {                    new global::Polar.EndPointAuthorizationRequirement
+                    {
+                        Type = "Http",
+                        Location = "Header",
+                        Name = "Bearer",
+                        FriendlyName = "Bearer",
+                    },
+                },
+            };
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_ListNightsSecurityRequirements =
+            new global::Polar.EndPointSecurityRequirement[]
+            {                s_ListNightsSecurityRequirement0,
+            };
         partial void PrepareListNightsArguments(
             global::System.Net.Http.HttpClient httpClient);
         partial void PrepareListNightsRequest(
@@ -33,9 +52,15 @@ namespace Polar
             PrepareListNightsArguments(
                 httpClient: HttpClient);
 
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_ListNightsSecurityRequirements,
+                operationName: "ListNightsAsync");
+
             var __pathBuilder = new global::Polar.PathBuilder(
                 path: "/v3/users/sleep",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -45,7 +70,7 @@ namespace Polar
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

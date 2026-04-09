@@ -6,6 +6,7 @@ namespace Polar
     public sealed partial class PolarClient
     {
         /// <inheritdoc cref="PolarClient(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::Polar.EndPointAuthorization}?, bool)"/>
+
         public PolarClient(
             string apiKey,
             global::System.Net.Http.HttpClient? httpClient = null,
