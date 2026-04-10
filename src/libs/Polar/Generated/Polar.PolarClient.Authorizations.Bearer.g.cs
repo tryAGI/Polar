@@ -25,6 +25,7 @@ namespace Polar
             Authorizations.Add(new global::Polar.EndPointAuthorization
             {
                 Type = "Http",
+                SchemeId = "HttpBearer",
                 Location = "Header",
                 Name = "Bearer",
                 Value = apiKey,
