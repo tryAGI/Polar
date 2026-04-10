@@ -12,11 +12,13 @@ namespace Polar
         /// **Note!** Save the *signature_secret_key* from response since this is the only chance to get it.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
         global::System.Threading.Tasks.Task<global::Polar.CreatedWebhook> CreateWebhookAsync(
 
             global::Polar.WebhookRequest request,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create webhook<br/>
@@ -33,11 +35,13 @@ namespace Polar
         /// Url where the webhook notification is sent.<br/>
         /// Example: https://myapp.example.com/acl_webhook
         /// </param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
         global::System.Threading.Tasks.Task<global::Polar.CreatedWebhook> CreateWebhookAsync(
             global::System.Collections.Generic.IList<global::Polar.WebhookType> events,
             string url,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
