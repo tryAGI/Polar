@@ -1,0 +1,59 @@
+{
+  "Examples": [
+    {
+      "Order": 1,
+      "Title": "Get Continuous Heart rate samples with range",
+      "Slug": "get-continuous-heart-rate-samples-with-range",
+      "Description": "Get users continuous heart rate values for given date range. \u003Ca href=\u0022https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate\u0022\u003E Supported devices \u003C/a\u003E",
+      "Language": "http",
+      "Code": "### Get Continuous Heart rate samples with range\nGET {{host}}/v3/users/continuous-heart-rate?from={{from}}\u0026to={{to}}\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n## Responses\n# 200\n# Description: Request was successful.\n# Content-Type: application/json\n# 400\n# Description: Invalid request.\n# 401\n# Description: Unauthorized.\n# 403\n# Description: User has not accepted all mandatory consents.",
+      "Format": "http",
+      "OperationId": "getUsersContinuousHeartRate",
+      "Setup": null
+    },
+    {
+      "Order": 2,
+      "Title": "Get Continuous Heart rate samples",
+      "Slug": "get-continuous-heart-rate-samples",
+      "Description": "Get users continuous heart rate values for given date. \u003Ca href=\u0022https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate\u0022\u003E Supported devices \u003C/a\u003E",
+      "Language": "http",
+      "Code": "### Get Continuous Heart rate samples\nGET {{host}}/v3/users/continuous-heart-rate/{{date}}\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n## Responses\n# 200\n# Description: Request was successful.\n# Content-Type: application/json\n# 400\n# Description: Invalid request.\n# 401\n# Description: Unauthorized.\n# 403\n# Description: User has not accepted all mandatory consents.\n# 404\n# Description: No data found for date.",
+      "Format": "http",
+      "OperationId": "getUsersContinuousHeartRateByDate",
+      "Setup": null
+    },
+    {
+      "Order": 3,
+      "Title": "List exercises",
+      "Slug": "listexercises",
+      "Description": "After successfully initiating a transaction, training sessions included within it can be retrieved with the provided transactionId.",
+      "Language": "http",
+      "Code": "### List exercises\n# @name listExercises\nGET {{host}}/v3/users/{{user-id}}/exercise-transactions/{{transaction-id}}\nAuthorization: Bearer {{token}}\nAccept: application/json, application/xml\n\n## Responses\n# 200\n# Description: Return list of hyperlinks to training sessions contained within the transaction.\n# Content-Type: application/json, application/xml\n# 204\n# Description: No content when there is no data available.\n# 403\n# Description: User has not accepted all mandatory consents.",
+      "Format": "http",
+      "OperationId": "listExercises",
+      "Setup": null
+    },
+    {
+      "Order": 4,
+      "Title": "List physical infos",
+      "Slug": "listphysicalinfos",
+      "Description": "List new physical info data.\nAfter successfully initiating a transaction, physical infos included within it can be retrieved with the provided transactionId.",
+      "Language": "http",
+      "Code": "### List physical infos\n# @name listPhysicalInfos\nGET {{host}}/v3/users/{{user-id}}/physical-information-transactions/{{transaction-id}}\nAuthorization: Bearer {{token}}\nAccept: application/json, application/xml\n\n## Responses\n# 200\n# Description: Return list of hyperlinks to physical information contained within the transaction.\n# Content-Type: application/json, application/xml\n# 204\n# Description: No content when there is no data available.\n# 403\n# Description: User has not accepted all mandatory consents.\n# 404\n# Description: No transaction was found with given transaction id.",
+      "Format": "http",
+      "OperationId": "listPhysicalInfos",
+      "Setup": null
+    },
+    {
+      "Order": 5,
+      "Title": "Get user information",
+      "Slug": "getuserinformation",
+      "Description": "List user basic information.\nNote: Although it is possible to get users weight and height from this resource, the [get physical info](#get-physical-info) should be used instead.",
+      "Language": "csharp",
+      "Code": "using var client = new PolarClient(apiKey);\n\nvar response = await client.Users.GetUserInformationAsync(\n    userId: 475\n);",
+      "Format": "sdk",
+      "OperationId": "getUserInformation",
+      "Setup": "This example assumes \u0060using Polar;\u0060 is in scope and \u0060apiKey\u0060 contains the required credential."
+    }
+  ]
+}
