@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// This resource allows partners to access their users' continuous heart rate data. Continuous heart rate is recorded with supported devices when the heart rate tracking is turned on in device settings. Samples are recording in 5 minute intervals. Heart rate samples from training sessions are not available through this resource. Training sessions samples have more precise sampling interval and they can be accessed from the [training data resource](#exercises). &lt;a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate"&gt;Supported devices&lt;/a&gt;.<br/>
+    /// This resource allows partners to access their users' continuous heart rate data. Continuous heart rate is recorded with supported devices when the heart rate tracking is turned on in device settings. Samples are recording in 5 minute intervals. Heart rate samples from training sessions are not available through this resource. Training sessions samples have more precise sampling interval and they can be accessed from the [training data resource](#exercises). &lt;a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate"&gt;Supported devices&lt;/a&gt;<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
@@ -33,11 +33,11 @@ namespace Polar
         /// ensuring <see cref="ApiException.ResponseBody"/> is populated.
         /// </summary>
         public bool ReadResponseAsString { get; set; }
-
         /// <summary>
         /// Client-wide request defaults such as headers, query parameters, retries, and timeout.
         /// </summary>
         public global::Polar.AutoSDKClientOptions Options { get; }
+
 
         /// <summary>
         /// 
