@@ -134,8 +134,8 @@ namespace Polar
                 PrepareGetUsersSleepwiseCircadianBedtimeDateRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    from: from,
-                    to: to);
+                    from: from!,
+                    to: to!);
 
                 return __httpRequest;
             }

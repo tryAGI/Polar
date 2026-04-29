@@ -125,7 +125,7 @@ namespace Polar
                 PrepareGetExerciseGpxWithoutTransactionRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    exerciseId: exerciseId);
+                    exerciseId: exerciseId!);
 
                 return __httpRequest;
             }

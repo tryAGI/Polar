@@ -162,13 +162,13 @@ namespace Polar
                 PrepareListActivitiesWithoutTransactionByDateRangeRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    from: from,
+                    from: from!,
                     to: to,
                     steps: steps,
                     activityZones: activityZones,
                     inactivityStamps: inactivityStamps,
-                    from2: from2,
-                    to2: to2);
+                    from2: from2!,
+                    to2: to2!);
 
                 return __httpRequest;
             }

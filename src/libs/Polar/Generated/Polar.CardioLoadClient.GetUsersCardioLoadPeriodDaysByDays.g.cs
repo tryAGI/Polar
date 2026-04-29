@@ -125,7 +125,7 @@ namespace Polar
                 PrepareGetUsersCardioLoadPeriodDaysByDaysRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    days: days);
+                    days: days!);
 
                 return __httpRequest;
             }

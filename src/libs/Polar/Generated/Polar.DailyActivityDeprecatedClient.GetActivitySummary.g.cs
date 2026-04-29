@@ -134,9 +134,9 @@ namespace Polar
                 PrepareGetActivitySummaryRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    userId: userId,
-                    transactionId: transactionId,
-                    activityId: activityId);
+                    userId: userId!,
+                    transactionId: transactionId!,
+                    activityId: activityId!);
 
                 return __httpRequest;
             }

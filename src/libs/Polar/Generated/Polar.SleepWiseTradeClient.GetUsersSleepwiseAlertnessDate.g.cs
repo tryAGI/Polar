@@ -134,8 +134,8 @@ namespace Polar
                 PrepareGetUsersSleepwiseAlertnessDateRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    from: from,
-                    to: to);
+                    from: from!,
+                    to: to!);
 
                 return __httpRequest;
             }

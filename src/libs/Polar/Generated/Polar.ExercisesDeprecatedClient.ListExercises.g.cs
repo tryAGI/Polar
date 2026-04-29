@@ -130,8 +130,8 @@ namespace Polar
                 PrepareListExercisesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    transactionId: transactionId,
-                    userId: userId);
+                    transactionId: transactionId!,
+                    userId: userId!);
 
                 return __httpRequest;
             }

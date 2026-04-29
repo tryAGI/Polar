@@ -145,7 +145,7 @@ namespace Polar
                 PrepareGetActivityWithoutTransactionRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    date: date,
+                    date: date!,
                     steps: steps,
                     activityZones: activityZones,
                     inactivityStamps: inactivityStamps);

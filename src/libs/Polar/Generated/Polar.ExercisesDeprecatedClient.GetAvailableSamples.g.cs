@@ -135,9 +135,9 @@ namespace Polar
                 PrepareGetAvailableSamplesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    userId: userId,
-                    transactionId: transactionId,
-                    exerciseId: exerciseId);
+                    userId: userId!,
+                    transactionId: transactionId!,
+                    exerciseId: exerciseId!);
 
                 return __httpRequest;
             }
