@@ -125,7 +125,7 @@ namespace Polar
                 PrepareGetUsersSleepByDateRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    date: date);
+                    date: date!);
 
                 return __httpRequest;
             }

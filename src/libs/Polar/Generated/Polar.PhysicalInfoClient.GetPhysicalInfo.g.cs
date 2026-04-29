@@ -135,9 +135,9 @@ namespace Polar
                 PrepareGetPhysicalInfoRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    userId: userId,
-                    transactionId: transactionId,
-                    physicalInfoId: physicalInfoId);
+                    userId: userId!,
+                    transactionId: transactionId!,
+                    physicalInfoId: physicalInfoId!);
 
                 return __httpRequest;
             }

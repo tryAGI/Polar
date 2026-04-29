@@ -145,7 +145,7 @@ namespace Polar
                 PrepareGetExerciseWithoutTransactionRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    exerciseId: exerciseId,
+                    exerciseId: exerciseId!,
                     samples: samples,
                     zones: zones,
                     route: route);

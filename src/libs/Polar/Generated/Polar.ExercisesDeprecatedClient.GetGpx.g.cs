@@ -145,9 +145,9 @@ namespace Polar
                 PrepareGetGpxRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    userId: userId,
-                    transactionId: transactionId,
-                    exerciseId: exerciseId,
+                    userId: userId!,
+                    transactionId: transactionId!,
+                    exerciseId: exerciseId!,
                     includePauseTimes: includePauseTimes);
 
                 return __httpRequest;

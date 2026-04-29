@@ -140,10 +140,10 @@ namespace Polar
                 PrepareGetSamplesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    typeId: typeId,
-                    userId: userId,
-                    transactionId: transactionId,
-                    exerciseId: exerciseId);
+                    typeId: typeId!,
+                    userId: userId!,
+                    transactionId: transactionId!,
+                    exerciseId: exerciseId!);
 
                 return __httpRequest;
             }

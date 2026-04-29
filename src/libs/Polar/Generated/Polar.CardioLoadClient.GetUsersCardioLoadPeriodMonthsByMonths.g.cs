@@ -125,7 +125,7 @@ namespace Polar
                 PrepareGetUsersCardioLoadPeriodMonthsByMonthsRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    months: months);
+                    months: months!);
 
                 return __httpRequest;
             }
