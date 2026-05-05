@@ -16,5 +16,17 @@ namespace Polar
             global::System.DateTime date,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get activity samples for given date<br/>
+        /// Get users activity samples for given date. Date cannot be older than 365 days from today.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.ActivityDayWithSamples>> GetActivitySamplesWithoutTransactionAsResponseAsync(
+            global::System.DateTime date,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
     }
 }
