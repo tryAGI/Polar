@@ -2,7 +2,7 @@
 
 namespace Polar
 {
-    public partial interface IPhysicalInfoClient
+    public partial interface IPhysicalInfoDeprecatedClient
     {
         /// <summary>
         /// Commit transaction<br/>

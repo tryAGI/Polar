@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// Resources for getting information about exercise. These endpoints does not require active transaction, but they use hashed id.<br/>
+    /// Resources for getting information about exercise. These endpoints do not require an active transaction, but they use hashed id.<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>

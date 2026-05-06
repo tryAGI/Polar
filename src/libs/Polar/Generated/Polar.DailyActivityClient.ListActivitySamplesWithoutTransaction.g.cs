@@ -26,10 +26,14 @@ namespace Polar
             {                s_ListActivitySamplesWithoutTransactionSecurityRequirement0,
             };
         partial void PrepareListActivitySamplesWithoutTransactionArguments(
-            global::System.Net.Http.HttpClient httpClient);
+            global::System.Net.Http.HttpClient httpClient,
+            ref global::System.DateTime? from,
+            ref global::System.DateTime? to);
         partial void PrepareListActivitySamplesWithoutTransactionRequest(
             global::System.Net.Http.HttpClient httpClient,
-            global::System.Net.Http.HttpRequestMessage httpRequestMessage);
+            global::System.Net.Http.HttpRequestMessage httpRequestMessage,
+            global::System.DateTime? from,
+            global::System.DateTime? to);
         partial void ProcessListActivitySamplesWithoutTransactionResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
@@ -40,17 +44,27 @@ namespace Polar
             ref string content);
 
         /// <summary>
-        /// List activity days with samples for past 28 days<br/>
-        /// List users activity samples available in AccessLink. Only Activity samples uploaded to Flow in the last 28 days are returned.
+        /// List activity samples<br/>
+        /// List users activity samples available in AccessLink. When no date range is given, activity samples from the last 28 days are returned. When `from` is given, activity samples for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
         /// </summary>
+        /// <param name="from">
+        /// Example: 2023-01-01
+        /// </param>
+        /// <param name="to">
+        /// Example: 2023-01-31
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamples>> ListActivitySamplesWithoutTransactionAsync(
+            global::System.DateTime? from = default,
+            global::System.DateTime? to = default,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             var __response = await ListActivitySamplesWithoutTransactionAsResponseAsync(
+                from: from,
+                to: to,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -58,20 +72,30 @@ namespace Polar
             return __response.Body;
         }
         /// <summary>
-        /// List activity days with samples for past 28 days<br/>
-        /// List users activity samples available in AccessLink. Only Activity samples uploaded to Flow in the last 28 days are returned.
+        /// List activity samples<br/>
+        /// List users activity samples available in AccessLink. When no date range is given, activity samples from the last 28 days are returned. When `from` is given, activity samples for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
         /// </summary>
+        /// <param name="from">
+        /// Example: 2023-01-01
+        /// </param>
+        /// <param name="to">
+        /// Example: 2023-01-31
+        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamples>>> ListActivitySamplesWithoutTransactionAsResponseAsync(
+            global::System.DateTime? from = default,
+            global::System.DateTime? to = default,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             PrepareArguments(
                 client: HttpClient);
             PrepareListActivitySamplesWithoutTransactionArguments(
-                httpClient: HttpClient);
+                httpClient: HttpClient,
+                from: ref from,
+                to: ref to);
 
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
@@ -99,6 +123,10 @@ namespace Polar
                             var __pathBuilder = new global::Polar.PathBuilder(
                                 path: "/v3/users/activities/samples",
                                 baseUri: HttpClient.BaseAddress);
+                            __pathBuilder
+                                .AddOptionalParameter("from", from?.ToString("yyyy-MM-dd"))
+                                .AddOptionalParameter("to", to?.ToString("yyyy-MM-dd"))
+                                ;
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
                     path: __path,
@@ -138,7 +166,9 @@ namespace Polar
                     request: __httpRequest);
                 PrepareListActivitySamplesWithoutTransactionRequest(
                     httpClient: HttpClient,
-                    httpRequestMessage: __httpRequest);
+                    httpRequestMessage: __httpRequest,
+                    from: from,
+                    to: to);
 
                 return __httpRequest;
             }
@@ -318,32 +348,32 @@ namespace Polar
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
-                            if ((int)__response.StatusCode == 403)
+                            if ((int)__response.StatusCode == 400)
                             {
-                                string? __content_403 = null;
-                                global::System.Exception? __exception_403 = null;
+                                string? __content_400 = null;
+                                global::System.Exception? __exception_400 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                     else
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    __exception_403 = __ex;
+                                    __exception_400 = __ex;
                                 }
 
                                 throw new global::Polar.ApiException(
-                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_403,
+                                    message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_400,
                                     statusCode: __response.StatusCode)
                                 {
-                                    ResponseBody = __content_403,
+                                    ResponseBody = __content_400,
                                     ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
@@ -377,6 +407,39 @@ namespace Polar
                                     statusCode: __response.StatusCode)
                                 {
                                     ResponseBody = __content_401,
+                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value),
+                                };
+                            }
+                            // 
+                            if ((int)__response.StatusCode == 403)
+                            {
+                                string? __content_403 = null;
+                                global::System.Exception? __exception_403 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                    else
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_403 = __ex;
+                                }
+
+                                throw new global::Polar.ApiException(
+                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_403,
+                                    statusCode: __response.StatusCode)
+                                {
+                                    ResponseBody = __content_403,
                                     ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,

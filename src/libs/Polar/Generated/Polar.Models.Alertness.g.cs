@@ -23,7 +23,7 @@ namespace Polar
         /// </summary>
         /// <example>57600</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("grade_validity_seconds")]
-        public double? GradeValiditySeconds { get; set; }
+        public int? GradeValiditySeconds { get; set; }
 
         /// <summary>
         /// Grade type<br/>
@@ -117,7 +117,7 @@ namespace Polar
         /// </summary>
         /// <example>120</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("sleep_timezone_offset_minutes")]
-        public double? SleepTimezoneOffsetMinutes { get; set; }
+        public int? SleepTimezoneOffsetMinutes { get; set; }
 
         /// <summary>
         /// Alertness hourly data for the alertness period
@@ -194,7 +194,7 @@ namespace Polar
 #endif
         public Alertness(
             double? grade,
-            double? gradeValiditySeconds,
+            int? gradeValiditySeconds,
             global::Polar.AlertnessGradeType? gradeType,
             global::Polar.AlertnessGradeClassification? gradeClassification,
             global::Polar.AlertnessValidity? validity,
@@ -205,7 +205,7 @@ namespace Polar
             global::System.DateTime? periodEndTime,
             global::System.DateTime? sleepPeriodStartTime,
             global::System.DateTime? sleepPeriodEndTime,
-            double? sleepTimezoneOffsetMinutes,
+            int? sleepTimezoneOffsetMinutes,
             global::System.Collections.Generic.IList<global::Polar.AlertnessHourlyData>? hourlyData)
         {
             this.Grade = grade;

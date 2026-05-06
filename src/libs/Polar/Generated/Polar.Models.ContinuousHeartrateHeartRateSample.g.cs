@@ -6,19 +6,19 @@ namespace Polar
     /// <summary>
     /// 
     /// </summary>
-    public sealed partial class ContinuousHeartrateHeartRateSamples
+    public sealed partial class ContinuousHeartrateHeartRateSample
     {
         /// <summary>
-        /// heart rate rpm
+        /// Heart rate in beats per minute (bpm).
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("heart_rate")]
         public int? HeartRate { get; set; }
 
         /// <summary>
-        /// Measurement time of heart rate. Device time used for measurement
+        /// Measurement time of heart rate in HH:mm:ss format. Device time used for measurement.
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("sample_time")]
-        public global::System.DateTime? SampleTime { get; set; }
+        public string? SampleTime { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -27,29 +27,29 @@ namespace Polar
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalProperties { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContinuousHeartrateHeartRateSamples" /> class.
+        /// Initializes a new instance of the <see cref="ContinuousHeartrateHeartRateSample" /> class.
         /// </summary>
         /// <param name="heartRate">
-        /// heart rate rpm
+        /// Heart rate in beats per minute (bpm).
         /// </param>
         /// <param name="sampleTime">
-        /// Measurement time of heart rate. Device time used for measurement
+        /// Measurement time of heart rate in HH:mm:ss format. Device time used for measurement.
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 #endif
-        public ContinuousHeartrateHeartRateSamples(
+        public ContinuousHeartrateHeartRateSample(
             int? heartRate,
-            global::System.DateTime? sampleTime)
+            string? sampleTime)
         {
             this.HeartRate = heartRate;
             this.SampleTime = sampleTime;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContinuousHeartrateHeartRateSamples" /> class.
+        /// Initializes a new instance of the <see cref="ContinuousHeartrateHeartRateSample" /> class.
         /// </summary>
-        public ContinuousHeartrateHeartRateSamples()
+        public ContinuousHeartrateHeartRateSample()
         {
         }
     }

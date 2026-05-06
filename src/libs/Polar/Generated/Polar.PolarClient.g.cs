@@ -68,7 +68,7 @@ namespace Polar
         };
 
         /// <summary>
-        /// This resource allows partners to access their users' daily activity data. During the transfer, the activity data is copied also into the AccessLink database so the end-users cannot change the data that is accessible via AccessLink afterwards. Begin and end of day are determined by the time set on the device used. No timezone information is available. Each transaction will consist of at most 50 activity summaries. Available data presented in section [Schemas](#schemas). Only data that has been uploaded to Flow after the user has been registered to your client will be available. Only data that has been uploaded in the last 28 days will be available. &lt;br/&gt;&lt;br/&gt; This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity--beta-) instead.
+        /// This resource allows partners to access their users' daily activity data. During the transfer, the activity data is copied also into the AccessLink database so the end-users cannot change the data that is accessible via AccessLink afterwards. Begin and end of day are determined by the time set on the device used. No timezone information is available. Each transaction will consist of at most 50 activity summaries. Available data presented in section [Schemas](#schemas). Only data that has been uploaded to Flow after the user has been registered to your client will be available. Only data that has been uploaded in the last 28 days will be available. &lt;br/&gt;&lt;br/&gt; This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity) instead.
         /// </summary>
         public DailyActivityDeprecatedClient DailyActivityDeprecated => new DailyActivityDeprecatedClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -86,7 +86,7 @@ namespace Polar
         };
 
         /// <summary>
-        /// Resources for getting information about exercise. These endpoints does not require active transaction, but they use hashed id.
+        /// Resources for getting information about exercise. These endpoints do not require an active transaction, but they use hashed id.
         /// </summary>
         public ExercisesClient Exercises => new ExercisesClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
@@ -113,9 +113,18 @@ namespace Polar
         };
 
         /// <summary>
-        /// This resource allows partners to access their users' physical information. Whenever some user's physical information changes, new entry containing full physical info is stored to AccessLink. Pull notifications can be used to check if user have new physical information available. Available data presented in section [Schemas](#schemas).
+        /// This resource allows partners to access their users' physical information.
         /// </summary>
         public PhysicalInfoClient PhysicalInfo => new PhysicalInfoClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
+        {
+            ReadResponseAsString = ReadResponseAsString,
+            JsonSerializerContext = JsonSerializerContext,
+        };
+
+        /// <summary>
+        /// This resource allows partners to access their users' physical information. Whenever some user's physical information changes, new entry containing full physical info is stored to AccessLink. Pull notifications can be used to check if user have new physical information available. Available data presented in section [Schemas](#schemas). &lt;br/&gt;&lt;br/&gt; This resource is deprecated. Please use non-transactional [Physical info](#physical-info) instead.
+        /// </summary>
+        public PhysicalInfoDeprecatedClient PhysicalInfoDeprecated => new PhysicalInfoDeprecatedClient(HttpClient, baseUri: null, authorizations: Authorizations, options: Options)
         {
             ReadResponseAsString = ReadResponseAsString,
             JsonSerializerContext = JsonSerializerContext,

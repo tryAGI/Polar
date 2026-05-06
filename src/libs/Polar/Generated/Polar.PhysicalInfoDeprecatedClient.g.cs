@@ -4,11 +4,11 @@
 namespace Polar
 {
     /// <summary>
-    /// This resource allows partners to access their users' physical information.<br/>
+    /// This resource allows partners to access their users' physical information. Whenever some user's physical information changes, new entry containing full physical info is stored to AccessLink. Pull notifications can be used to check if user have new physical information available. Available data presented in section [Schemas](#schemas). &lt;br/&gt;&lt;br/&gt; This resource is deprecated. Please use non-transactional [Physical info](#physical-info) instead.<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
-    public sealed partial class PhysicalInfoClient : global::Polar.IPhysicalInfoClient, global::System.IDisposable
+    public sealed partial class PhysicalInfoDeprecatedClient : global::Polar.IPhysicalInfoDeprecatedClient, global::System.IDisposable
     {
         /// <summary>
         /// 
@@ -41,7 +41,7 @@ namespace Polar
 
 
         /// <summary>
-        /// Creates a new instance of the PhysicalInfoClient.
+        /// Creates a new instance of the PhysicalInfoDeprecatedClient.
         /// If no httpClient is provided, a new one will be created.
         /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Polar
         /// <param name="baseUri">The base URL for the API. If not provided, the default baseUri from OpenAPI spec will be used.</param>
         /// <param name="authorizations">The authorizations to use for the requests.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
-        public PhysicalInfoClient(
+        public PhysicalInfoDeprecatedClient(
             global::System.Net.Http.HttpClient? httpClient = null,
             global::System.Uri? baseUri = null,
             global::System.Collections.Generic.List<global::Polar.EndPointAuthorization>? authorizations = null,
@@ -63,7 +63,7 @@ namespace Polar
         }
 
         /// <summary>
-        /// Creates a new instance of the PhysicalInfoClient.
+        /// Creates a new instance of the PhysicalInfoDeprecatedClient.
         /// If no httpClient is provided, a new one will be created.
         /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
         /// </summary>
@@ -72,7 +72,7 @@ namespace Polar
         /// <param name="authorizations">The authorizations to use for the requests.</param>
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
-        public PhysicalInfoClient(
+        public PhysicalInfoDeprecatedClient(
             global::System.Net.Http.HttpClient? httpClient,
             global::System.Uri? baseUri,
             global::System.Collections.Generic.List<global::Polar.EndPointAuthorization>? authorizations,

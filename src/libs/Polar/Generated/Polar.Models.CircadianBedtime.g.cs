@@ -90,7 +90,7 @@ namespace Polar
         /// </summary>
         /// <example>120</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("sleep_timezone_offset_minutes")]
-        public double? SleepTimezoneOffsetMinutes { get; set; }
+        public int? SleepTimezoneOffsetMinutes { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -154,7 +154,7 @@ namespace Polar
             global::System.DateTime? preferredSleepPeriodEndTime,
             global::System.DateTime? sleepGateStartTime,
             global::System.DateTime? sleepGateEndTime,
-            double? sleepTimezoneOffsetMinutes)
+            int? sleepTimezoneOffsetMinutes)
         {
             this.Validity = validity;
             this.Quality = quality;
