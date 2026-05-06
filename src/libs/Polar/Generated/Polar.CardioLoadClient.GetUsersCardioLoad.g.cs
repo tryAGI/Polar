@@ -41,7 +41,7 @@ namespace Polar
 
         /// <summary>
         /// List cardio loads<br/>
-        /// Returns cardio load data for the last 28 days.
+        /// Returns cardio load data for the last 28 days. The response list contains cardio load objects for every day in the range, even if values cannot be calculated — in that case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
         /// </summary>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -59,7 +59,7 @@ namespace Polar
         }
         /// <summary>
         /// List cardio loads<br/>
-        /// Returns cardio load data for the last 28 days.
+        /// Returns cardio load data for the last 28 days. The response list contains cardio load objects for every day in the range, even if values cannot be calculated — in that case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
         /// </summary>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
@@ -97,7 +97,7 @@ namespace Polar
             {
 
                             var __pathBuilder = new global::Polar.PathBuilder(
-                                path: "/v3/users/cardio-load/",
+                                path: "/v3/users/cardio-load",
                                 baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -157,7 +157,7 @@ namespace Polar
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "getUsersCardioLoad",
                                 methodName: "GetUsersCardioLoadAsync",
-                                pathTemplate: "\"/v3/users/cardio-load/\"",
+                                pathTemplate: "\"/v3/users/cardio-load\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -191,7 +191,7 @@ namespace Polar
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "getUsersCardioLoad",
                                 methodName: "GetUsersCardioLoadAsync",
-                                pathTemplate: "\"/v3/users/cardio-load/\"",
+                                pathTemplate: "\"/v3/users/cardio-load\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -232,7 +232,7 @@ namespace Polar
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "getUsersCardioLoad",
                                 methodName: "GetUsersCardioLoadAsync",
-                                pathTemplate: "\"/v3/users/cardio-load/\"",
+                                pathTemplate: "\"/v3/users/cardio-load\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -280,7 +280,7 @@ namespace Polar
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "getUsersCardioLoad",
                                 methodName: "GetUsersCardioLoadAsync",
-                                pathTemplate: "\"/v3/users/cardio-load/\"",
+                                pathTemplate: "\"/v3/users/cardio-load\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -302,7 +302,7 @@ namespace Polar
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
                                 operationId: "getUsersCardioLoad",
                                 methodName: "GetUsersCardioLoadAsync",
-                                pathTemplate: "\"/v3/users/cardio-load/\"",
+                                pathTemplate: "\"/v3/users/cardio-load\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -317,39 +317,6 @@ namespace Polar
                                 retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // 
-                            if ((int)__response.StatusCode == 400)
-                            {
-                                string? __content_400 = null;
-                                global::System.Exception? __exception_400 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_400 = __ex;
-                                }
-
-                                throw new global::Polar.ApiException(
-                                    message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_400,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_400,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value),
-                                };
-                            }
                             // 
                             if ((int)__response.StatusCode == 401)
                             {

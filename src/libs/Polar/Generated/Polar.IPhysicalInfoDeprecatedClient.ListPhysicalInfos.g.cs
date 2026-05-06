@@ -2,30 +2,36 @@
 
 namespace Polar
 {
-    public partial interface IUsersClient
+    public partial interface IPhysicalInfoDeprecatedClient
     {
         /// <summary>
-        /// Delete user<br/>
-        /// When partner wishes no longer to receive user data, user can be de-registered. This will revoke the access token authorized by user.
+        /// List physical infos<br/>
+        /// List new physical info data.<br/>
+        /// After successfully initiating a transaction, physical infos included within it can be retrieved with the provided transactionId.
         /// </summary>
+        /// <param name="transactionId"></param>
         /// <param name="userId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task DeleteUserAsync(
-            long userId,
+        global::System.Threading.Tasks.Task<global::Polar.PhysicalInformations> ListPhysicalInfosAsync(
+            long transactionId,
+            int userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Delete user<br/>
-        /// When partner wishes no longer to receive user data, user can be de-registered. This will revoke the access token authorized by user.
+        /// List physical infos<br/>
+        /// List new physical info data.<br/>
+        /// After successfully initiating a transaction, physical infos included within it can be retrieved with the provided transactionId.
         /// </summary>
+        /// <param name="transactionId"></param>
         /// <param name="userId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse> DeleteUserAsResponseAsync(
-            long userId,
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.PhysicalInformations>> ListPhysicalInfosAsResponseAsync(
+            long transactionId,
+            int userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

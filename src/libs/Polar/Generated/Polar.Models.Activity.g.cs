@@ -25,7 +25,7 @@ namespace Polar
         public string? PolarUser { get; set; }
 
         /// <summary>
-        /// Id of the activity-transaction this training was transferred in<br/>
+        /// Id of the activity-transaction this activity was transferred in<br/>
         /// Example: 179879
         /// </summary>
         /// <example>179879</example>
@@ -98,7 +98,7 @@ namespace Polar
         /// Example: https://www.polaraccesslink/v3/users/1
         /// </param>
         /// <param name="transactionId">
-        /// Id of the activity-transaction this training was transferred in<br/>
+        /// Id of the activity-transaction this activity was transferred in<br/>
         /// Example: 179879
         /// </param>
         /// <param name="date">

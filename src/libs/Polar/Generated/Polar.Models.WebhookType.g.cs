@@ -4,14 +4,38 @@
 namespace Polar
 {
     /// <summary>
-    /// Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS and ACTIVITY_SUMMARY are supported.
+    /// Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
     /// </summary>
     public enum WebhookType
     {
         /// <summary>
         /// 
         /// </summary>
-        Exercise_Sleep_ContinuousHeartRate_SleepWiseCircadianBedtime_SleepWiseAlertness_ActivitySummary,
+        ActivitySummary,
+        /// <summary>
+        /// 
+        /// </summary>
+        ContinuousHeartRate,
+        /// <summary>
+        /// 
+        /// </summary>
+        Exercise,
+        /// <summary>
+        /// 
+        /// </summary>
+        PhysicalInformation,
+        /// <summary>
+        /// 
+        /// </summary>
+        Sleep,
+        /// <summary>
+        /// 
+        /// </summary>
+        SleepWiseAlertness,
+        /// <summary>
+        /// 
+        /// </summary>
+        SleepWiseCircadianBedtime,
     }
 
     /// <summary>
@@ -26,7 +50,13 @@ namespace Polar
         {
             return value switch
             {
-                WebhookType.Exercise_Sleep_ContinuousHeartRate_SleepWiseCircadianBedtime_SleepWiseAlertness_ActivitySummary => "EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY",
+                WebhookType.ActivitySummary => "ACTIVITY_SUMMARY",
+                WebhookType.ContinuousHeartRate => "CONTINUOUS_HEART_RATE",
+                WebhookType.Exercise => "EXERCISE",
+                WebhookType.PhysicalInformation => "PHYSICAL_INFORMATION",
+                WebhookType.Sleep => "SLEEP",
+                WebhookType.SleepWiseAlertness => "SLEEP_WISE_ALERTNESS",
+                WebhookType.SleepWiseCircadianBedtime => "SLEEP_WISE_CIRCADIAN_BEDTIME",
                 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, null),
             };
         }
@@ -37,7 +67,13 @@ namespace Polar
         {
             return value switch
             {
-                "EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY" => WebhookType.Exercise_Sleep_ContinuousHeartRate_SleepWiseCircadianBedtime_SleepWiseAlertness_ActivitySummary,
+                "ACTIVITY_SUMMARY" => WebhookType.ActivitySummary,
+                "CONTINUOUS_HEART_RATE" => WebhookType.ContinuousHeartRate,
+                "EXERCISE" => WebhookType.Exercise,
+                "PHYSICAL_INFORMATION" => WebhookType.PhysicalInformation,
+                "SLEEP" => WebhookType.Sleep,
+                "SLEEP_WISE_ALERTNESS" => WebhookType.SleepWiseAlertness,
+                "SLEEP_WISE_CIRCADIAN_BEDTIME" => WebhookType.SleepWiseCircadianBedtime,
                 _ => null,
             };
         }

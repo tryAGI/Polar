@@ -45,7 +45,7 @@ namespace Polar
 
         /// <summary>
         /// Get cardio load by date range<br/>
-        /// Returns cardio load data for selected date range.  The response list contains cardio load objects for every day between range even if the cardio load values cannot be calculated, in this case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
+        /// Returns cardio load data for selected date range. The response list contains cardio load objects for every day between range even if the cardio load values cannot be calculated, in this case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -69,7 +69,7 @@ namespace Polar
         }
         /// <summary>
         /// Get cardio load by date range<br/>
-        /// Returns cardio load data for selected date range.  The response list contains cardio load objects for every day between range even if the cardio load values cannot be calculated, in this case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
+        /// Returns cardio load data for selected date range. The response list contains cardio load objects for every day between range even if the cardio load values cannot be calculated, in this case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>

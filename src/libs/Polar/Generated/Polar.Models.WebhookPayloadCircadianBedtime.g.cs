@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// Payload example for webhook payload for event type SLEEP_WISE_CIRCADIAN_BEDTIME
+    /// Payload example for webhook payload for event type SLEEP_WISE_CIRCADIAN_BEDTIME. This event is sent when new circadian bedtime data is available for the user.
     /// </summary>
     public sealed partial class WebhookPayloadCircadianBedtime
     {
@@ -25,15 +25,15 @@ namespace Polar
         public long? UserId { get; set; }
 
         /// <summary>
-        /// For consistency use period for all descriptions<br/>
-        /// Example: 2022-09-31
+        /// Start date of the available circadian bedtime data.<br/>
+        /// Example: 2022-09-30
         /// </summary>
-        /// <example>2022-09-31</example>
+        /// <example>2022-09-30</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("from")]
         public string? From { get; set; }
 
         /// <summary>
-        /// For consistency use period for all descriptions<br/>
+        /// End date of the available circadian bedtime data.<br/>
         /// Example: 2022-10-02
         /// </summary>
         /// <example>2022-10-02</example>
@@ -50,9 +50,9 @@ namespace Polar
 
         /// <summary>
         /// Url to the new available data.<br/>
-        /// Example: https://www.polaraccesslink.com/v3/users/sleepwise/circadian_bedtime/date?from=2022-09-31&amp;to=2022-10-02
+        /// Example: https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date?from=2022-09-30&amp;to=2022-10-02
         /// </summary>
-        /// <example>https://www.polaraccesslink.com/v3/users/sleepwise/circadian_bedtime/date?from=2022-09-31&amp;to=2022-10-02</example>
+        /// <example>https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date?from=2022-09-30&amp;to=2022-10-02</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("url")]
         public string? Url { get; set; }
 
@@ -74,11 +74,11 @@ namespace Polar
         /// Example: 475
         /// </param>
         /// <param name="from">
-        /// For consistency use period for all descriptions<br/>
-        /// Example: 2022-09-31
+        /// Start date of the available circadian bedtime data.<br/>
+        /// Example: 2022-09-30
         /// </param>
         /// <param name="to">
-        /// For consistency use period for all descriptions<br/>
+        /// End date of the available circadian bedtime data.<br/>
         /// Example: 2022-10-02
         /// </param>
         /// <param name="timestamp">
@@ -87,7 +87,7 @@ namespace Polar
         /// </param>
         /// <param name="url">
         /// Url to the new available data.<br/>
-        /// Example: https://www.polaraccesslink.com/v3/users/sleepwise/circadian_bedtime/date?from=2022-09-31&amp;to=2022-10-02
+        /// Example: https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date?from=2022-09-30&amp;to=2022-10-02
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

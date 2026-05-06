@@ -38,7 +38,7 @@ namespace Polar
 
         /// <summary>
         /// Delete user<br/>
-        /// When partner wishes no longer to receive user data, user can be de-registered.This will revoke the access token authorized by user.
+        /// When partner wishes no longer to receive user data, user can be de-registered. This will revoke the access token authorized by user.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
@@ -57,7 +57,7 @@ namespace Polar
         }
         /// <summary>
         /// Delete user<br/>
-        /// When partner wishes no longer to receive user data, user can be de-registered.This will revoke the access token authorized by user.
+        /// When partner wishes no longer to receive user data, user can be de-registered. This will revoke the access token authorized by user.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>

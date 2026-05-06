@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// Payload example for webhook payload for event type EXERCISE
+    /// Payload example for webhook payload for event type EXERCISE. This event is sent when new exercise data is available for the user.
     /// </summary>
     public sealed partial class WebhookPayloadExercise
     {
