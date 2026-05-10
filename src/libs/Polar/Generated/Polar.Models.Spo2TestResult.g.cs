@@ -178,5 +178,6 @@ namespace Polar
         public Spo2TestResult()
         {
         }
+
     }
 }

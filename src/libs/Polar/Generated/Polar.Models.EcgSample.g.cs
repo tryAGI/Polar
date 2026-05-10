@@ -54,5 +54,6 @@ namespace Polar
         public EcgSample()
         {
         }
+
     }
 }

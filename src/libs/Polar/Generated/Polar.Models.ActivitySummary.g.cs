@@ -170,5 +170,6 @@ namespace Polar
         public ActivitySummary()
         {
         }
+
     }
 }

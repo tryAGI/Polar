@@ -169,5 +169,6 @@ namespace Polar
         public EcgTestResult()
         {
         }
+
     }
 }

@@ -73,5 +73,6 @@ namespace Polar
         public ActivityDayWithSamples()
         {
         }
+
     }
 }
