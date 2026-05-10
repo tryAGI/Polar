@@ -52,5 +52,6 @@ namespace Polar
         public ContinuousHeartrateHeartRateSample()
         {
         }
+
     }
 }

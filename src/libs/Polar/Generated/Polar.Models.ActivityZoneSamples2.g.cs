@@ -41,5 +41,6 @@ namespace Polar
         public ActivityZoneSamples2()
         {
         }
+
     }
 }

@@ -344,5 +344,6 @@ namespace Polar
         public Exercise()
         {
         }
+
     }
 }

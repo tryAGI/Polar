@@ -55,5 +55,6 @@ namespace Polar
         public ActivityStepSample2()
         {
         }
+
     }
 }

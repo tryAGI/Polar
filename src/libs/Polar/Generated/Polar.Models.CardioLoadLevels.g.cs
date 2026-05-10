@@ -90,5 +90,6 @@ namespace Polar
         public CardioLoadLevels()
         {
         }
+
     }
 }

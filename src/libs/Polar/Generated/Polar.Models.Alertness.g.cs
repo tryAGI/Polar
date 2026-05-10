@@ -230,5 +230,6 @@ namespace Polar
         public Alertness()
         {
         }
+
     }
 }

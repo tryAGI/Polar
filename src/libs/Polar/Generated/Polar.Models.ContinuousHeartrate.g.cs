@@ -68,5 +68,6 @@ namespace Polar
         public ContinuousHeartrate()
         {
         }
+
     }
 }

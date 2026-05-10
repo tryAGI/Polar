@@ -128,5 +128,6 @@ namespace Polar
         public TrainingLoadProSample()
         {
         }
+
     }
 }
