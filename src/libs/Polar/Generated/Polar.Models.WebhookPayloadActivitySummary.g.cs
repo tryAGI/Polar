@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// Payload example for webhook payload for event type ACTIVITY_SUMMARY
+    /// Payload example for webhook payload for event type ACTIVITY_SUMMARY. This event is sent when new activity summary data is available for the user.
     /// </summary>
     public sealed partial class WebhookPayloadActivitySummary
     {
@@ -26,9 +26,9 @@ namespace Polar
 
         /// <summary>
         /// Date of the available activity summary data.<br/>
-        /// Example: 2022-09-31
+        /// Example: 2022-09-30
         /// </summary>
-        /// <example>2022-09-31</example>
+        /// <example>2022-09-30</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("date")]
         public string? Date { get; set; }
 
@@ -42,9 +42,9 @@ namespace Polar
 
         /// <summary>
         /// Url to the new available data.<br/>
-        /// Example: https://www.polaraccesslink.com/v3/users/activities/2022-09-31
+        /// Example: https://www.polaraccesslink.com/v3/users/activities/2022-09-30
         /// </summary>
-        /// <example>https://www.polaraccesslink.com/v3/users/activities/2022-09-31</example>
+        /// <example>https://www.polaraccesslink.com/v3/users/activities/2022-09-30</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("url")]
         public string? Url { get; set; }
 
@@ -67,7 +67,7 @@ namespace Polar
         /// </param>
         /// <param name="date">
         /// Date of the available activity summary data.<br/>
-        /// Example: 2022-09-31
+        /// Example: 2022-09-30
         /// </param>
         /// <param name="timestamp">
         /// Time when webhook notification is sent.<br/>
@@ -75,7 +75,7 @@ namespace Polar
         /// </param>
         /// <param name="url">
         /// Url to the new available data.<br/>
-        /// Example: https://www.polaraccesslink.com/v3/users/activities/2022-09-31
+        /// Example: https://www.polaraccesslink.com/v3/users/activities/2022-09-30
         /// </param>
 #if NET7_0_OR_GREATER
         [global::System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -100,5 +100,6 @@ namespace Polar
         public WebhookPayloadActivitySummary()
         {
         }
+
     }
 }

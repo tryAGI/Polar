@@ -26,6 +26,22 @@ namespace Polar
         /// When updating webhook url the AccessLink sends a ping message to the new address. The ping message must be answered with 200 OK or otherwise the webhook is not updated.
         /// </summary>
         /// <param name="webhookId"></param>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.WebhookInfo>> UpdateWebhookAsResponseAsync(
+            string webhookId,
+
+            global::Polar.WebhookPatch request,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Update webhook<br/>
+        /// Edit webhook event types and/or url.<br/>
+        /// When updating webhook url the AccessLink sends a ping message to the new address. The ping message must be answered with 200 OK or otherwise the webhook is not updated.
+        /// </summary>
+        /// <param name="webhookId"></param>
         /// <param name="events">
         /// Type of events to subscribe.<br/>
         /// Example: [EXERCISE]

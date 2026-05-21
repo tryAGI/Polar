@@ -13,6 +13,9 @@ info:
 tags:
   - name: Users
     description: This resource provides all the necessary functions to manage users.
+  - name: Physical info
+    description: >-
+      This resource allows partners to access their users' physical information.
   - name: Pull notifications
     description: >-
       This resource allows partners to check if their users have available data
@@ -20,7 +23,7 @@ tags:
       holding list of available data objects.
   - name: Exercises
     description: >-
-      Resources for getting information about exercise. These endpoints does not require active transaction, but they
+      Resources for getting information about exercise. These endpoints do not require an active transaction, but they
       use hashed id.
   - name: Daily activity
     description: >-
@@ -61,13 +64,15 @@ tags:
       Nightly Recharge&trade; is a recovery measurement that shows how well your body recovers from daily training and stress.
       It is based on heart rate variability (HRV) and overnight heart rate data. The higher the Nightly Recharge score, the better your body has recovered.
       For more detailed information please check [Nightly Recharge](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/nightly-recharge.htm).
-  - name: Physical info
+  - name: Physical info (deprecated)
     description: >-
       This resource allows partners to access their users' physical information.
       Whenever some user's physical information changes, new entry containing
       full physical info is stored to AccessLink. Pull notifications can be used
       to check if user have new physical information available. Available data
       presented in section [Schemas](#schemas).
+      <br/><br/>
+      This resource is deprecated. Please use non-transactional [Physical info](#physical-info) instead.
   - name: Daily activity (deprecated)
     description: >-
       This resource allows partners to access their users' daily activity data.
@@ -80,7 +85,7 @@ tags:
       the user has been registered to your client will be available.
       Only data that has been uploaded in the last 28 days will be available.
       <br/><br/>
-      This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity--beta-) instead.
+      This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity) instead.
   - name: Exercises (deprecated)
     description: >-
       This resource allows partners to access their users' training data. All
@@ -361,7 +366,7 @@ paths:
       summary: Delete user
       description: >-
         When partner wishes no longer to receive user data, user can be
-        de-registered.This will revoke the access token authorized by user.
+        de-registered. This will revoke the access token authorized by user.
       operationId: deleteUser
       parameters:
         - name: user-id
@@ -375,6 +380,33 @@ paths:
       responses:
         '204':
           description: will be returned when user is successfully de-registered.
+      security:
+        - OAuth2:
+            - accesslink.read_all
+  /v3/users/physical-info:
+    get:
+      tags:
+        - Physical info
+      summary: Get user's physical info
+      description: >-
+        Retrieve user's physical information.
+      operationId: getUserPhysicalInformation
+      responses:
+        '200':
+          description: User's physical information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical-info'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/physical-info'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+        '404':
+          description: User not found.
       security:
         - OAuth2:
             - accesslink.read_all
@@ -1080,12 +1112,30 @@ paths:
   '/v3/users/activities':
     get:
       tags:
-        - Daily activity 
-      summary: List activities for past 28 days
+        - Daily activity
+      summary: List activities
       description: >-
-        List users activities available in AccessLink. Only Activities uploaded to Flow in the last 28 days are returned.
+        List users activities available in AccessLink. When no date range is given, activities from the last 28 days are returned.
+        When `from` is given, activities for the specified date range are returned.
+        From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
       operationId: listActivitiesWithoutTransaction
       parameters:
+        - name: from
+          in: query
+          description: Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago.
+          required: false
+          schema:
+            type: string
+            format: date
+            example: '2023-01-01'
+        - name: to
+          in: query
+          description: End date in format YYYY-MM-DD. If not given, defaults to today.
+          required: false
+          schema:
+            type: string
+            format: date
+            example: '2023-01-28'
         - name: steps
           in: query
           description: include steps samples for activity summary.
@@ -1106,22 +1156,24 @@ paths:
             type: boolean
       responses:
         '200':
-          description: List of extended daily activities for past 28 days with all samples.
+          description: List of extended daily activities with all samples.
           content:
             application/json:
               schema: 
                 $ref: '#/components/schemas/array-of-activity-summary-with-all-samples'
-        '403':
-          description: User has not accepted all mandatory consents.
+        '400':
+          description: Invalid or too old date. Cannot be older than 365 days.
         '401':
           description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
       security:
         - OAuth2:
             - accesslink.read_all
   '/v3/users/activities/{date}':
     get:
       tags:
-        - Daily activity 
+        - Daily activity
       summary: Get activity for given date
       description: >-
         Get users activity for given date. Date cannot be older than 365 days from today.
@@ -1167,23 +1219,25 @@ paths:
       security:
         - OAuth2:
             - accesslink.read_all
-  '/v3/users/activities/?from={from}&to={to}':
+  '/v3/users/activities/samples':
     get:
       tags:
-        - Daily activity 
-      summary: List activities for given date range
+        - Daily activity
+      summary: List activity samples
       description: >-
-        List users activities available in AccessLink for given date range.
-        From date cannot be older than 365 days from today and maximum range between from date and to date is 28 days.
-      operationId: listActivitiesWithoutTransactionByDateRange
+        List users activity samples available in AccessLink. When no date range is given, activity samples from the last 28 days are returned.
+        When `from` is given, activity samples for the specified date range are returned.
+        From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
+      operationId: listActivitySamplesWithoutTransaction
       parameters:
         - name: from
           in: query
-          description: Start date in format YYYY-MM-DD.
-          required: true
+          description: Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago.
+          required: false
           schema:
             type: string
             format: date
+            example: '2023-01-01'
         - name: to
           in: query
           description: End date in format YYYY-MM-DD. If not given, defaults to today.
@@ -1191,66 +1245,27 @@ paths:
           schema:
             type: string
             format: date
-        - name: steps
-          in: query
-          description: include steps samples for activity summary.
-          required: false
-          schema:
-            type: boolean
-        - name: activity_zones
-          in: query
-          description: include activity zones samples for activity summary.
-          required: false
-          schema:
-            type: boolean
-        - name: inactivity_stamps
-          in: query
-          required: false
-          schema:
-            type: boolean
-          description: include inactivity stamps for activity summary.
+            example: '2023-01-31'
       responses:
         '200':
-          description: List of users activities for given date range.
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/array-of-activity-summary-with-all-samples'
-        '403':
-          description: User has not accepted all mandatory consents.
-        '401':
-          description: Unauthorized.
-        '400':
-          description: Invalid or too old date. Cannot be older than 365 days.
-      security:
-        - OAuth2:
-            - accesslink.read_all
-  '/v3/users/activities/samples':
-    get:
-      tags:
-        - Daily activity 
-      summary: List activity days with samples for past 28 days
-      description: >-
-        List users activity samples available in AccessLink. Only Activity samples uploaded to Flow in the last 28 days are returned.
-      operationId: listActivitySamplesWithoutTransaction
-      responses:
-        '200':
-          description: List of users activity samples for past 28 days.
+          description: List of users activity samples.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/array-of-activity-day-with-samples'
-        '403':
-          description: User has not accepted all mandatory consents.
+        '400':
+          description: Invalid or too old date. Cannot be older than 365 days.
         '401':
           description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
       security:
         - OAuth2:
             - accesslink.read_all
   '/v3/users/activities/samples/{date}':
     get:
       tags:
-        - Daily activity 
+        - Daily activity
       summary: Get activity samples for given date
       description: >-
         Get users activity samples for given date. Date cannot be older than 365 days from today.
@@ -1281,52 +1296,10 @@ paths:
       security:
         - OAuth2:
             - accesslink.read_all
-  '/v3/users/activities/samples/?from={from}&to={to}':
-    get:
-      tags:
-        - Daily activity 
-      summary: List activity samples for given date range
-      description: >-
-        List users activity samples available in AccessLink for given date range.
-        From date cannot be older than 365 days from today and maximum range between from date and to date is 28 days.
-      operationId: listActivitySamplesWithoutTransactionByDateRange
-      parameters:
-        - name: from
-          in: query
-          description: Start date in format YYYY-MM-DD.
-          required: true
-          schema:
-            type: string
-            example: '2023-01-01'
-            format: date
-        - name: to
-          in: query
-          description: End date in format YYYY-MM-DD. If not given, defaults to today.
-          required: false
-          schema:
-            type: string
-            example: '2023-01-31'
-            format: date
-      responses:
-        '200':
-          description: List of users activity samples for given date range.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/array-of-activity-day-with-samples'
-        '403':
-          description: User has not accepted all mandatory consents.
-        '401':
-          description: Unauthorized.
-        '400':
-          description: Invalid or too old date. Cannot be older than 365 days.
-      security:
-        - OAuth2:
-            - accesslink.read_all
   '/v3/users/{user-id}/physical-information-transactions':
     post:
       tags:
-        - Physical info
+        - Physical info (deprecated)
       summary: Create transaction
       description: |-
         Initiate physical info transaction.
@@ -1361,7 +1334,7 @@ paths:
   '/v3/users/{user-id}/physical-information-transactions/{transaction-id}':
     get:
       tags:
-        - Physical info
+        - Physical info (deprecated)
       summary: List physical infos
       description: >-
         List new physical info data.
@@ -1411,7 +1384,7 @@ paths:
             - accesslink.read_all
     put:
       tags:
-        - Physical info
+        - Physical info (deprecated)
       summary: Commit transaction
       description: >-
         After successfully retrieving physical information within a transaction,
@@ -1444,7 +1417,7 @@ paths:
   '/v3/users/{user-id}/physical-information-transactions/{transaction-id}/physical-informations/{physical-info-id}':
     get:
       tags:
-        - Physical info
+        - Physical info (deprecated)
       summary: Get physical info
       description: Get physical info entity data
       operationId: getPhysicalInfo
@@ -1557,7 +1530,7 @@ paths:
         '200':
           description: Webhook has been successfully activated.
         '204':
-          description: Webhook does not exits and it cannot be activated.
+          description: Webhook does not exist and it cannot be activated.
       security:
         - Basic: [ ]
   '/v3/webhooks/deactivate':
@@ -1571,7 +1544,7 @@ paths:
         '200':
           description: Webhook has been successfully deactivated.
         '204':
-          description: Webhook does not exits and it cannot be deactivated.
+          description: Webhook does not exist and it cannot be deactivated.
       security:
         - Basic: [ ]
   '/v3/webhooks/{webhook-id}':
@@ -1802,7 +1775,7 @@ paths:
   '/v3/users/continuous-heart-rate':
     get:
       tags:
-        - Continuous Heart Rate 
+        - Continuous Heart Rate
       parameters:
         - name: from
           in: query
@@ -1838,13 +1811,15 @@ paths:
       security:
         - OAuth2:
             - accesslink.read_all
-  '/v3/users/cardio-load/':
+  '/v3/users/cardio-load':
     get:
       tags:
-        - Cardio load 
+        - Cardio load
       summary: List cardio loads
       description: >-
         Returns cardio load data for the last 28 days.
+        The response list contains cardio load objects for every day in the range, even if values cannot be calculated —
+        in that case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
       responses:
         '200':
           description: List of user cardio loads.
@@ -1852,8 +1827,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/cardio-load-schema'
-        '400':
-          description: Invalid request.
         '401':
           description: Unauthorized.
         '403':
@@ -1864,18 +1837,19 @@ paths:
   '/v3/users/cardio-load/{date}':
     get:
       tags:
-        - Cardio load 
-      parameters:
-        - name: date
-          in: path
-          description: 'Inclusive start date of range as ISO-8601 date string, example: "2022-01-01"'
-          required: true
-          schema:
-            format: date
-            type: string
+        - Cardio load
       summary: Get cardio load by date
       description: >-
         Returns cardio load data for selected date.
+      parameters:
+        - name: date
+          in: path
+          description: 'Date as ISO-8601 date string, example: "2022-01-01"'
+          required: true
+          schema:
+            type: string
+            format: date
+
       responses:
         '200':
           description: Request was successful.
@@ -1895,10 +1869,10 @@ paths:
   '/v3/users/cardio-load/date':
     get:
       tags:
-        - Cardio load 
+        - Cardio load
       summary: Get cardio load by date range
       description: >-
-        Returns cardio load data for selected date range. 
+        Returns cardio load data for selected date range.
         The response list contains cardio load objects for every day between range even if the cardio load values cannot be calculated,
         in this case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
       parameters:
@@ -1909,7 +1883,6 @@ paths:
           schema:
             type: string
             format: date
-
         - name: to
           in: query
           description: 'Inclusive as ISO-8601 date string, example: "2022-01-01"'
@@ -1917,7 +1890,6 @@ paths:
           schema:
             type: string
             format: date
-
       responses:
         '200':
           description: Request was successful.
@@ -1937,7 +1909,7 @@ paths:
   '/v3/users/cardio-load/period/days/{days}':
     get:
       tags:
-        - Cardio load 
+        - Cardio load
       summary: Get historical data by days
       description: >-
         Returns historical cardio load data for selected period of days counting from current date.
@@ -1970,7 +1942,7 @@ paths:
   '/v3/users/cardio-load/period/months/{months}':
     get:
       tags:
-        - Cardio load 
+        - Cardio load
       parameters:
         - name: months
           in: path
@@ -2002,7 +1974,7 @@ paths:
   '/v3/users/sleepwise/alertness':
     get:
       tags:
-        - SleepWise&trade; 
+        - SleepWise&trade;
       summary: Alertness period data (last 28 days)
       description: >-
         Get user's alertness period data for the last 28 days.
@@ -2016,12 +1988,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/alertness'
+        '204':
+          description: No data found for last 28 days.
         '400':
           description: Invalid request.
         '401':
           description: Unauthorized.
-        '204':
-          description: No data found for last 28 days.
         '403':
           description: User has not accepted all mandatory consents.
       security:
@@ -2030,7 +2002,7 @@ paths:
   '/v3/users/sleepwise/alertness/date':
     get:
       tags:
-        - SleepWise&trade; 
+        - SleepWise&trade;
       parameters:
         - name: from
           in: query
@@ -2059,12 +2031,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/alertness'
+        '204':
+          description: No data found for date range.
         '400':
           description: Invalid request.
         '401':
           description: Unauthorized.
-        '204':
-          description: No data found for date range.
         '403':
           description: User has not accepted all mandatory consents.
       security:
@@ -2073,7 +2045,7 @@ paths:
   '/v3/users/sleepwise/circadian-bedtime':
     get:
       tags:
-        - SleepWise&trade; 
+        - SleepWise&trade;
       summary: Circadian bedtime period data (last 28 days)
       description: >-
         Get user's circadian bedtime period data for the last 28 days.
@@ -2087,12 +2059,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/circadian-bedtime'
+        '204':
+          description: No data found for last 28 days.
         '400':
           description: Invalid request.
         '401':
           description: Unauthorized.
-        '204':
-          description: No data found for last 28 days.
         '403':
           description: User has not accepted all mandatory consents.
       security:
@@ -2101,7 +2073,7 @@ paths:
   '/v3/users/sleepwise/circadian-bedtime/date':
     get:
       tags:
-        - SleepWise&trade; 
+        - SleepWise&trade;
       parameters:
         - name: from
           in: query
@@ -2130,12 +2102,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/circadian-bedtime'
+        '204':
+          description: No data found for date range.
         '400':
           description: Invalid request.
         '401':
           description: Unauthorized.
-        '204':
-          description: No data found for date range.
         '403':
           description: User has not accepted all mandatory consents.
       security:
@@ -2144,7 +2116,7 @@ paths:
   '/v3/users/biosensing/bodytemperature':
     get:
       tags:
-        - Elixir&trade; Biosensing 
+        - Elixir&trade; Biosensing
       parameters:
         - name: from
           in: query
@@ -2187,7 +2159,7 @@ paths:
   '/v3/users/biosensing/skintemperature':
     get:
       tags:
-        - Elixir&trade; Biosensing 
+        - Elixir&trade; Biosensing
       parameters:
         - name: from
           in: query
@@ -2230,7 +2202,7 @@ paths:
   '/v3/users/biosensing/skincontacts':
     get:
       tags:
-        - Elixir&trade; Biosensing 
+        - Elixir&trade; Biosensing
       parameters:
         - name: from
           in: query
@@ -2273,7 +2245,7 @@ paths:
   '/v3/users/biosensing/ecg':
     get:
       tags:
-        - Elixir&trade; Biosensing 
+        - Elixir&trade; Biosensing
       parameters:
         - name: from
           in: query
@@ -2316,7 +2288,7 @@ paths:
   '/v3/users/biosensing/spo2':
     get:
       tags:
-        - Elixir&trade; Biosensing 
+        - Elixir&trade; Biosensing
       parameters:
         - name: from
           in: query
@@ -2614,7 +2586,7 @@ components:
           example: 179879
           xml:
             attribute: true
-          description: Id of the activity-transaction this training was transferred in
+          description: Id of the activity-transaction this activity was transferred in
         date:
           type: string
           example: '2010-12-31'
@@ -2906,7 +2878,6 @@ components:
       properties:
         zone:
             type: string
-            format: SEDENTARY
             description: Activity zone type.
             enum:
               - SEDENTARY
@@ -3270,6 +3241,83 @@ components:
       description: Exercise transaction container
       xml:
         name: exercises
+    physical-info:
+      type: object
+      properties:
+        weight:
+          type: number
+          format: float
+          description: User's weight in kilograms.
+          example: 70.5
+        height:
+          type: number
+          format: float
+          description: User's height in centimeters.
+          example: 175.0
+        created:
+          type: string
+          format: date-time
+          description: Creation timestamp of the physical info.
+          example: '2024-06-01T12:00:00Z'
+        modified:
+          type: string
+          format: date-time
+          description: Last modification timestamp of the physical info.
+          example: '2024-06-10T12:00:00Z'
+        birthday:
+          type: string
+          format: date
+          description: User's date of birth.
+          example: '1990-01-01'
+        gender:
+          type: string
+          description: User's gender.
+          enum: [MALE, FEMALE]
+          example: MALE
+        maximum_heart_rate:
+          type: integer
+          format: int32
+          description: User's maximum heart rate.
+          example: 190
+        resting_heart_rate:
+          type: integer
+          format: int32
+          description: User's resting heart rate.
+          example: 60
+        aerobic_threshold:
+          type: integer
+          format: int32
+          description: User's aerobic threshold.
+          example: 140
+        anaerobic_threshold:
+          type: integer
+          format: int32
+          description: User's anaerobic threshold.
+          example: 170
+        vo2_max:
+          type: integer
+          format: int32
+          description: User's VO2 max value.
+          example: 50
+        weight_source:
+          type: string
+          description: Source of the weight information.
+          enum: [SOURCE_DEFAULT, SOURCE_ESTIMATE, SOURCE_USER, SOURCE_MEASURED, SOURCE_KEEP]
+          example: SOURCE_USER
+        training_background:
+          type: string
+          description: User's training background.
+          enum: [OCCASIONAL, REGULAR, FREQUENT, HEAVY, SEMI_PRO, PRO]
+          example: REGULAR
+        typical_day:
+          type: string
+          description: User's typical day description.
+          enum: [MOSTLY_SITTING, MOSTLY_STANDING, MOSTLY_MOVING]
+          example: MOSTLY_MOVING
+        sleep_goal:
+          type: string
+          description: User's sleep goal as ISO 8601 duration.
+          example: 'PT8H'
     physical-information:
       type: object
       properties:
@@ -3287,7 +3335,7 @@ components:
           xml:
             attribute: true
           description: >-
-            Id of the physical-information-transaction this training was
+            Id of the physical-information-transaction this physical information was
             transferred in
         created:
           type: string
@@ -3320,7 +3368,7 @@ components:
           type: integer
           format: int32
           example: 60
-          description: Resting hear rate
+          description: Resting heart rate
         aerobic-threshold:
           type: integer
           format: int32
@@ -3600,7 +3648,7 @@ components:
           description: Url where the webhook notification is sent.
     webhookPayloadExercise:
       description:
-        Payload example for webhook payload for event type EXERCISE
+        Payload example for webhook payload for event type EXERCISE. This event is sent when new exercise data is available for the user.
       type: object
       properties:
         event:
@@ -3628,7 +3676,7 @@ components:
           description: Url to the new available data.
     webhookPayloadSleep:
       description:
-        Payload example for webhook payload for event type SLEEP
+        Payload example for webhook payload for event type SLEEP. This event is sent when new sleep data is available for the user.
       type: object
       properties:
         event:
@@ -3656,7 +3704,7 @@ components:
           description: Url to the new available data.
     webhookPayloadContinuousHeartRate:
       description:
-        Payload example for webhook payload for event type CONTINUOUS_HEART_RATE
+        Payload example for webhook payload for event type CONTINUOUS_HEART_RATE. This event is sent when new continuous heart rate data is available for the user.
       type: object
       properties:
         event:
@@ -3670,7 +3718,7 @@ components:
           description: Id of the user who has new data.
         date:
           type: string
-          example: '2022-09-31'
+          example: '2022-09-30'
           description: Date of the available continuous hr data.
         timestamp:
           type: string
@@ -3680,11 +3728,11 @@ components:
         url:
           type: string
           format: uri
-          example: https://www.polaraccesslink.com/v3/users/continuous-heart-rate/2022-09-31
+          example: https://www.polaraccesslink.com/v3/users/continuous-heart-rate/2022-09-30
           description: Url to the new available data.
     webhookPayloadCircadianBedtime:
       description:
-        Payload example for webhook payload for event type SLEEP_WISE_CIRCADIAN_BEDTIME
+        Payload example for webhook payload for event type SLEEP_WISE_CIRCADIAN_BEDTIME. This event is sent when new circadian bedtime data is available for the user.
       type: object
       properties:
         event:
@@ -3698,12 +3746,12 @@ components:
           description: Id of the user who has new data.
         from:
           type: string
-          example: '2022-09-31'
-          description: For consistency use period for all descriptions
+          example: '2022-09-30'
+          description: Start date of the available circadian bedtime data.
         to:
           type: string
           example: '2022-10-02'
-          description: For consistency use period for all descriptions
+          description: End date of the available circadian bedtime data.
         timestamp:
           type: string
           format: date-time
@@ -3712,11 +3760,11 @@ components:
         url:
           type: string
           format: uri
-          example: https://www.polaraccesslink.com/v3/users/sleepwise/circadian_bedtime/date?from=2022-09-31&to=2022-10-02
+          example: https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date?from=2022-09-30&to=2022-10-02
           description: Url to the new available data.
     webhookPayloadAlertness:
       description:
-        Payload example for webhook payload for event type SLEEP_WISE_ALERTNESS
+        Payload example for webhook payload for event type SLEEP_WISE_ALERTNESS. This event is sent when new alertness data is available for the user.
       type: object
       properties:
         event:
@@ -3730,12 +3778,12 @@ components:
           description: Id of the user who has new data.
         from:
           type: string
-          example: '2022-09-31'
-          description: For consistency use period for all descriptions
+          example: '2022-09-30'
+          description: Start date of the available alertness data.
         to:
           type: string
           example: '2022-10-02'
-          description: For consistency use period for all descriptions
+          description: End date of the available alertness data.
         timestamp:
           type: string
           format: date-time
@@ -3744,11 +3792,11 @@ components:
         url:
           type: string
           format: uri
-          example: https://www.polaraccesslink.com/v3/users/sleepwise/alertness/date?from=2022-09-31&to=2022-10-02
+          example: https://www.polaraccesslink.com/v3/users/sleepwise/alertness/date?from=2022-09-30&to=2022-10-02
           description: Url to the new available data.
     webhookPayloadActivitySummary:
         description:
-            Payload example for webhook payload for event type ACTIVITY_SUMMARY
+            Payload example for webhook payload for event type ACTIVITY_SUMMARY. This event is sent when new activity summary data is available for the user.
         type: object
         properties:
           event:
@@ -3762,7 +3810,7 @@ components:
             description: Id of the user who has new data.
           date:
             type: string
-            example: '2022-09-31'
+            example: '2022-09-30'
             description: Date of the available activity summary data.
           timestamp:
             type: string
@@ -3772,8 +3820,32 @@ components:
           url:
             type: string
             format: uri
-            example: https://www.polaraccesslink.com/v3/users/activities/2022-09-31
+            example: https://www.polaraccesslink.com/v3/users/activities/2022-09-30
             description: Url to the new available data.
+    webhookPayloadPhysicalInformation:
+      description:
+        Payload example for webhook payload for event type PHYSICAL_INFORMATION. This event is sent when new physical information data is available for the user.
+      type: object
+      properties:
+        event:
+          type: string
+          example: PHYSICAL_INFORMATION
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2025-12-31T14:22:24Z'
+          description: Time when webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/physical-info
+          description: Url to the new available data.
     webhookPing:
       type: object
       properties:
@@ -3812,8 +3884,14 @@ components:
     webhookType:
       type: string
       enum:
-        - EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY
-      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS and ACTIVITY_SUMMARY are supported.
+        - EXERCISE
+        - SLEEP
+        - CONTINUOUS_HEART_RATE
+        - SLEEP_WISE_CIRCADIAN_BEDTIME
+        - SLEEP_WISE_ALERTNESS
+        - ACTIVITY_SUMMARY
+        - PHYSICAL_INFORMATION
+      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
     zone:
       type: object
       properties:
@@ -3951,7 +4029,7 @@ components:
           format: int32
           example: 28800
           description: >-
-            Time goal in seconds for sleep selectedby user. A default value of the setting is based on age-related sleep duration recommendations.
+            Time goal in seconds for sleep selected by user. A default value of the setting is based on age-related sleep duration recommendations.
         sleep_rating:
           type: integer
           format: int32
@@ -4008,7 +4086,7 @@ components:
           example: {
             "00:39": 2,
             "00:50": 3,
-            "01:23": 6
+            "01:23": 5
           }
           description: >-
             The time span between when you fell asleep and when you woke up is classified into light,
@@ -4159,15 +4237,16 @@ components:
           description: Result date of the Continuous Heart Rate
           example: '2020-01-01'
         heart_rate_samples:
-          type: object
-          properties:
-            heart_rate:
-              type: integer
-              description: heart rate rpm
-            sample_time:
-              type: string
-              format: date
-              description: Measurement time of heart rate. Device time used for measurement
+          type: array
+          items:
+            type: object
+            properties:
+              heart_rate:
+                type: integer
+                description: Heart rate in beats per minute (bpm).
+              sample_time:
+                type: string
+                description: Measurement time of heart rate in HH:mm:ss format. Device time used for measurement.
       example:
         {
           "polar_user": "https://polaraccesslink.com/v3/users/627139",
@@ -4208,8 +4287,8 @@ components:
           example: 9.9
           description: Grade
         grade_validity_seconds:
-          type: number
-          format: int
+          type: integer
+          format: int32
           example: 57600
           description: Grade validity seconds
         grade_type:
@@ -4269,27 +4348,27 @@ components:
             - ALERTNESS_TYPE_HISTORY
         period_start_time:
           type: string
-          format: date
+          format: date-time
           description: Alertness period start time (UTC)
           example: '2022-11-20T20:52:20'
         period_end_time:
           type: string
-          format: date
+          format: date-time
           description: Alertness period end time (UTC)
           example: '2022-11-21T19:15:52'
         sleep_period_start_time:
           type: string
-          format: date
+          format: date-time
           description: Sleep period start time (UTC)
           example: '2022-11-20T20:52:20.57'
         sleep_period_end_time:
           type: string
-          format: date
+          format: date-time
           description: Sleep period end time (UTC)
           example: '2022-11-21T04:11:20.57'
         sleep_timezone_offset_minutes:
-          type: number
-          format: int
+          type: integer
+          format: int32
           example: 120
           description: Sleep timezone offset minutes
         hourly_data:
@@ -4356,37 +4435,37 @@ components:
             - CIRCADIAN_BEDTIME_TYPE_HISTORY
         period_start_time:
           type: string
-          format: date
+          format: date-time
           description: Circadian bedtime period start time (UTC)
           example: '2022-11-20T21:18:30'
         period_end_time:
           type: string
-          format: date
+          format: date-time
           description: Circadian bedtime period end time (UTC)
           example: '2022-11-21T05:18:30'
         preferred_sleep_period_start_time:
           type: string
-          format: date
+          format: date-time
           description: Circadian bedtime preferred sleep period start time (UTC)
           example: '2022-11-20T21:18:30'
         preferred_sleep_period_end_time:
           type: string
-          format: date
+          format: date-time
           description: Circadian bedtime preferred sleep period end time (UTC)
           example: '2022-11-21T05:18:30'
         sleep_gate_start_time:
           type: string
-          format: date
+          format: date-time
           description: Circadian bedtime sleep gate (suggested fall a sleep window) start time (UTC)
           example: '2022-11-20T21:18:30'
         sleep_gate_end_time:
           type: string
-          format: date
+          format: date-time
           description: Circadian bedtime sleep gate (suggested fall a sleep window) end time (UTC)
           example: '2022-11-21T05:18:30'
         sleep_timezone_offset_minutes:
-          type: number
-          format: int
+          type: integer
+          format: int32
           example: 120
           description: Sleep timezone offset minutes
       description: Circadian bedtime period data
@@ -4430,12 +4509,12 @@ components:
             - ALERTNESS_LEVEL_VERY_HIGH
         start_time:
           type: string
-          format: date
+          format: date-time
           description: Alertness period start time (UTC)
           example: '2022-11-21T04:00:00'
         end_time:
           type: string
-          format: date
+          format: date-time
           description: Alertness period end time (UTC)
           example: '2022-11-21T05:00:00'
       description: Hourly data for the alertness period
@@ -4567,7 +4646,7 @@ components:
         average_heart_rate_bpm:
           type: integer
           example: 60
-          format: uint32
+          format: int32
         heart_rate_variability_ms:
           type: number
           example: 0.0
@@ -4682,7 +4761,7 @@ components:
         average_heart_rate_bpm:
           type: integer
           example: 60
-          format: uint32
+          format: int32
         heart_rate_variability_ms:
           type: number
           example: 100.0

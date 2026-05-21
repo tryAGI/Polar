@@ -3,11 +3,11 @@
 
 namespace Polar
 {
-    public partial class PhysicalInfoClient
+    public partial class PhysicalInfoDeprecatedClient
     {
 
 
-        private static readonly global::Polar.EndPointSecurityRequirement s_ListPhysicalInfosSecurityRequirement0 =
+        private static readonly global::Polar.EndPointSecurityRequirement s_CommitPhysicalInfoTransactionSecurityRequirement0 =
             new global::Polar.EndPointSecurityRequirement
             {
                 Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
@@ -21,39 +21,55 @@ namespace Polar
                     },
                 },
             };
-        private static readonly global::Polar.EndPointSecurityRequirement[] s_ListPhysicalInfosSecurityRequirements =
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_CommitPhysicalInfoTransactionSecurityRequirements =
             new global::Polar.EndPointSecurityRequirement[]
-            {                s_ListPhysicalInfosSecurityRequirement0,
+            {                s_CommitPhysicalInfoTransactionSecurityRequirement0,
             };
-        partial void PrepareListPhysicalInfosArguments(
+        partial void PrepareCommitPhysicalInfoTransactionArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref long transactionId,
             ref int userId);
-        partial void PrepareListPhysicalInfosRequest(
+        partial void PrepareCommitPhysicalInfoTransactionRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             long transactionId,
             int userId);
-        partial void ProcessListPhysicalInfosResponse(
+        partial void ProcessCommitPhysicalInfoTransactionResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessListPhysicalInfosResponseContent(
-            global::System.Net.Http.HttpClient httpClient,
-            global::System.Net.Http.HttpResponseMessage httpResponseMessage,
-            ref string content);
-
         /// <summary>
-        /// List physical infos<br/>
-        /// List new physical info data.<br/>
-        /// After successfully initiating a transaction, physical infos included within it can be retrieved with the provided transactionId.
+        /// Commit transaction<br/>
+        /// After successfully retrieving physical information within a transaction, partners are expected to commit the transaction.
         /// </summary>
         /// <param name="transactionId"></param>
         /// <param name="userId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.PhysicalInformations> ListPhysicalInfosAsync(
+        public async global::System.Threading.Tasks.Task CommitPhysicalInfoTransactionAsync(
+            long transactionId,
+            int userId,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            await CommitPhysicalInfoTransactionAsResponseAsync(
+                transactionId: transactionId,
+                userId: userId,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Commit transaction<br/>
+        /// After successfully retrieving physical information within a transaction, partners are expected to commit the transaction.
+        /// </summary>
+        /// <param name="transactionId"></param>
+        /// <param name="userId"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse> CommitPhysicalInfoTransactionAsResponseAsync(
             long transactionId,
             int userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
@@ -61,7 +77,7 @@ namespace Polar
         {
             PrepareArguments(
                 client: HttpClient);
-            PrepareListPhysicalInfosArguments(
+            PrepareCommitPhysicalInfoTransactionArguments(
                 httpClient: HttpClient,
                 transactionId: ref transactionId,
                 userId: ref userId);
@@ -69,8 +85,8 @@ namespace Polar
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_ListPhysicalInfosSecurityRequirements,
-                operationName: "ListPhysicalInfosAsync");
+                securityRequirements: s_CommitPhysicalInfoTransactionSecurityRequirements,
+                operationName: "CommitPhysicalInfoTransactionAsync");
 
             using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -88,6 +104,7 @@ namespace Polar
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::Polar.PathBuilder(
                                 path: $"/v3/users/{userId}/physical-information-transactions/{transactionId}",
                                 baseUri: HttpClient.BaseAddress);
@@ -97,7 +114,7 @@ namespace Polar
                     clientParameters: Options.QueryParameters,
                     requestParameters: requestOptions?.QueryParameters);
                 var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
-                    method: global::System.Net.Http.HttpMethod.Get,
+                    method: global::System.Net.Http.HttpMethod.Put,
                     requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
 #if NET6_0_OR_GREATER
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
@@ -128,7 +145,7 @@ namespace Polar
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareListPhysicalInfosRequest(
+                PrepareCommitPhysicalInfoTransactionRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     transactionId: transactionId!,
@@ -149,10 +166,10 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListPhysicalInfos",
-                                methodName: "ListPhysicalInfosAsync",
+                                operationId: "CommitPhysicalInfoTransaction",
+                                methodName: "CommitPhysicalInfoTransactionAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}\"",
-                                httpMethod: "GET",
+                                httpMethod: "PUT",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -162,6 +179,8 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -172,14 +191,19 @@ namespace Polar
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListPhysicalInfos",
-                                methodName: "ListPhysicalInfosAsync",
+                                operationId: "CommitPhysicalInfoTransaction",
+                                methodName: "CommitPhysicalInfoTransactionAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}\"",
-                                httpMethod: "GET",
+                                httpMethod: "PUT",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: null,
@@ -189,6 +213,8 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -198,8 +224,7 @@ namespace Polar
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -208,13 +233,18 @@ namespace Polar
                         __attempt < __maxAttempts &&
                         global::Polar.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListPhysicalInfos",
-                                methodName: "ListPhysicalInfosAsync",
+                                operationId: "CommitPhysicalInfoTransaction",
+                                methodName: "CommitPhysicalInfoTransactionAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}\"",
-                                httpMethod: "GET",
+                                httpMethod: "PUT",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -224,14 +254,15 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -250,7 +281,7 @@ namespace Polar
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessListPhysicalInfosResponse(
+                ProcessCommitPhysicalInfoTransactionResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -258,10 +289,10 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListPhysicalInfos",
-                                methodName: "ListPhysicalInfosAsync",
+                                operationId: "CommitPhysicalInfoTransaction",
+                                methodName: "CommitPhysicalInfoTransactionAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}\"",
-                                httpMethod: "GET",
+                                httpMethod: "PUT",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -271,6 +302,8 @@ namespace Polar
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -278,10 +311,10 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListPhysicalInfos",
-                                methodName: "ListPhysicalInfosAsync",
+                                operationId: "CommitPhysicalInfoTransaction",
+                                methodName: "CommitPhysicalInfoTransactionAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}\"",
-                                httpMethod: "GET",
+                                httpMethod: "PUT",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
                                 response: __response,
@@ -291,41 +324,10 @@ namespace Polar
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
-                            // 
-                            if ((int)__response.StatusCode == 404)
-                            {
-                                string? __content_404 = null;
-                                global::System.Exception? __exception_404 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_404 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_404 = __ex;
-                                }
-
-                                throw new global::Polar.ApiException(
-                                    message: __content_404 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_404,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_404,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value),
-                                };
-                            }
                             // 
                             if ((int)__response.StatusCode == 403)
                             {
@@ -372,18 +374,15 @@ namespace Polar
                                     client: HttpClient,
                                     response: __response,
                                     content: ref __content);
-                                ProcessListPhysicalInfosResponseContent(
-                                    httpClient: HttpClient,
-                                    httpResponseMessage: __response,
-                                    content: ref __content);
 
                                 try
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        global::Polar.PhysicalInformations.FromJson(__content, JsonSerializerContext) ??
-                                        throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                return new global::Polar.AutoSDKHttpResponse(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -405,15 +404,10 @@ namespace Polar
                                 try
                                 {
                                     __response.EnsureSuccessStatusCode();
-                                    using var __content = await __response.Content.ReadAsStreamAsync(
-                #if NET5_0_OR_GREATER
-                                        __effectiveCancellationToken
-                #endif
-                                    ).ConfigureAwait(false);
-
-                                    return
-                                        await global::Polar.PhysicalInformations.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
-                                        throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::Polar.AutoSDKHttpResponse(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

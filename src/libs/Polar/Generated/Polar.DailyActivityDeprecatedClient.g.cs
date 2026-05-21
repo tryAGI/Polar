@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// This resource allows partners to access their users' daily activity data. During the transfer, the activity data is copied also into the AccessLink database so the end-users cannot change the data that is accessible via AccessLink afterwards. Begin and end of day are determined by the time set on the device used. No timezone information is available. Each transaction will consist of at most 50 activity summaries. Available data presented in section [Schemas](#schemas). Only data that has been uploaded to Flow after the user has been registered to your client will be available. Only data that has been uploaded in the last 28 days will be available. &lt;br/&gt;&lt;br/&gt; This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity--beta-) instead.<br/>
+    /// This resource allows partners to access their users' daily activity data. During the transfer, the activity data is copied also into the AccessLink database so the end-users cannot change the data that is accessible via AccessLink afterwards. Begin and end of day are determined by the time set on the device used. No timezone information is available. Each transaction will consist of at most 50 activity summaries. Available data presented in section [Schemas](#schemas). Only data that has been uploaded to Flow after the user has been registered to your client will be available. Only data that has been uploaded in the last 28 days will be available. &lt;br/&gt;&lt;br/&gt; This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity) instead.<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
@@ -63,6 +63,27 @@ namespace Polar
         }
 
         /// <summary>
+        /// Creates a new instance of the DailyActivityDeprecatedClient with explicit options but no base URL override.
+        /// Skips passing <c>baseUri</c> so the default base URL from the OpenAPI spec applies.
+        /// </summary>
+        /// <param name="httpClient">The HttpClient instance. If not provided, a new one will be created.</param>
+        /// <param name="authorizations">The authorizations to use for the requests.</param>
+        /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
+        /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
+        public DailyActivityDeprecatedClient(
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Collections.Generic.List<global::Polar.EndPointAuthorization>? authorizations,
+            global::Polar.AutoSDKClientOptions? options,
+            bool disposeHttpClient = true) : this(
+                httpClient,
+                baseUri: null,
+                authorizations,
+                options,
+                disposeHttpClient: disposeHttpClient)
+        {
+        }
+
+        /// <summary>
         /// Creates a new instance of the DailyActivityDeprecatedClient.
         /// If no httpClient is provided, a new one will be created.
         /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
@@ -73,10 +94,10 @@ namespace Polar
         /// <param name="options">Client-wide request defaults such as headers, query parameters, retries, and timeout.</param>
         /// <param name="disposeHttpClient">Dispose the HttpClient when the instance is disposed. True by default.</param>
         public DailyActivityDeprecatedClient(
-            global::System.Net.Http.HttpClient? httpClient = null,
-            global::System.Uri? baseUri = null,
-            global::System.Collections.Generic.List<global::Polar.EndPointAuthorization>? authorizations = null,
-            global::Polar.AutoSDKClientOptions? options = null,
+            global::System.Net.Http.HttpClient? httpClient,
+            global::System.Uri? baseUri,
+            global::System.Collections.Generic.List<global::Polar.EndPointAuthorization>? authorizations,
+            global::Polar.AutoSDKClientOptions? options,
             bool disposeHttpClient = true)
         {
 

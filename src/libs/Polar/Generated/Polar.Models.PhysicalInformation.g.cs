@@ -17,7 +17,7 @@ namespace Polar
         public long? Id { get; set; }
 
         /// <summary>
-        /// Id of the physical-information-transaction this training was transferred in<br/>
+        /// Id of the physical-information-transaction this physical information was transferred in<br/>
         /// Example: 179879
         /// </summary>
         /// <example>179879</example>
@@ -65,7 +65,7 @@ namespace Polar
         public int? MaximumHeartRate { get; set; }
 
         /// <summary>
-        /// Resting hear rate<br/>
+        /// Resting heart rate<br/>
         /// Example: 60
         /// </summary>
         /// <example>60</example>
@@ -119,7 +119,7 @@ namespace Polar
         /// Example: 123
         /// </param>
         /// <param name="transactionId">
-        /// Id of the physical-information-transaction this training was transferred in<br/>
+        /// Id of the physical-information-transaction this physical information was transferred in<br/>
         /// Example: 179879
         /// </param>
         /// <param name="created">
@@ -143,7 +143,7 @@ namespace Polar
         /// Example: 160
         /// </param>
         /// <param name="restingHeartRate">
-        /// Resting hear rate<br/>
+        /// Resting heart rate<br/>
         /// Example: 60
         /// </param>
         /// <param name="aerobicThreshold">
@@ -199,5 +199,6 @@ namespace Polar
         public PhysicalInformation()
         {
         }
+
     }
 }

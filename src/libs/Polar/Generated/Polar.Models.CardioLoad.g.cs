@@ -123,5 +123,6 @@ namespace Polar
         public CardioLoad()
         {
         }
+
     }
 }

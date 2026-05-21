@@ -121,7 +121,7 @@ namespace Polar
         public int? SleepCharge { get; set; }
 
         /// <summary>
-        /// Time goal in seconds for sleep selectedby user. A default value of the setting is based on age-related sleep duration recommendations.<br/>
+        /// Time goal in seconds for sleep selected by user. A default value of the setting is based on age-related sleep duration recommendations.<br/>
         /// Example: 28800
         /// </summary>
         /// <example>28800</example>
@@ -187,9 +187,9 @@ namespace Polar
         /// <summary>
         /// The time span between when you fell asleep and when you woke up is classified into light, deep or REM sleep, or unrecognised or wake in 30-s epochs.<br/>
         /// 0 = WAKE, 1 = REM, 2 = LIGHTER NON-REM, 3 = LIGHT NON-REM, 4 = DEEP NON-REM, 5 = UNKNOWN (eg. due to bad skin contact).<br/>
-        /// Example: {"00:39":2,"00:50":3,"01:23":6}
+        /// Example: {"00:39":2,"00:50":3,"01:23":5}
         /// </summary>
-        /// <example>{"00:39":2,"00:50":3,"01:23":6}</example>
+        /// <example>{"00:39":2,"00:50":3,"01:23":5}</example>
         [global::System.Text.Json.Serialization.JsonPropertyName("hypnogram")]
         public object? Hypnogram { get; set; }
 
@@ -267,7 +267,7 @@ namespace Polar
         /// Example: 3
         /// </param>
         /// <param name="sleepGoal">
-        /// Time goal in seconds for sleep selectedby user. A default value of the setting is based on age-related sleep duration recommendations.<br/>
+        /// Time goal in seconds for sleep selected by user. A default value of the setting is based on age-related sleep duration recommendations.<br/>
         /// Example: 28800
         /// </param>
         /// <param name="sleepRating">
@@ -301,7 +301,7 @@ namespace Polar
         /// <param name="hypnogram">
         /// The time span between when you fell asleep and when you woke up is classified into light, deep or REM sleep, or unrecognised or wake in 30-s epochs.<br/>
         /// 0 = WAKE, 1 = REM, 2 = LIGHTER NON-REM, 3 = LIGHT NON-REM, 4 = DEEP NON-REM, 5 = UNKNOWN (eg. due to bad skin contact).<br/>
-        /// Example: {"00:39":2,"00:50":3,"01:23":6}
+        /// Example: {"00:39":2,"00:50":3,"01:23":5}
         /// </param>
         /// <param name="heartRateSamples">
         /// 5 min average samples of heart rate from the duration of the sleep. Default time between samples is 5 minutes. There may be periods with samples more often than every 5 minutes. Unit of samples is beats per minute (bpm).<br/>
@@ -368,5 +368,6 @@ namespace Polar
         public Sleep()
         {
         }
+
     }
 }

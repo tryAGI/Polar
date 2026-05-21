@@ -181,5 +181,6 @@ namespace Polar
         public ActivitySummaryWithAllSamples()
         {
         }
+
     }
 }

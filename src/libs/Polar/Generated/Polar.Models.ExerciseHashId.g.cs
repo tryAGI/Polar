@@ -363,5 +363,6 @@ namespace Polar
         public ExerciseHashId()
         {
         }
+
     }
 }

@@ -33,6 +33,22 @@ namespace Polar
 
             typeof(global::Polar.JsonConverters.ActivityZoneSample2ZoneNullableJsonConverter),
 
+            typeof(global::Polar.JsonConverters.PhysicalInfoGenderJsonConverter),
+
+            typeof(global::Polar.JsonConverters.PhysicalInfoGenderNullableJsonConverter),
+
+            typeof(global::Polar.JsonConverters.PhysicalInfoWeightSourceJsonConverter),
+
+            typeof(global::Polar.JsonConverters.PhysicalInfoWeightSourceNullableJsonConverter),
+
+            typeof(global::Polar.JsonConverters.PhysicalInfoTrainingBackgroundJsonConverter),
+
+            typeof(global::Polar.JsonConverters.PhysicalInfoTrainingBackgroundNullableJsonConverter),
+
+            typeof(global::Polar.JsonConverters.PhysicalInfoTypicalDayJsonConverter),
+
+            typeof(global::Polar.JsonConverters.PhysicalInfoTypicalDayNullableJsonConverter),
+
             typeof(global::Polar.JsonConverters.PhysicalInformationWeightSourceJsonConverter),
 
             typeof(global::Polar.JsonConverters.PhysicalInformationWeightSourceNullableJsonConverter),
@@ -183,6 +199,11 @@ namespace Polar
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.Location))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Polar.ExerciseHashId>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.Exercises))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInfo))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInfoGender), TypeInfoPropertyName = "PhysicalInfoGender2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInfoWeightSource), TypeInfoPropertyName = "PhysicalInfoWeightSource2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInfoTrainingBackground), TypeInfoPropertyName = "PhysicalInfoTrainingBackground2")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInfoTypicalDay), TypeInfoPropertyName = "PhysicalInfoTypicalDay2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInformation))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInformationWeightSource), TypeInfoPropertyName = "PhysicalInformationWeightSource2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.PhysicalInformations))]
@@ -208,6 +229,7 @@ namespace Polar
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadCircadianBedtime))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadAlertness))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadActivitySummary))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadPhysicalInformation))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPing))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPingEvent), TypeInfoPropertyName = "WebhookPingEvent2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookRequest))]
@@ -221,7 +243,8 @@ namespace Polar
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Polar.AvailableSleep>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.NightlyRecharge))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.ContinuousHeartrate))]
-    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.ContinuousHeartrateHeartRateSamples))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Polar.ContinuousHeartrateHeartRateSample>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.ContinuousHeartrateHeartRateSample))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.Recharges))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.IList<global::Polar.NightlyRecharge>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.Alertness))]
@@ -287,6 +310,7 @@ namespace Polar
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Polar.WebhookInfoDataItem>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Polar.Sleep>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Polar.AvailableSleep>))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Polar.ContinuousHeartrateHeartRateSample>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Polar.NightlyRecharge>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Polar.AlertnessHourlyData>))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<global::Polar.BodyTemperatureSample>))]

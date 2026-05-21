@@ -88,5 +88,6 @@ namespace Polar
         public AlertnessHourlyData()
         {
         }
+
     }
 }

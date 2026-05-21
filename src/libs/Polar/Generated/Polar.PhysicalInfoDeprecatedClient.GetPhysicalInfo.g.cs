@@ -3,11 +3,11 @@
 
 namespace Polar
 {
-    public partial class DailyActivityClient
+    public partial class PhysicalInfoDeprecatedClient
     {
 
 
-        private static readonly global::Polar.EndPointSecurityRequirement s_ListActivitySamplesWithoutTransactionByDateRangeSecurityRequirement0 =
+        private static readonly global::Polar.EndPointSecurityRequirement s_GetPhysicalInfoSecurityRequirement0 =
             new global::Polar.EndPointSecurityRequirement
             {
                 Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
@@ -21,69 +21,87 @@ namespace Polar
                     },
                 },
             };
-        private static readonly global::Polar.EndPointSecurityRequirement[] s_ListActivitySamplesWithoutTransactionByDateRangeSecurityRequirements =
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetPhysicalInfoSecurityRequirements =
             new global::Polar.EndPointSecurityRequirement[]
-            {                s_ListActivitySamplesWithoutTransactionByDateRangeSecurityRequirement0,
+            {                s_GetPhysicalInfoSecurityRequirement0,
             };
-        partial void PrepareListActivitySamplesWithoutTransactionByDateRangeArguments(
+        partial void PrepareGetPhysicalInfoArguments(
             global::System.Net.Http.HttpClient httpClient,
-            ref global::System.DateTime from,
-            ref global::System.DateTime? to,
-            ref string from2,
-            ref string to2);
-        partial void PrepareListActivitySamplesWithoutTransactionByDateRangeRequest(
+            ref int userId,
+            ref int transactionId,
+            ref int physicalInfoId);
+        partial void PrepareGetPhysicalInfoRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
-            global::System.DateTime from,
-            global::System.DateTime? to,
-            string from2,
-            string to2);
-        partial void ProcessListActivitySamplesWithoutTransactionByDateRangeResponse(
+            int userId,
+            int transactionId,
+            int physicalInfoId);
+        partial void ProcessGetPhysicalInfoResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessListActivitySamplesWithoutTransactionByDateRangeResponseContent(
+        partial void ProcessGetPhysicalInfoResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref string content);
 
         /// <summary>
-        /// List activity samples for given date range<br/>
-        /// List users activity samples available in AccessLink for given date range. From date cannot be older than 365 days from today and maximum range between from date and to date is 28 days.
+        /// Get physical info<br/>
+        /// Get physical info entity data
         /// </summary>
-        /// <param name="from">
-        /// Example: 2023-01-01
-        /// </param>
-        /// <param name="to">
-        /// Example: 2023-01-31
-        /// </param>
-        /// <param name="from2"></param>
-        /// <param name="to2"></param>
+        /// <param name="userId"></param>
+        /// <param name="transactionId"></param>
+        /// <param name="physicalInfoId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamples>> ListActivitySamplesWithoutTransactionByDateRangeAsync(
-            global::System.DateTime from,
-            string from2,
-            string to2,
-            global::System.DateTime? to = default,
+        public async global::System.Threading.Tasks.Task<global::Polar.PhysicalInformation> GetPhysicalInfoAsync(
+            int userId,
+            int transactionId,
+            int physicalInfoId,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var __response = await GetPhysicalInfoAsResponseAsync(
+                userId: userId,
+                transactionId: transactionId,
+                physicalInfoId: physicalInfoId,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// Get physical info<br/>
+        /// Get physical info entity data
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="transactionId"></param>
+        /// <param name="physicalInfoId"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.PhysicalInformation>> GetPhysicalInfoAsResponseAsync(
+            int userId,
+            int transactionId,
+            int physicalInfoId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             PrepareArguments(
                 client: HttpClient);
-            PrepareListActivitySamplesWithoutTransactionByDateRangeArguments(
+            PrepareGetPhysicalInfoArguments(
                 httpClient: HttpClient,
-                from: ref from,
-                to: ref to,
-                from2: ref from2,
-                to2: ref to2);
+                userId: ref userId,
+                transactionId: ref transactionId,
+                physicalInfoId: ref physicalInfoId);
 
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_ListActivitySamplesWithoutTransactionByDateRangeSecurityRequirements,
-                operationName: "ListActivitySamplesWithoutTransactionByDateRangeAsync");
+                securityRequirements: s_GetPhysicalInfoSecurityRequirements,
+                operationName: "GetPhysicalInfoAsync");
 
             using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -101,13 +119,10 @@ namespace Polar
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::Polar.PathBuilder(
-                                path: $"/v3/users/activities/samples/?from={from2}&to={to2}",
-                                baseUri: HttpClient.BaseAddress); 
-                            __pathBuilder
-                                .AddRequiredParameter("from", from.ToString("yyyy-MM-dd"))
-                                .AddOptionalParameter("to", to?.ToString("yyyy-MM-dd")) 
-                                ;
+                                path: $"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}",
+                                baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
                     path: __path,
@@ -145,13 +160,12 @@ namespace Polar
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareListActivitySamplesWithoutTransactionByDateRangeRequest(
+                PrepareGetPhysicalInfoRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    from: from!,
-                    to: to,
-                    from2: from2!,
-                    to2: to2!);
+                    userId: userId!,
+                    transactionId: transactionId!,
+                    physicalInfoId: physicalInfoId!);
 
                 return __httpRequest;
             }
@@ -168,9 +182,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListActivitySamplesWithoutTransactionByDateRange",
-                                methodName: "ListActivitySamplesWithoutTransactionByDateRangeAsync",
-                                pathTemplate: "$\"/v3/users/activities/samples/?from={from2}&to={to2}\"",
+                                operationId: "GetPhysicalInfo",
+                                methodName: "GetPhysicalInfoAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -181,6 +195,8 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -191,13 +207,18 @@ namespace Polar
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListActivitySamplesWithoutTransactionByDateRange",
-                                methodName: "ListActivitySamplesWithoutTransactionByDateRangeAsync",
-                                pathTemplate: "$\"/v3/users/activities/samples/?from={from2}&to={to2}\"",
+                                operationId: "GetPhysicalInfo",
+                                methodName: "GetPhysicalInfoAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -208,6 +229,8 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -217,8 +240,7 @@ namespace Polar
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -227,12 +249,17 @@ namespace Polar
                         __attempt < __maxAttempts &&
                         global::Polar.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListActivitySamplesWithoutTransactionByDateRange",
-                                methodName: "ListActivitySamplesWithoutTransactionByDateRangeAsync",
-                                pathTemplate: "$\"/v3/users/activities/samples/?from={from2}&to={to2}\"",
+                                operationId: "GetPhysicalInfo",
+                                methodName: "GetPhysicalInfoAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -243,14 +270,15 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -269,7 +297,7 @@ namespace Polar
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessListActivitySamplesWithoutTransactionByDateRangeResponse(
+                ProcessGetPhysicalInfoResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -277,9 +305,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListActivitySamplesWithoutTransactionByDateRange",
-                                methodName: "ListActivitySamplesWithoutTransactionByDateRangeAsync",
-                                pathTemplate: "$\"/v3/users/activities/samples/?from={from2}&to={to2}\"",
+                                operationId: "GetPhysicalInfo",
+                                methodName: "GetPhysicalInfoAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -290,6 +318,8 @@ namespace Polar
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -297,9 +327,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "ListActivitySamplesWithoutTransactionByDateRange",
-                                methodName: "ListActivitySamplesWithoutTransactionByDateRangeAsync",
-                                pathTemplate: "$\"/v3/users/activities/samples/?from={from2}&to={to2}\"",
+                                operationId: "GetPhysicalInfo",
+                                methodName: "GetPhysicalInfoAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -310,6 +340,8 @@ namespace Polar
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
@@ -345,72 +377,6 @@ namespace Polar
                                         h => h.Value),
                                 };
                             }
-                            // 
-                            if ((int)__response.StatusCode == 401)
-                            {
-                                string? __content_401 = null;
-                                global::System.Exception? __exception_401 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_401 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_401 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_401 = __ex;
-                                }
-
-                                throw new global::Polar.ApiException(
-                                    message: __content_401 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_401,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_401,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value),
-                                };
-                            }
-                            // 
-                            if ((int)__response.StatusCode == 400)
-                            {
-                                string? __content_400 = null;
-                                global::System.Exception? __exception_400 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_400 = __ex;
-                                }
-
-                                throw new global::Polar.ApiException(
-                                    message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_400,
-                                    statusCode: __response.StatusCode)
-                                {
-                                    ResponseBody = __content_400,
-                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value),
-                                };
-                            }
 
                             if (__effectiveReadResponseAsString)
                             {
@@ -424,7 +390,7 @@ namespace Polar
                                     client: HttpClient,
                                     response: __response,
                                     content: ref __content);
-                                ProcessListActivitySamplesWithoutTransactionByDateRangeResponseContent(
+                                ProcessGetPhysicalInfoResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);
@@ -433,9 +399,13 @@ namespace Polar
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        (global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamples>?)global::System.Text.Json.JsonSerializer.Deserialize(__content, typeof(global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamples>), JsonSerializerContext) ??
+                                    var __value = global::Polar.PhysicalInformation.FromJson(__content, JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                                    return new global::Polar.AutoSDKHttpResponse<global::Polar.PhysicalInformation>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -463,9 +433,13 @@ namespace Polar
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return
-                                        (global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamples>?)await global::System.Text.Json.JsonSerializer.DeserializeAsync(__content, typeof(global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamples>), JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = await global::Polar.PhysicalInformation.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::Polar.AutoSDKHttpResponse<global::Polar.PhysicalInformation>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

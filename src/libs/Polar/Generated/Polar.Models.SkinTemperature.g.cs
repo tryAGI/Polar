@@ -66,5 +66,6 @@ namespace Polar
         public SkinTemperature()
         {
         }
+
     }
 }

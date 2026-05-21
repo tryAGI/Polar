@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// Payload example for webhook payload for event type SLEEP
+    /// Payload example for webhook payload for event type SLEEP. This event is sent when new sleep data is available for the user.
     /// </summary>
     public sealed partial class WebhookPayloadSleep
     {
@@ -100,5 +100,6 @@ namespace Polar
         public WebhookPayloadSleep()
         {
         }
+
     }
 }

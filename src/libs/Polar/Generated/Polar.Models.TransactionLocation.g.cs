@@ -58,5 +58,6 @@ namespace Polar
         public TransactionLocation()
         {
         }
+
     }
 }

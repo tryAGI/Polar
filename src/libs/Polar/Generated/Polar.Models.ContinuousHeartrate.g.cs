@@ -29,7 +29,7 @@ namespace Polar
         /// 
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("heart_rate_samples")]
-        public global::Polar.ContinuousHeartrateHeartRateSamples? HeartRateSamples { get; set; }
+        public global::System.Collections.Generic.IList<global::Polar.ContinuousHeartrateHeartRateSample>? HeartRateSamples { get; set; }
 
         /// <summary>
         /// Additional properties that are not explicitly defined in the schema
@@ -55,7 +55,7 @@ namespace Polar
         public ContinuousHeartrate(
             string? polarUser,
             global::System.DateTime? date,
-            global::Polar.ContinuousHeartrateHeartRateSamples? heartRateSamples)
+            global::System.Collections.Generic.IList<global::Polar.ContinuousHeartrateHeartRateSample>? heartRateSamples)
         {
             this.PolarUser = polarUser;
             this.Date = date;
@@ -68,5 +68,6 @@ namespace Polar
         public ContinuousHeartrate()
         {
         }
+
     }
 }

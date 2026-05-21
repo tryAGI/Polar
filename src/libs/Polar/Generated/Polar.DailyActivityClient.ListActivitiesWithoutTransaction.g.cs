@@ -27,12 +27,16 @@ namespace Polar
             };
         partial void PrepareListActivitiesWithoutTransactionArguments(
             global::System.Net.Http.HttpClient httpClient,
+            ref global::System.DateTime? from,
+            ref global::System.DateTime? to,
             ref bool? steps,
             ref bool? activityZones,
             ref bool? inactivityStamps);
         partial void PrepareListActivitiesWithoutTransactionRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
+            global::System.DateTime? from,
+            global::System.DateTime? to,
             bool? steps,
             bool? activityZones,
             bool? inactivityStamps);
@@ -46,9 +50,15 @@ namespace Polar
             ref string content);
 
         /// <summary>
-        /// List activities for past 28 days<br/>
-        /// List users activities available in AccessLink. Only Activities uploaded to Flow in the last 28 days are returned.
+        /// List activities<br/>
+        /// List users activities available in AccessLink. When no date range is given, activities from the last 28 days are returned. When `from` is given, activities for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
         /// </summary>
+        /// <param name="from">
+        /// Example: 2023-01-01
+        /// </param>
+        /// <param name="to">
+        /// Example: 2023-01-28
+        /// </param>
         /// <param name="steps"></param>
         /// <param name="activityZones"></param>
         /// <param name="inactivityStamps"></param>
@@ -56,6 +66,45 @@ namespace Polar
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
         public async global::System.Threading.Tasks.Task<global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>> ListActivitiesWithoutTransactionAsync(
+            global::System.DateTime? from = default,
+            global::System.DateTime? to = default,
+            bool? steps = default,
+            bool? activityZones = default,
+            bool? inactivityStamps = default,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var __response = await ListActivitiesWithoutTransactionAsResponseAsync(
+                from: from,
+                to: to,
+                steps: steps,
+                activityZones: activityZones,
+                inactivityStamps: inactivityStamps,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken
+            ).ConfigureAwait(false);
+
+            return __response.Body;
+        }
+        /// <summary>
+        /// List activities<br/>
+        /// List users activities available in AccessLink. When no date range is given, activities from the last 28 days are returned. When `from` is given, activities for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
+        /// </summary>
+        /// <param name="from">
+        /// Example: 2023-01-01
+        /// </param>
+        /// <param name="to">
+        /// Example: 2023-01-28
+        /// </param>
+        /// <param name="steps"></param>
+        /// <param name="activityZones"></param>
+        /// <param name="inactivityStamps"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>>> ListActivitiesWithoutTransactionAsResponseAsync(
+            global::System.DateTime? from = default,
+            global::System.DateTime? to = default,
             bool? steps = default,
             bool? activityZones = default,
             bool? inactivityStamps = default,
@@ -66,6 +115,8 @@ namespace Polar
                 client: HttpClient);
             PrepareListActivitiesWithoutTransactionArguments(
                 httpClient: HttpClient,
+                from: ref from,
+                to: ref to,
                 steps: ref steps,
                 activityZones: ref activityZones,
                 inactivityStamps: ref inactivityStamps);
@@ -92,13 +143,16 @@ namespace Polar
 
             global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
             {
+
                             var __pathBuilder = new global::Polar.PathBuilder(
                                 path: "/v3/users/activities",
-                                baseUri: HttpClient.BaseAddress); 
+                                baseUri: HttpClient.BaseAddress);
                             __pathBuilder
+                                .AddOptionalParameter("from", from?.ToString("yyyy-MM-dd"))
+                                .AddOptionalParameter("to", to?.ToString("yyyy-MM-dd"))
                                 .AddOptionalParameter("steps", steps?.ToString().ToLowerInvariant())
                                 .AddOptionalParameter("activity_zones", activityZones?.ToString().ToLowerInvariant())
-                                .AddOptionalParameter("inactivity_stamps", inactivityStamps?.ToString().ToLowerInvariant()) 
+                                .AddOptionalParameter("inactivity_stamps", inactivityStamps?.ToString().ToLowerInvariant())
                                 ;
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -140,6 +194,8 @@ namespace Polar
                 PrepareListActivitiesWithoutTransactionRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
+                    from: from,
+                    to: to,
                     steps: steps,
                     activityZones: activityZones,
                     inactivityStamps: inactivityStamps);
@@ -172,6 +228,8 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                     try
                     {
@@ -182,6 +240,11 @@ namespace Polar
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
                     {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
                         var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
@@ -199,6 +262,8 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         if (!__willRetry)
                         {
@@ -208,8 +273,7 @@ namespace Polar
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -218,6 +282,11 @@ namespace Polar
                         __attempt < __maxAttempts &&
                         global::Polar.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
                     {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
@@ -234,14 +303,15 @@ namespace Polar
                                 attempt: __attempt,
                                 maxAttempts: __maxAttempts,
                                 willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                         __response.Dispose();
                         __response = null;
                         __httpRequest.Dispose();
                         __httpRequest = null;
                         await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
+                            retryDelay: __retryDelay,
                             cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                         continue;
                     }
@@ -281,6 +351,8 @@ namespace Polar
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                 else
@@ -301,35 +373,37 @@ namespace Polar
                                 attempt: __attemptNumber,
                                 maxAttempts: __maxAttempts,
                                 willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
                                 cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
                 }
                             // 
-                            if ((int)__response.StatusCode == 403)
+                            if ((int)__response.StatusCode == 400)
                             {
-                                string? __content_403 = null;
-                                global::System.Exception? __exception_403 = null;
+                                string? __content_400 = null;
+                                global::System.Exception? __exception_400 = null;
                                 try
                                 {
                                     if (__effectiveReadResponseAsString)
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                     else
                                     {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                        __content_400 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
                                     }
                                 }
                                 catch (global::System.Exception __ex)
                                 {
-                                    __exception_403 = __ex;
+                                    __exception_400 = __ex;
                                 }
 
                                 throw new global::Polar.ApiException(
-                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_403,
+                                    message: __content_400 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_400,
                                     statusCode: __response.StatusCode)
                                 {
-                                    ResponseBody = __content_403,
+                                    ResponseBody = __content_400,
                                     ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
                                         __response.Headers,
                                         h => h.Key,
@@ -369,6 +443,39 @@ namespace Polar
                                         h => h.Value),
                                 };
                             }
+                            // 
+                            if ((int)__response.StatusCode == 403)
+                            {
+                                string? __content_403 = null;
+                                global::System.Exception? __exception_403 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                    else
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_403 = __ex;
+                                }
+
+                                throw new global::Polar.ApiException(
+                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_403,
+                                    statusCode: __response.StatusCode)
+                                {
+                                    ResponseBody = __content_403,
+                                    ResponseHeaders = global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value),
+                                };
+                            }
 
                             if (__effectiveReadResponseAsString)
                             {
@@ -391,9 +498,13 @@ namespace Polar
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    return
-                                        (global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>?)global::System.Text.Json.JsonSerializer.Deserialize(__content, typeof(global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>), JsonSerializerContext) ??
+                                    var __value = (global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>?)global::System.Text.Json.JsonSerializer.Deserialize(__content, typeof(global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>), JsonSerializerContext) ??
                                         throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
+                                    return new global::Polar.AutoSDKHttpResponse<global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
@@ -421,9 +532,13 @@ namespace Polar
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    return
-                                        (global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>?)await global::System.Text.Json.JsonSerializer.DeserializeAsync(__content, typeof(global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>), JsonSerializerContext).ConfigureAwait(false) ??
+                                    var __value = (global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>?)await global::System.Text.Json.JsonSerializer.DeserializeAsync(__content, typeof(global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>), JsonSerializerContext).ConfigureAwait(false) ??
                                         throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                    return new global::Polar.AutoSDKHttpResponse<global::System.Collections.Generic.IList<global::Polar.ActivitySummaryWithAllSamples>>(
+                                        statusCode: __response.StatusCode,
+                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                        requestUri: __response.RequestMessage?.RequestUri,
+                                        body: __value);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

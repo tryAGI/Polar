@@ -184,5 +184,6 @@ namespace Polar
         public NightlyRecharge()
         {
         }
+
     }
 }

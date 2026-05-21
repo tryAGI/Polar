@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// This resource allows partners to access their users' physical information. Whenever some user's physical information changes, new entry containing full physical info is stored to AccessLink. Pull notifications can be used to check if user have new physical information available. Available data presented in section [Schemas](#schemas).<br/>
+    /// This resource allows partners to access their users' physical information.<br/>
     /// If no httpClient is provided, a new one will be created.<br/>
     /// If no baseUri is provided, the default baseUri from OpenAPI spec will be used.
     /// </summary>
