@@ -3,11 +3,11 @@
 
 namespace Polar
 {
-    public partial class ExercisesDeprecatedClient
+    public partial class PhysicalInfoDeprecatedClient
     {
 
 
-        private static readonly global::Polar.EndPointSecurityRequirement s_GetTcxSecurityRequirement0 =
+        private static readonly global::Polar.EndPointSecurityRequirement s_GetPhysicalInfoAsBytesSecurityRequirement0 =
             new global::Polar.EndPointSecurityRequirement
             {
                 Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
@@ -21,51 +21,51 @@ namespace Polar
                     },
                 },
             };
-        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetTcxSecurityRequirements =
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetPhysicalInfoAsBytesSecurityRequirements =
             new global::Polar.EndPointSecurityRequirement[]
-            {                s_GetTcxSecurityRequirement0,
+            {                s_GetPhysicalInfoAsBytesSecurityRequirement0,
             };
-        partial void PrepareGetTcxArguments(
+        partial void PrepareGetPhysicalInfoAsBytesArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref int userId,
             ref int transactionId,
-            ref int exerciseId);
-        partial void PrepareGetTcxRequest(
+            ref int physicalInfoId);
+        partial void PrepareGetPhysicalInfoAsBytesRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             int userId,
             int transactionId,
-            int exerciseId);
-        partial void ProcessGetTcxResponse(
+            int physicalInfoId);
+        partial void ProcessGetPhysicalInfoAsBytesResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessGetTcxResponseContent(
+        partial void ProcessGetPhysicalInfoAsBytesResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref byte[] content);
 
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// Get physical info<br/>
+        /// Get physical info entity data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
+        /// <param name="physicalInfoId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<byte[]> GetTcxAsync(
+        public async global::System.Threading.Tasks.Task<byte[]> GetPhysicalInfoAsBytesAsync(
             int userId,
             int transactionId,
-            int exerciseId,
+            int physicalInfoId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await GetTcxAsResponseAsync(
+            var __response = await GetPhysicalInfoAsBytesAsResponseAsync(
                 userId: userId,
                 transactionId: transactionId,
-                exerciseId: exerciseId,
+                physicalInfoId: physicalInfoId,
                 requestOptions: requestOptions,
                 cancellationToken: cancellationToken
             ).ConfigureAwait(false);
@@ -73,35 +73,35 @@ namespace Polar
             return __response.Body;
         }
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// Get physical info<br/>
+        /// Get physical info entity data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
+        /// <param name="physicalInfoId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> GetTcxAsStreamAsync(
+        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> GetPhysicalInfoAsBytesAsStreamAsync(
             int userId,
             int transactionId,
-            int exerciseId,
+            int physicalInfoId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             PrepareArguments(
                 client: HttpClient);
-            PrepareGetTcxArguments(
+            PrepareGetPhysicalInfoAsBytesArguments(
                 httpClient: HttpClient,
                 userId: ref userId,
                 transactionId: ref transactionId,
-                exerciseId: ref exerciseId);
+                physicalInfoId: ref physicalInfoId);
 
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_GetTcxSecurityRequirements,
-                operationName: "GetTcxAsync");
+                securityRequirements: s_GetPhysicalInfoAsBytesSecurityRequirements,
+                operationName: "GetPhysicalInfoAsBytesAsync");
 
             using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -121,7 +121,7 @@ namespace Polar
             {
 
                             var __pathBuilder = new global::Polar.PathBuilder(
-                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx",
+                                path: $"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}",
                                 baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -135,6 +135,10 @@ namespace Polar
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
                 __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
+
+                __httpRequest.Headers.TryAddWithoutValidation(
+                    "Accept",
+                    "application/xml");
 
             foreach (var __authorization in __authorizations)
             {
@@ -160,12 +164,12 @@ namespace Polar
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareGetTcxRequest(
+                PrepareGetPhysicalInfoAsBytesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     userId: userId!,
                     transactionId: transactionId!,
-                    exerciseId: exerciseId!);
+                    physicalInfoId: physicalInfoId!);
 
                 return __httpRequest;
             }
@@ -182,9 +186,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -216,9 +220,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -257,9 +261,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -297,7 +301,7 @@ namespace Polar
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessGetTcxResponse(
+                ProcessGetPhysicalInfoAsBytesResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -305,9 +309,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -327,9 +331,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -428,35 +432,35 @@ namespace Polar
             }
         }
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// Get physical info<br/>
+        /// Get physical info entity data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
+        /// <param name="physicalInfoId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetTcxAsResponseAsync(
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetPhysicalInfoAsBytesAsResponseAsync(
             int userId,
             int transactionId,
-            int exerciseId,
+            int physicalInfoId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
             PrepareArguments(
                 client: HttpClient);
-            PrepareGetTcxArguments(
+            PrepareGetPhysicalInfoAsBytesArguments(
                 httpClient: HttpClient,
                 userId: ref userId,
                 transactionId: ref transactionId,
-                exerciseId: ref exerciseId);
+                physicalInfoId: ref physicalInfoId);
 
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_GetTcxSecurityRequirements,
-                operationName: "GetTcxAsync");
+                securityRequirements: s_GetPhysicalInfoAsBytesSecurityRequirements,
+                operationName: "GetPhysicalInfoAsBytesAsync");
 
             using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -476,7 +480,7 @@ namespace Polar
             {
 
                             var __pathBuilder = new global::Polar.PathBuilder(
-                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx",
+                                path: $"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}",
                                 baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -490,6 +494,10 @@ namespace Polar
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
                 __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
+
+                __httpRequest.Headers.TryAddWithoutValidation(
+                    "Accept",
+                    "application/xml");
 
             foreach (var __authorization in __authorizations)
             {
@@ -515,12 +523,12 @@ namespace Polar
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareGetTcxRequest(
+                PrepareGetPhysicalInfoAsBytesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     userId: userId!,
                     transactionId: transactionId!,
-                    exerciseId: exerciseId!);
+                    physicalInfoId: physicalInfoId!);
 
                 return __httpRequest;
             }
@@ -537,9 +545,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -571,9 +579,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -612,9 +620,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -652,7 +660,7 @@ namespace Polar
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessGetTcxResponse(
+                ProcessGetPhysicalInfoAsBytesResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -660,9 +668,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -682,9 +690,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetPhysicalInfoAsBytes",
+                                methodName: "GetPhysicalInfoAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/physical-information-transactions/{transactionId}/physical-informations/{physicalInfoId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -740,7 +748,7 @@ namespace Polar
                 #endif
                                 ).ConfigureAwait(false);
 
-                                ProcessGetTcxResponseContent(
+                                ProcessGetPhysicalInfoAsBytesResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);

@@ -125,6 +125,10 @@ namespace Polar
                 __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
+                __httpRequest.Headers.TryAddWithoutValidation(
+                    "Accept",
+                    "application/json");
+
             foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
@@ -145,7 +149,7 @@ namespace Polar
                             var __httpRequestContent = new global::System.Net.Http.StringContent(
                                 content: __httpRequestContentBody,
                                 encoding: global::System.Text.Encoding.UTF8,
-                                mediaType: "application/xml");
+                                mediaType: "application/json");
                             __httpRequest.Content = __httpRequestContent;
                 global::Polar.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

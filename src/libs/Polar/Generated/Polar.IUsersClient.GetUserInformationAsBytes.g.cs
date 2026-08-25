@@ -2,66 +2,45 @@
 
 namespace Polar
 {
-    public partial interface IExercisesDeprecatedClient
+    public partial interface IUsersClient
     {
         /// <summary>
-        /// Get GPX<br/>
-        /// Retrieve training session summary data in GPX format
+        /// Get user information<br/>
+        /// List user basic information.<br/>
+        /// Note: Although it is possible to get users weight and height from this resource, the [get physical info](#get-physical-info) should be used instead.
         /// </summary>
         /// <param name="userId"></param>
-        /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
-        /// <param name="includePauseTimes">
-        /// Default Value: false
-        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<byte[]> GetGpxAsync(
-            int userId,
-            int transactionId,
-            int exerciseId,
-            bool? includePauseTimes = default,
+        global::System.Threading.Tasks.Task<byte[]> GetUserInformationAsBytesAsync(
+            long userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get GPX<br/>
-        /// Retrieve training session summary data in GPX format
+        /// Get user information<br/>
+        /// List user basic information.<br/>
+        /// Note: Although it is possible to get users weight and height from this resource, the [get physical info](#get-physical-info) should be used instead.
         /// </summary>
         /// <param name="userId"></param>
-        /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
-        /// <param name="includePauseTimes">
-        /// Default Value: false
-        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::System.IO.Stream> GetGpxAsStreamAsync(
-            int userId,
-            int transactionId,
-            int exerciseId,
-            bool? includePauseTimes = default,
+        global::System.Threading.Tasks.Task<global::System.IO.Stream> GetUserInformationAsBytesAsStreamAsync(
+            long userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get GPX<br/>
-        /// Retrieve training session summary data in GPX format
+        /// Get user information<br/>
+        /// List user basic information.<br/>
+        /// Note: Although it is possible to get users weight and height from this resource, the [get physical info](#get-physical-info) should be used instead.
         /// </summary>
         /// <param name="userId"></param>
-        /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
-        /// <param name="includePauseTimes">
-        /// Default Value: false
-        /// </param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetGpxAsResponseAsync(
-            int userId,
-            int transactionId,
-            int exerciseId,
-            bool? includePauseTimes = default,
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetUserInformationAsBytesAsResponseAsync(
+            long userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
