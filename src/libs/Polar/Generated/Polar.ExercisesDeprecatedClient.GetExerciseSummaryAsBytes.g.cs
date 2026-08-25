@@ -7,7 +7,7 @@ namespace Polar
     {
 
 
-        private static readonly global::Polar.EndPointSecurityRequirement s_GetTcxSecurityRequirement0 =
+        private static readonly global::Polar.EndPointSecurityRequirement s_GetExerciseSummaryAsBytesSecurityRequirement0 =
             new global::Polar.EndPointSecurityRequirement
             {
                 Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
@@ -21,33 +21,33 @@ namespace Polar
                     },
                 },
             };
-        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetTcxSecurityRequirements =
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetExerciseSummaryAsBytesSecurityRequirements =
             new global::Polar.EndPointSecurityRequirement[]
-            {                s_GetTcxSecurityRequirement0,
+            {                s_GetExerciseSummaryAsBytesSecurityRequirement0,
             };
-        partial void PrepareGetTcxArguments(
+        partial void PrepareGetExerciseSummaryAsBytesArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref int userId,
             ref int transactionId,
             ref int exerciseId);
-        partial void PrepareGetTcxRequest(
+        partial void PrepareGetExerciseSummaryAsBytesRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             int userId,
             int transactionId,
             int exerciseId);
-        partial void ProcessGetTcxResponse(
+        partial void ProcessGetExerciseSummaryAsBytesResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessGetTcxResponseContent(
+        partial void ProcessGetExerciseSummaryAsBytesResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
             ref byte[] content);
 
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// Get exercise summary<br/>
+        /// Retrieve training session summary data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
@@ -55,14 +55,14 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<byte[]> GetTcxAsync(
+        public async global::System.Threading.Tasks.Task<byte[]> GetExerciseSummaryAsBytesAsync(
             int userId,
             int transactionId,
             int exerciseId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await GetTcxAsResponseAsync(
+            var __response = await GetExerciseSummaryAsBytesAsResponseAsync(
                 userId: userId,
                 transactionId: transactionId,
                 exerciseId: exerciseId,
@@ -73,8 +73,8 @@ namespace Polar
             return __response.Body;
         }
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// Get exercise summary<br/>
+        /// Retrieve training session summary data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
@@ -82,7 +82,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> GetTcxAsStreamAsync(
+        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> GetExerciseSummaryAsBytesAsStreamAsync(
             int userId,
             int transactionId,
             int exerciseId,
@@ -91,7 +91,7 @@ namespace Polar
         {
             PrepareArguments(
                 client: HttpClient);
-            PrepareGetTcxArguments(
+            PrepareGetExerciseSummaryAsBytesArguments(
                 httpClient: HttpClient,
                 userId: ref userId,
                 transactionId: ref transactionId,
@@ -100,8 +100,8 @@ namespace Polar
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_GetTcxSecurityRequirements,
-                operationName: "GetTcxAsync");
+                securityRequirements: s_GetExerciseSummaryAsBytesSecurityRequirements,
+                operationName: "GetExerciseSummaryAsBytesAsync");
 
             using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -121,7 +121,7 @@ namespace Polar
             {
 
                             var __pathBuilder = new global::Polar.PathBuilder(
-                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx",
+                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}",
                                 baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -135,6 +135,10 @@ namespace Polar
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
                 __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
+
+                __httpRequest.Headers.TryAddWithoutValidation(
+                    "Accept",
+                    "application/xml");
 
             foreach (var __authorization in __authorizations)
             {
@@ -160,7 +164,7 @@ namespace Polar
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareGetTcxRequest(
+                PrepareGetExerciseSummaryAsBytesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     userId: userId!,
@@ -182,9 +186,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -216,9 +220,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -257,9 +261,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -297,7 +301,7 @@ namespace Polar
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessGetTcxResponse(
+                ProcessGetExerciseSummaryAsBytesResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -305,9 +309,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -327,9 +331,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -428,8 +432,8 @@ namespace Polar
             }
         }
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// Get exercise summary<br/>
+        /// Retrieve training session summary data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
@@ -437,7 +441,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetTcxAsResponseAsync(
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetExerciseSummaryAsBytesAsResponseAsync(
             int userId,
             int transactionId,
             int exerciseId,
@@ -446,7 +450,7 @@ namespace Polar
         {
             PrepareArguments(
                 client: HttpClient);
-            PrepareGetTcxArguments(
+            PrepareGetExerciseSummaryAsBytesArguments(
                 httpClient: HttpClient,
                 userId: ref userId,
                 transactionId: ref transactionId,
@@ -455,8 +459,8 @@ namespace Polar
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_GetTcxSecurityRequirements,
-                operationName: "GetTcxAsync");
+                securityRequirements: s_GetExerciseSummaryAsBytesSecurityRequirements,
+                operationName: "GetExerciseSummaryAsBytesAsync");
 
             using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -476,7 +480,7 @@ namespace Polar
             {
 
                             var __pathBuilder = new global::Polar.PathBuilder(
-                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx",
+                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}",
                                 baseUri: HttpClient.BaseAddress);
                             var __path = __pathBuilder.ToString();
                 __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
@@ -490,6 +494,10 @@ namespace Polar
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
                 __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
+
+                __httpRequest.Headers.TryAddWithoutValidation(
+                    "Accept",
+                    "application/xml");
 
             foreach (var __authorization in __authorizations)
             {
@@ -515,7 +523,7 @@ namespace Polar
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareGetTcxRequest(
+                PrepareGetExerciseSummaryAsBytesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     userId: userId!,
@@ -537,9 +545,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -571,9 +579,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -612,9 +620,9 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -652,7 +660,7 @@ namespace Polar
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessGetTcxResponse(
+                ProcessGetExerciseSummaryAsBytesResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -660,9 +668,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -682,9 +690,9 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetTcx",
-                                methodName: "GetTcxAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/tcx\"",
+                                operationId: "GetExerciseSummaryAsBytes",
+                                methodName: "GetExerciseSummaryAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
                                 request: __httpRequest!,
@@ -740,7 +748,7 @@ namespace Polar
                 #endif
                                 ).ConfigureAwait(false);
 
-                                ProcessGetTcxResponseContent(
+                                ProcessGetExerciseSummaryAsBytesResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);

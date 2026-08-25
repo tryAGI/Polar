@@ -2,54 +2,36 @@
 
 namespace Polar
 {
-    public partial interface IExercisesDeprecatedClient
+    public partial interface IPullNotificationsClient
     {
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// List<br/>
+        /// Get list of available exercises and activities for users
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<byte[]> GetTcxAsync(
-            int userId,
-            int transactionId,
-            int exerciseId,
+        global::System.Threading.Tasks.Task<byte[]> ListAsBytesAsync(
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// List<br/>
+        /// Get list of available exercises and activities for users
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::System.IO.Stream> GetTcxAsStreamAsync(
-            int userId,
-            int transactionId,
-            int exerciseId,
+        global::System.Threading.Tasks.Task<global::System.IO.Stream> ListAsBytesAsStreamAsync(
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get TCX<br/>
-        /// Retrieve exercise in TCX format
+        /// List<br/>
+        /// Get list of available exercises and activities for users
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetTcxAsResponseAsync(
-            int userId,
-            int transactionId,
-            int exerciseId,
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> ListAsBytesAsResponseAsync(
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }

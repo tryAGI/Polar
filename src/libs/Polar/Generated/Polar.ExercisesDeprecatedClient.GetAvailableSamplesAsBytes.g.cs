@@ -7,7 +7,7 @@ namespace Polar
     {
 
 
-        private static readonly global::Polar.EndPointSecurityRequirement s_GetAvailableSamplesSecurityRequirement0 =
+        private static readonly global::Polar.EndPointSecurityRequirement s_GetAvailableSamplesAsBytesSecurityRequirement0 =
             new global::Polar.EndPointSecurityRequirement
             {
                 Authorizations = new global::Polar.EndPointAuthorizationRequirement[]
@@ -21,29 +21,29 @@ namespace Polar
                     },
                 },
             };
-        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetAvailableSamplesSecurityRequirements =
+        private static readonly global::Polar.EndPointSecurityRequirement[] s_GetAvailableSamplesAsBytesSecurityRequirements =
             new global::Polar.EndPointSecurityRequirement[]
-            {                s_GetAvailableSamplesSecurityRequirement0,
+            {                s_GetAvailableSamplesAsBytesSecurityRequirement0,
             };
-        partial void PrepareGetAvailableSamplesArguments(
+        partial void PrepareGetAvailableSamplesAsBytesArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref int userId,
             ref int transactionId,
             ref int exerciseId);
-        partial void PrepareGetAvailableSamplesRequest(
+        partial void PrepareGetAvailableSamplesAsBytesRequest(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpRequestMessage httpRequestMessage,
             int userId,
             int transactionId,
             int exerciseId);
-        partial void ProcessGetAvailableSamplesResponse(
+        partial void ProcessGetAvailableSamplesAsBytesResponse(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage);
 
-        partial void ProcessGetAvailableSamplesResponseContent(
+        partial void ProcessGetAvailableSamplesAsBytesResponseContent(
             global::System.Net.Http.HttpClient httpClient,
             global::System.Net.Http.HttpResponseMessage httpResponseMessage,
-            ref string content);
+            ref byte[] content);
 
         /// <summary>
         /// Get available samples<br/>
@@ -55,14 +55,14 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.Samples> GetAvailableSamplesAsync(
+        public async global::System.Threading.Tasks.Task<byte[]> GetAvailableSamplesAsBytesAsync(
             int userId,
             int transactionId,
             int exerciseId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-            var __response = await GetAvailableSamplesAsResponseAsync(
+            var __response = await GetAvailableSamplesAsBytesAsResponseAsync(
                 userId: userId,
                 transactionId: transactionId,
                 exerciseId: exerciseId,
@@ -82,7 +82,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.Samples>> GetAvailableSamplesAsResponseAsync(
+        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> GetAvailableSamplesAsBytesAsStreamAsync(
             int userId,
             int transactionId,
             int exerciseId,
@@ -91,7 +91,7 @@ namespace Polar
         {
             PrepareArguments(
                 client: HttpClient);
-            PrepareGetAvailableSamplesArguments(
+            PrepareGetAvailableSamplesAsBytesArguments(
                 httpClient: HttpClient,
                 userId: ref userId,
                 transactionId: ref transactionId,
@@ -100,8 +100,8 @@ namespace Polar
 
             var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
                 availableAuthorizations: Authorizations,
-                securityRequirements: s_GetAvailableSamplesSecurityRequirements,
-                operationName: "GetAvailableSamplesAsync");
+                securityRequirements: s_GetAvailableSamplesAsBytesSecurityRequirements,
+                operationName: "GetAvailableSamplesAsBytesAsync");
 
             using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
                 clientOptions: Options,
@@ -138,7 +138,7 @@ namespace Polar
 
                 __httpRequest.Headers.TryAddWithoutValidation(
                     "Accept",
-                    "application/json");
+                    "application/xml");
 
             foreach (var __authorization in __authorizations)
             {
@@ -164,7 +164,7 @@ namespace Polar
                 PrepareRequest(
                     client: HttpClient,
                     request: __httpRequest);
-                PrepareGetAvailableSamplesRequest(
+                PrepareGetAvailableSamplesAsBytesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
                     userId: userId!,
@@ -186,8 +186,8 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetAvailableSamples",
-                                methodName: "GetAvailableSamplesAsync",
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
@@ -206,7 +206,7 @@ namespace Polar
                     {
                         __response = await HttpClient.SendAsync(
                 request: __httpRequest,
-                completionOption: global::System.Net.Http.HttpCompletionOption.ResponseContentRead,
+                completionOption: global::System.Net.Http.HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
@@ -220,8 +220,8 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetAvailableSamples",
-                                methodName: "GetAvailableSamplesAsync",
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
@@ -261,8 +261,367 @@ namespace Polar
                         await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetAvailableSamples",
-                                methodName: "GetAvailableSamplesAsync",
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
+                                httpMethod: "GET",
+                                baseUri: BaseUri,
+                                request: __httpRequest!,
+                                response: __response,
+                                exception: null,
+                                clientOptions: Options,
+                                requestOptions: requestOptions,
+                                attempt: __attempt,
+                                maxAttempts: __maxAttempts,
+                                willRetry: true,
+                                retryDelay: __retryDelay,
+                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
+                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
+                        __response.Dispose();
+                        __response = null;
+                        __httpRequest.Dispose();
+                        __httpRequest = null;
+                        await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
+                            retryDelay: __retryDelay,
+                            cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
+                        continue;
+                    }
+
+                    break;
+                }
+
+                if (__response == null)
+                {
+                    throw new global::System.InvalidOperationException("No response received.");
+                }
+
+                try
+                {
+
+                ProcessResponse(
+                    client: HttpClient,
+                    response: __response);
+                ProcessGetAvailableSamplesAsBytesResponse(
+                    httpClient: HttpClient,
+                    httpResponseMessage: __response);
+                if (__response.IsSuccessStatusCode)
+                {
+                    await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
+                            clientOptions: Options,
+                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
+                                httpMethod: "GET",
+                                baseUri: BaseUri,
+                                request: __httpRequest!,
+                                response: __response,
+                                exception: null,
+                                clientOptions: Options,
+                                requestOptions: requestOptions,
+                                attempt: __attemptNumber,
+                                maxAttempts: __maxAttempts,
+                                willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
+                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
+                }
+                else
+                {
+                    await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
+                            clientOptions: Options,
+                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
+                                httpMethod: "GET",
+                                baseUri: BaseUri,
+                                request: __httpRequest!,
+                                response: __response,
+                                exception: null,
+                                clientOptions: Options,
+                                requestOptions: requestOptions,
+                                attempt: __attemptNumber,
+                                maxAttempts: __maxAttempts,
+                                willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
+                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
+                }
+                            // 
+                            if ((int)__response.StatusCode == 403)
+                            {
+                                string? __content_403 = null;
+                                global::System.Exception? __exception_403 = null;
+                                try
+                                {
+                                    if (__effectiveReadResponseAsString)
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                    else
+                                    {
+                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
+                                    }
+                                }
+                                catch (global::System.Exception __ex)
+                                {
+                                    __exception_403 = __ex;
+                                }
+
+
+                                throw global::Polar.ApiException.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __exception_403,
+                                    responseBody: __content_403,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
+
+                            try
+                            {
+                                __response.EnsureSuccessStatusCode();
+
+                                var __content = await __response.Content.ReadAsStreamAsync(
+                #if NET5_0_OR_GREATER
+                                    __effectiveCancellationToken
+                #endif
+                                ).ConfigureAwait(false);
+
+                                return new global::Polar.ResponseStream(__response, __content);
+                            }
+                            catch (global::System.Exception __ex)
+                            {
+                                string? __content = null;
+                                try
+                                {
+                                    __content = await __response.Content.ReadAsStringAsync(
+                #if NET5_0_OR_GREATER
+                                        __effectiveCancellationToken
+                #endif
+                                    ).ConfigureAwait(false);
+                                }
+                                catch (global::System.Exception)
+                                {
+                                }
+
+                                throw global::Polar.ApiException.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __content ?? __response.ReasonPhrase ?? string.Empty,
+                                    innerException: __ex,
+                                    responseBody: __content,
+                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
+                                        __response.Headers,
+                                        h => h.Key,
+                                        h => h.Value));
+                            }
+
+                }
+                catch
+                {
+                    __response.Dispose();
+                    throw;
+                }
+            }
+            finally
+            {
+                __httpRequest?.Dispose();
+            }
+        }
+        /// <summary>
+        /// Get available samples<br/>
+        /// Retrieve list of links to available samples in training session
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="transactionId"></param>
+        /// <param name="exerciseId"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetAvailableSamplesAsBytesAsResponseAsync(
+            int userId,
+            int transactionId,
+            int exerciseId,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            PrepareArguments(
+                client: HttpClient);
+            PrepareGetAvailableSamplesAsBytesArguments(
+                httpClient: HttpClient,
+                userId: ref userId,
+                transactionId: ref transactionId,
+                exerciseId: ref exerciseId);
+
+
+            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetAvailableSamplesAsBytesSecurityRequirements,
+                operationName: "GetAvailableSamplesAsBytesAsync");
+
+            using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
+                clientOptions: Options,
+                requestOptions: requestOptions,
+                cancellationToken: cancellationToken);
+            var __effectiveCancellationToken = __timeoutCancellationTokenSource?.Token ?? cancellationToken;
+            var __effectiveReadResponseAsString = global::Polar.AutoSDKRequestOptionsSupport.GetReadResponseAsString(
+                clientOptions: Options,
+                requestOptions: requestOptions,
+                fallbackValue: ReadResponseAsString);
+            var __maxAttempts = global::Polar.AutoSDKRequestOptionsSupport.GetMaxAttempts(
+                clientOptions: Options,
+                requestOptions: requestOptions,
+                supportsRetry: true);
+
+            global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
+            {
+
+                            var __pathBuilder = new global::Polar.PathBuilder(
+                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples",
+                                baseUri: HttpClient.BaseAddress);
+                            var __path = __pathBuilder.ToString();
+                __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
+                    path: __path,
+                    clientParameters: Options.QueryParameters,
+                    requestParameters: requestOptions?.QueryParameters);
+                var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
+                    method: global::System.Net.Http.HttpMethod.Get,
+                    requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
+#if NET6_0_OR_GREATER
+                __httpRequest.Version = global::System.Net.HttpVersion.Version11;
+                __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
+#endif
+
+                __httpRequest.Headers.TryAddWithoutValidation(
+                    "Accept",
+                    "application/xml");
+
+            foreach (var __authorization in __authorizations)
+            {
+                if (__authorization.Type == "Http" ||
+                    __authorization.Type == "OAuth2" ||
+                    __authorization.Type == "OpenIdConnect")
+                {
+                    __httpRequest.Headers.Authorization = new global::System.Net.Http.Headers.AuthenticationHeaderValue(
+                        scheme: __authorization.Name,
+                        parameter: __authorization.Value);
+                }
+                else if (__authorization.Type == "ApiKey" &&
+                         __authorization.Location == "Header")
+                {
+                    __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
+                } 
+            }
+                global::Polar.AutoSDKRequestOptionsSupport.ApplyHeaders(
+                    request: __httpRequest,
+                    clientHeaders: Options.Headers,
+                    requestHeaders: requestOptions?.Headers);
+
+                PrepareRequest(
+                    client: HttpClient,
+                    request: __httpRequest);
+                PrepareGetAvailableSamplesAsBytesRequest(
+                    httpClient: HttpClient,
+                    httpRequestMessage: __httpRequest,
+                    userId: userId!,
+                    transactionId: transactionId!,
+                    exerciseId: exerciseId!);
+
+                return __httpRequest;
+            }
+
+            global::System.Net.Http.HttpRequestMessage? __httpRequest = null;
+            global::System.Net.Http.HttpResponseMessage? __response = null;
+            var __attemptNumber = 0;
+            try
+            {
+                for (var __attempt = 1; __attempt <= __maxAttempts; __attempt++)
+                {
+                    __attemptNumber = __attempt;
+                    __httpRequest = __CreateHttpRequest();
+                    await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
+                            clientOptions: Options,
+                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
+                                httpMethod: "GET",
+                                baseUri: BaseUri,
+                                request: __httpRequest!,
+                                response: null,
+                                exception: null,
+                                clientOptions: Options,
+                                requestOptions: requestOptions,
+                                attempt: __attempt,
+                                maxAttempts: __maxAttempts,
+                                willRetry: false,
+                                retryDelay: null,
+                                retryReason: global::System.String.Empty,
+                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
+                    try
+                    {
+                        __response = await HttpClient.SendAsync(
+                request: __httpRequest,
+                completionOption: global::System.Net.Http.HttpCompletionOption.ResponseContentRead,
+                cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
+                    }
+                    catch (global::System.Net.Http.HttpRequestException __exception)
+                    {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: null,
+                            attempt: __attempt);
+                        var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
+                        await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
+                            clientOptions: Options,
+                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
+                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
+                                httpMethod: "GET",
+                                baseUri: BaseUri,
+                                request: __httpRequest!,
+                                response: null,
+                                exception: __exception,
+                                clientOptions: Options,
+                                requestOptions: requestOptions,
+                                attempt: __attempt,
+                                maxAttempts: __maxAttempts,
+                                willRetry: __willRetry,
+                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
+                                retryReason: "exception",
+                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
+                        if (!__willRetry)
+                        {
+                            throw;
+                        }
+
+                        __httpRequest.Dispose();
+                        __httpRequest = null;
+                        await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
+                            retryDelay: __retryDelay,
+                            cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
+                        continue;
+                    }
+
+                    if (__response != null &&
+                        __attempt < __maxAttempts &&
+                        global::Polar.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
+                    {
+                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
+                            clientOptions: Options,
+                            requestOptions: requestOptions,
+                            response: __response,
+                            attempt: __attempt);
+                        await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
+                            clientOptions: Options,
+                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
@@ -301,7 +660,7 @@ namespace Polar
                 ProcessResponse(
                     client: HttpClient,
                     response: __response);
-                ProcessGetAvailableSamplesResponse(
+                ProcessGetAvailableSamplesAsBytesResponse(
                     httpClient: HttpClient,
                     httpResponseMessage: __response);
                 if (__response.IsSuccessStatusCode)
@@ -309,8 +668,8 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetAvailableSamples",
-                                methodName: "GetAvailableSamplesAsync",
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
@@ -331,8 +690,8 @@ namespace Polar
                     await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
                             clientOptions: Options,
                             context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetAvailableSamples",
-                                methodName: "GetAvailableSamplesAsync",
+                                operationId: "GetAvailableSamplesAsBytes",
+                                methodName: "GetAvailableSamplesAsBytesAsync",
                                 pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/samples\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
@@ -383,17 +742,13 @@ namespace Polar
 
                             if (__effectiveReadResponseAsString)
                             {
-                                var __content = await __response.Content.ReadAsStringAsync(
+                                var __content = await __response.Content.ReadAsByteArrayAsync(
                 #if NET5_0_OR_GREATER
                                     __effectiveCancellationToken
                 #endif
                                 ).ConfigureAwait(false);
 
-                                ProcessResponseContent(
-                                    client: HttpClient,
-                                    response: __response,
-                                    content: ref __content);
-                                ProcessGetAvailableSamplesResponseContent(
+                                ProcessGetAvailableSamplesAsBytesResponseContent(
                                     httpClient: HttpClient,
                                     httpResponseMessage: __response,
                                     content: ref __content);
@@ -402,21 +757,19 @@ namespace Polar
                                 {
                                     __response.EnsureSuccessStatusCode();
 
-                                    var __value = global::Polar.Samples.FromJson(__content, JsonSerializerContext) ??
-                                        throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
-                                    return new global::Polar.AutoSDKHttpResponse<global::Polar.Samples>(
+                                    return new global::Polar.AutoSDKHttpResponse<byte[]>(
                                         statusCode: __response.StatusCode,
                                         headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
-                                        body: __value);
+                                        body: __content);
                                 }
                                 catch (global::System.Exception __ex)
                                 {
                                     throw global::Polar.ApiException.Create(
                                         statusCode: __response.StatusCode,
-                                        message: __content ?? __response.ReasonPhrase ?? string.Empty,
+                                        message: __response.ReasonPhrase ?? string.Empty,
                                         innerException: __ex,
-                                        responseBody: __content,
+                                        responseBody: null,
                                         responseHeaders: global::System.Linq.Enumerable.ToDictionary(
                                             __response.Headers,
                                             h => h.Key,
@@ -428,19 +781,17 @@ namespace Polar
                                 try
                                 {
                                     __response.EnsureSuccessStatusCode();
-                                    using var __content = await __response.Content.ReadAsStreamAsync(
+                                    var __content = await __response.Content.ReadAsByteArrayAsync(
                 #if NET5_0_OR_GREATER
                                         __effectiveCancellationToken
                 #endif
                                     ).ConfigureAwait(false);
 
-                                    var __value = await global::Polar.Samples.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
-                                        throw new global::System.InvalidOperationException("Response deserialization failed.");
-                                    return new global::Polar.AutoSDKHttpResponse<global::Polar.Samples>(
+                                    return new global::Polar.AutoSDKHttpResponse<byte[]>(
                                         statusCode: __response.StatusCode,
                                         headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
                                         requestUri: __response.RequestMessage?.RequestUri,
-                                        body: __value);
+                                        body: __content);
                                 }
                                 catch (global::System.Exception __ex)
                                 {

@@ -2,66 +2,54 @@
 
 namespace Polar
 {
-    public partial interface IExercisesDeprecatedClient
+    public partial interface IPhysicalInfoDeprecatedClient
     {
         /// <summary>
-        /// Get GPX<br/>
-        /// Retrieve training session summary data in GPX format
+        /// Get physical info<br/>
+        /// Get physical info entity data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
-        /// <param name="includePauseTimes">
-        /// Default Value: false
-        /// </param>
+        /// <param name="physicalInfoId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<byte[]> GetGpxAsync(
+        global::System.Threading.Tasks.Task<byte[]> GetPhysicalInfoAsBytesAsync(
             int userId,
             int transactionId,
-            int exerciseId,
-            bool? includePauseTimes = default,
+            int physicalInfoId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get GPX<br/>
-        /// Retrieve training session summary data in GPX format
+        /// Get physical info<br/>
+        /// Get physical info entity data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
-        /// <param name="includePauseTimes">
-        /// Default Value: false
-        /// </param>
+        /// <param name="physicalInfoId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::System.IO.Stream> GetGpxAsStreamAsync(
+        global::System.Threading.Tasks.Task<global::System.IO.Stream> GetPhysicalInfoAsBytesAsStreamAsync(
             int userId,
             int transactionId,
-            int exerciseId,
-            bool? includePauseTimes = default,
+            int physicalInfoId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get GPX<br/>
-        /// Retrieve training session summary data in GPX format
+        /// Get physical info<br/>
+        /// Get physical info entity data
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
-        /// <param name="includePauseTimes">
-        /// Default Value: false
-        /// </param>
+        /// <param name="physicalInfoId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetGpxAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetPhysicalInfoAsBytesAsResponseAsync(
             int userId,
             int transactionId,
-            int exerciseId,
-            bool? includePauseTimes = default,
+            int physicalInfoId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
     }
