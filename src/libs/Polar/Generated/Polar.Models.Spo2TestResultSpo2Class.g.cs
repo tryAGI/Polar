@@ -9,19 +9,19 @@ namespace Polar
     public enum Spo2TestResultSpo2Class
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2ClassLow,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2ClassNormal,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2ClassUnknown,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2ClassVeryLow,
     }

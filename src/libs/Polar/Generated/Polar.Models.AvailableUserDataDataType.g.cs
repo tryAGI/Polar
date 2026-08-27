@@ -10,15 +10,15 @@ namespace Polar
     public enum AvailableUserDataDataType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ActivitySummary,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Exercise,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PhysicalInformation,
     }

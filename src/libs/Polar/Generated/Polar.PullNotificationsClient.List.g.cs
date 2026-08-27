@@ -130,7 +130,7 @@ namespace Polar
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::Polar.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

@@ -10,15 +10,15 @@ namespace Polar
     public enum CircadianBedtimeResultType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         CircadianBedtimeTypeHistory,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         CircadianBedtimeTypePrediction,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         CircadianBedtimeTypeUnknown,
     }

@@ -10,19 +10,19 @@ namespace Polar
     public enum AlertnessSleepType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepTypeArtificial,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepTypePrimary,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepTypeSecondary,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepTypeUnknown,
     }

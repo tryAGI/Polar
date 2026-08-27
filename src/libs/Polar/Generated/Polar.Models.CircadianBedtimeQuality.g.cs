@@ -10,19 +10,19 @@ namespace Polar
     public enum CircadianBedtimeQuality
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ClearlyRecognizable,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Compromised,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unknown,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Weak,
     }

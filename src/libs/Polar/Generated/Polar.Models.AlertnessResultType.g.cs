@@ -10,15 +10,15 @@ namespace Polar
     public enum AlertnessResultType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessTypeHistory,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessTypePrediction,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessTypeUnknown,
     }

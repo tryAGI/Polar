@@ -9,19 +9,19 @@ namespace Polar
     public enum EcgTestResultHeartRateVariabilityLevel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgHrvLevelAboveUsual,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgHrvLevelBelowUsual,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgHrvLevelNoBaseline,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgHrvLevelUsual,
     }

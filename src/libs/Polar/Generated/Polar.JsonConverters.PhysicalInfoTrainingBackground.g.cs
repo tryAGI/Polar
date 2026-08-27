@@ -20,7 +20,7 @@ namespace Polar.JsonConverters
                     {
                         return global::Polar.PhysicalInfoTrainingBackgroundExtensions.ToEnum(stringValue) ?? default;
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

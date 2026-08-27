@@ -10,23 +10,23 @@ namespace Polar
     public enum AlertnessGradeClassification
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeClassificationExcellent,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeClassificationFair,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeClassificationStrong,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeClassificationUnknown,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeClassificationWeak,
     }

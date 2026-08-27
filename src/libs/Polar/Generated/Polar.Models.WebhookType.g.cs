@@ -9,31 +9,31 @@ namespace Polar
     public enum WebhookType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ActivitySummary,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ContinuousHeartRate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Exercise,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         PhysicalInformation,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Sleep,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepWiseAlertness,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepWiseCircadianBedtime,
     }

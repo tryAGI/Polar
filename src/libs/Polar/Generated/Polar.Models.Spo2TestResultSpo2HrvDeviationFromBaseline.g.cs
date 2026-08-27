@@ -9,19 +9,19 @@ namespace Polar
     public enum Spo2TestResultSpo2HrvDeviationFromBaseline
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         DeviationAboveUsual,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         DeviationBelowUsual,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         DeviationNoBaseline,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         DeviationUsual,
     }

@@ -20,7 +20,7 @@ namespace Polar.JsonConverters
                     {
                         return global::Polar.UserGenderExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

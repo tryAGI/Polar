@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class EcgTestResult
     {
@@ -80,13 +80,13 @@ namespace Polar
         public float? PulseTransitTimeQualityIndex { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("samples")]
         public global::System.Collections.Generic.IList<global::Polar.EcgSample>? Samples { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("quality_measurements")]
         public global::System.Collections.Generic.IList<global::Polar.QualityMeasurement>? QualityMeasurements { get; set; }

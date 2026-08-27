@@ -10,23 +10,23 @@ namespace Polar
     public enum PhysicalInfoWeightSource
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SourceDefault,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SourceEstimate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SourceKeep,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SourceMeasured,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SourceUser,
     }

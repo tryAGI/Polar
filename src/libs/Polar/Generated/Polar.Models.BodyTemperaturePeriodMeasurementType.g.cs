@@ -10,15 +10,15 @@ namespace Polar
     public enum BodyTemperaturePeriodMeasurementType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         TmCoreTemperature,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         TmSkinTemperature,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         TmUnknown,
     }

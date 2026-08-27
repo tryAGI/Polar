@@ -10,11 +10,11 @@ namespace Polar
     public enum PhysicalInfoGender
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Female,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Male,
     }

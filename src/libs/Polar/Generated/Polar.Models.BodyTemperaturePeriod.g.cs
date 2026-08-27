@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class BodyTemperaturePeriod
     {
@@ -58,7 +58,7 @@ namespace Polar
         public global::System.DateTime? ModifiedTime { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("samples")]
         public global::System.Collections.Generic.IList<global::Polar.BodyTemperatureSample>? Samples { get; set; }

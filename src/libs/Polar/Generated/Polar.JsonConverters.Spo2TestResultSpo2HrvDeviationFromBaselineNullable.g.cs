@@ -20,7 +20,7 @@ namespace Polar.JsonConverters
                     {
                         return global::Polar.Spo2TestResultSpo2HrvDeviationFromBaselineExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

@@ -10,27 +10,27 @@ namespace Polar
     public enum AlertnessHourlyDataAlertnessLevel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessLevelHigh,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessLevelLow,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessLevelMinimal,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessLevelUnknown,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessLevelVeryHigh,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         AlertnessLevelVeryLow,
     }

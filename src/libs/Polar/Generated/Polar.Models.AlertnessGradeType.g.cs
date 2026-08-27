@@ -10,15 +10,15 @@ namespace Polar
     public enum AlertnessGradeType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeTypeAdditional,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeTypePrimary,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         GradeTypeUnknown,
     }

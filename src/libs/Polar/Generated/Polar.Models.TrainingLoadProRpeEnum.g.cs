@@ -9,47 +9,47 @@ namespace Polar
     public enum TrainingLoadProRpeEnum
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeBrisk,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeEasy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeExhausting,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeExtreme,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeFairlyBrisk,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeFairlyHard,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeHard,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeLight,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeModerate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RpeNone,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unknown,
     }

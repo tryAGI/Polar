@@ -20,7 +20,7 @@ namespace Polar.JsonConverters
                     {
                         return global::Polar.CircadianBedtimeResultTypeExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:
