@@ -9,39 +9,39 @@ namespace Polar
     public enum CardioLoadStatusEnum
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Detraining,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         LoadStatusNotAvailable,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Maintaining,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Overreaching,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Productive,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ProductiveAlmostOverreaching,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ProductiveDroppedFromOverreaching,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         RecoveryAfterOverreaching,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unrecognized,
     }

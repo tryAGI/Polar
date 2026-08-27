@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class SkinContactPeriod
     {
@@ -40,7 +40,7 @@ namespace Polar
         public global::System.DateTime? ModifiedTime { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("skin_contact_changes")]
         public global::System.Collections.Generic.IList<global::Polar.SkinContactChange>? SkinContactChanges { get; set; }

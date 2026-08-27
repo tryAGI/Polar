@@ -4,36 +4,36 @@
 namespace Polar
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum TrainingLoadProLoadEnum
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         High,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Low,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Medium,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         NotAvailable,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unknown,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         VeryHigh,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         VeryLow,
     }

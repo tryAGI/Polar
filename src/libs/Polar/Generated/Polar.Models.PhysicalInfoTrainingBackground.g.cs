@@ -10,27 +10,27 @@ namespace Polar
     public enum PhysicalInfoTrainingBackground
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Frequent,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Heavy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Occasional,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Regular,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SemiPro,
     }

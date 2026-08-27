@@ -10,15 +10,15 @@ namespace Polar
     public enum PhysicalInfoTypicalDay
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         MostlyMoving,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         MostlySitting,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         MostlyStanding,
     }

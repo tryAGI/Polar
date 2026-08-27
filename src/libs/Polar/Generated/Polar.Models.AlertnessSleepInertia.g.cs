@@ -10,23 +10,23 @@ namespace Polar
     public enum AlertnessSleepInertia
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepInertiaHeavy,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepInertiaMild,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepInertiaModerate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepInertiaNoInertia,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SleepInertiaUnknown,
     }

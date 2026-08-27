@@ -9,19 +9,19 @@ namespace Polar
     public enum Spo2TestResultTestStatus
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2TestInconclusiveTooLowOverallQuality,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2TestInconclusiveTooLowQualityInSamples,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2TestInconclusiveTooManyMissingSamples,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Spo2TestPassed,
     }

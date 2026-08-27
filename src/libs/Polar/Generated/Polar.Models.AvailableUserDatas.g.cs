@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// AvailableUserDatas is a container model for AvailableUserData. 
+    /// AvailableUserDatas is a container model for AvailableUserData.
     /// </summary>
     public sealed partial class AvailableUserDatas
     {

@@ -9,19 +9,19 @@ namespace Polar
     public enum QualityMeasurementQualityLevel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgQualityHigh,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgQualityLow,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgQualityNoContact,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         EcgQualityUnknown,
     }

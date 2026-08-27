@@ -20,7 +20,7 @@ namespace Polar.JsonConverters
                     {
                         return global::Polar.EcgTestResultHeartRateVariabilityLevelExtensions.ToEnum(stringValue) ?? default;
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

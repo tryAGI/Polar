@@ -26,7 +26,7 @@ namespace Polar
         public global::System.DateTime? Date { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("heart_rate_samples")]
         public global::System.Collections.Generic.IList<global::Polar.ContinuousHeartrateHeartRateSample>? HeartRateSamples { get; set; }

@@ -9,7 +9,7 @@ namespace Polar
     public enum WebhookPingEvent
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Ping,
     }

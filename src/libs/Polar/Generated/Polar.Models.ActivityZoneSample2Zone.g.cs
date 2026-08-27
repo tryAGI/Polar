@@ -9,23 +9,23 @@ namespace Polar
     public enum ActivityZoneSample2Zone
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Light,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Moderate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Sedentary,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Sleep,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Vigorous,
     }

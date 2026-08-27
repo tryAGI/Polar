@@ -10,15 +10,15 @@ namespace Polar
     public enum BodyTemperaturePeriodSensorLocation
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SlDistal,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SlProximal,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         SlUnknown,
     }

@@ -183,7 +183,7 @@ namespace Polar
         public int? RunningIndex { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("training-load-pro")]
         public global::Polar.TrainingLoadProSample? TrainingLoadPro { get; set; }

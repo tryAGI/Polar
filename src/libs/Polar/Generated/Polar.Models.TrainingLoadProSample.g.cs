@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class TrainingLoadProSample
     {
@@ -41,21 +41,21 @@ namespace Polar
         public float? PerceivedLoad { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("cardio-load-interpretation")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Polar.JsonConverters.TrainingLoadProLoadEnumJsonConverter))]
         public global::Polar.TrainingLoadProLoadEnum? CardioLoadInterpretation { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("muscle-load-interpretation")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Polar.JsonConverters.TrainingLoadProLoadEnumJsonConverter))]
         public global::Polar.TrainingLoadProLoadEnum? MuscleLoadInterpretation { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("perceived-load-interpretation")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Polar.JsonConverters.TrainingLoadProLoadEnumJsonConverter))]

@@ -11,7 +11,7 @@ namespace Polar
     public sealed partial class PullNotificationsClient : global::Polar.IPullNotificationsClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const string DefaultBaseUrl = "https://www.polaraccesslink.com/";
 
@@ -38,7 +38,7 @@ namespace Polar
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Polar.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {

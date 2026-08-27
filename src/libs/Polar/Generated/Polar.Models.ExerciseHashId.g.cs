@@ -193,7 +193,7 @@ namespace Polar
         public global::System.Collections.Generic.IList<global::Polar.Location>? Route { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("training_load_pro")]
         public global::Polar.TrainingLoadProSample? TrainingLoadPro { get; set; }

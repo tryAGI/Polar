@@ -23,13 +23,13 @@ namespace Polar
         public global::Polar.ActivitySteps2? Steps { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("activity_zones")]
         public global::Polar.ActivityZoneSamples2? ActivityZones { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("inactivity_stamps")]
         public global::System.Collections.Generic.IList<global::Polar.ActivityDayWithSamplesInactivityStamp>? InactivityStamps { get; set; }

@@ -10,23 +10,23 @@ namespace Polar
     public enum CircadianBedtimeValidity
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ValidityEstimate,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ValidityNotValid,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ValidityReset,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ValidityUnknown,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         ValidityValid,
     }

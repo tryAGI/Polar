@@ -4,12 +4,12 @@
 namespace Polar
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class CreatedWebhook
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("data")]
         public global::Polar.CreatedWebhookData? Data { get; set; }
