@@ -165,9 +165,9 @@ namespace Polar
                 PrepareGetActivitySummaryAsBytesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    userId: userId!,
-                    transactionId: transactionId!,
-                    activityId: activityId!);
+                    userId: userId,
+                    transactionId: transactionId,
+                    activityId: activityId);
 
                 return __httpRequest;
             }
@@ -189,7 +189,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: null,
                                 clientOptions: Options,
@@ -223,7 +223,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: __exception,
                                 clientOptions: Options,
@@ -264,7 +264,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -312,7 +312,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -334,7 +334,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -523,9 +523,9 @@ namespace Polar
                 PrepareGetActivitySummaryAsBytesRequest(
                     httpClient: HttpClient,
                     httpRequestMessage: __httpRequest,
-                    userId: userId!,
-                    transactionId: transactionId!,
-                    activityId: activityId!);
+                    userId: userId,
+                    transactionId: transactionId,
+                    activityId: activityId);
 
                 return __httpRequest;
             }
@@ -547,7 +547,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: null,
                                 clientOptions: Options,
@@ -581,7 +581,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: null,
                                 exception: __exception,
                                 clientOptions: Options,
@@ -622,7 +622,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -670,7 +670,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
@@ -692,7 +692,7 @@ namespace Polar
                                 pathTemplate: "$\"/v3/users/{userId}/activity-transactions/{transactionId}/activities/{activityId}\"",
                                 httpMethod: "GET",
                                 baseUri: BaseUri,
-                                request: __httpRequest!,
+                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
                                 response: __response,
                                 exception: null,
                                 clientOptions: Options,
