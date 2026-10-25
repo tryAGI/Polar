@@ -14,7 +14,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.ActivityZoneSamples> GetZoneSamplesAsync(
+        global::System.Threading.Tasks.Task<global::Polar.DailyActivityDeprecatedClient.GetZoneSamplesResult> GetZoneSamplesAsync(
             int userId,
             int transactionId,
             int activityId,
@@ -30,7 +30,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.ActivityZoneSamples>> GetZoneSamplesAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.DailyActivityDeprecatedClient.GetZoneSamplesResult>> GetZoneSamplesAsResponseAsync(
             int userId,
             int transactionId,
             int activityId,

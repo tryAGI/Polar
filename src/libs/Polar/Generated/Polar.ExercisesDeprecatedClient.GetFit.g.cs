@@ -6,6 +6,34 @@ namespace Polar
     public partial class ExercisesDeprecatedClient
     {
 
+        /// <summary>
+        /// A successful outcome selected by the actual HTTP status and media type.
+        /// Dispose this result after consuming its binary body to release the HTTP response.
+        /// </summary>
+        public sealed class GetFitResult : global::Polar.AutoSDKHttpResponse, global::System.IDisposable
+        {
+            internal GetFitResult(
+                global::System.Net.HttpStatusCode statusCode,
+                global::System.Collections.Generic.Dictionary<string, global::System.Collections.Generic.IEnumerable<string>> headers,
+                global::System.Uri? requestUri,
+                global::System.IO.Stream? body0 = default,
+                object? body1 = default)
+                : base(statusCode, headers, requestUri)
+            {
+                Body200 = body0;
+                Body204 = body1;
+            }
+            /// <summary>Gets the body for HTTP 200; null for other outcomes.</summary>
+            public global::System.IO.Stream? Body200 { get; }
+            /// <summary>Gets the body for HTTP 204; null for other outcomes.</summary>
+            public object? Body204 { get; }
+            /// <summary>Releases the binary response stream, if present.</summary>
+            public void Dispose()
+            {
+                Body200?.Dispose();
+            }
+        }
+
 
         private static readonly global::Polar.EndPointSecurityRequirement s_GetFitSecurityRequirement0 =
             new global::Polar.EndPointSecurityRequirement
@@ -55,7 +83,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<byte[]> GetFitAsync(
+        public async global::System.Threading.Tasks.Task<global::Polar.ExercisesDeprecatedClient.GetFitResult> GetFitAsync(
             int userId,
             int transactionId,
             int exerciseId,
@@ -82,7 +110,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::System.IO.Stream> GetFitAsStreamAsync(
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.ExercisesDeprecatedClient.GetFitResult>> GetFitAsResponseAsync(
             int userId,
             int transactionId,
             int exerciseId,
@@ -377,441 +405,71 @@ namespace Polar
                                         h => h.Value));
                             }
 
-                            try
+                            if (!__response.IsSuccessStatusCode)
                             {
-                                __response.EnsureSuccessStatusCode();
-
-                                var __content = await __response.Content.ReadAsStreamAsync(
+                                var __errorContent = await __response.Content.ReadAsStringAsync(
                 #if NET5_0_OR_GREATER
                                     __effectiveCancellationToken
                 #endif
                                 ).ConfigureAwait(false);
-
-                                return new global::Polar.ResponseStream(__response, __content);
-                            }
-                            catch (global::System.Exception __ex)
-                            {
-                                string? __content = null;
-                                try
-                                {
-                                    __content = await __response.Content.ReadAsStringAsync(
-                #if NET5_0_OR_GREATER
-                                        __effectiveCancellationToken
-                #endif
-                                    ).ConfigureAwait(false);
-                                }
-                                catch (global::System.Exception)
-                                {
-                                }
-
                                 throw global::Polar.ApiException.Create(
                                     statusCode: __response.StatusCode,
-                                    message: __content ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __ex,
-                                    responseBody: __content,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
+                                    message: __errorContent,
+                                    innerException: null,
+                                    responseBody: __errorContent,
+                                    responseHeaders: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response));
                             }
+                            var __mediaType = __response.Content.Headers.ContentType?.MediaType;
+
+                            if (((int)__response.StatusCode == 200) && (true))
+                            {
+                                var __stream = await __response.Content.ReadAsStreamAsync(
+                #if NET5_0_OR_GREATER
+                                    __effectiveCancellationToken
+                #endif
+                                ).ConfigureAwait(false);
+                                var __body = new global::Polar.ResponseStream(__response, __stream);
+                                var __result = new global::Polar.ExercisesDeprecatedClient.GetFitResult(
+                                    statusCode: __response.StatusCode,
+                                    headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                    requestUri: __response.RequestMessage?.RequestUri,
+                                    body0: __body);
+                                return new global::Polar.AutoSDKHttpResponse<global::Polar.ExercisesDeprecatedClient.GetFitResult>(
+                                    statusCode: __result.StatusCode,
+                                    headers: __result.Headers,
+                                    requestUri: __result.RequestUri,
+                                    body: __result);
+                            }
+
+                            if (((int)__response.StatusCode == 204) && (true))
+                            {
+                                object? __body = null;
+                                var __result = new global::Polar.ExercisesDeprecatedClient.GetFitResult(
+                                    statusCode: __response.StatusCode,
+                                    headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                    requestUri: __response.RequestMessage?.RequestUri,
+                                    body1: __body);
+                                __response.Dispose();
+                                return new global::Polar.AutoSDKHttpResponse<global::Polar.ExercisesDeprecatedClient.GetFitResult>(
+                                    statusCode: __result.StatusCode,
+                                    headers: __result.Headers,
+                                    requestUri: __result.RequestUri,
+                                    body: __result);
+                            }
+
+                            throw global::Polar.ApiException.Create(
+                                statusCode: __response.StatusCode,
+                                message: "The successful HTTP status and Content-Type do not match a declared response contract.",
+                                innerException: null,
+                                responseBody: null,
+                                responseHeaders: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response));
+
 
                 }
                 catch
                 {
                     __response.Dispose();
                     throw;
-                }
-            }
-            finally
-            {
-                __httpRequest?.Dispose();
-            }
-        }
-        /// <summary>
-        /// Get FIT<br/>
-        /// Retrieve exercise in FIT format. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files).
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="transactionId"></param>
-        /// <param name="exerciseId"></param>
-        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
-        /// <param name="cancellationToken">The token to cancel the operation with</param>
-        /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<byte[]>> GetFitAsResponseAsync(
-            int userId,
-            int transactionId,
-            int exerciseId,
-            global::Polar.AutoSDKRequestOptions? requestOptions = default,
-            global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            PrepareArguments(
-                client: HttpClient);
-            PrepareGetFitArguments(
-                httpClient: HttpClient,
-                userId: ref userId,
-                transactionId: ref transactionId,
-                exerciseId: ref exerciseId);
-
-
-            var __authorizations = global::Polar.EndPointSecurityResolver.ResolveAuthorizations(
-                availableAuthorizations: Authorizations,
-                securityRequirements: s_GetFitSecurityRequirements,
-                operationName: "GetFitAsync");
-
-            using var __timeoutCancellationTokenSource = global::Polar.AutoSDKRequestOptionsSupport.CreateTimeoutCancellationTokenSource(
-                clientOptions: Options,
-                requestOptions: requestOptions,
-                cancellationToken: cancellationToken);
-            var __effectiveCancellationToken = __timeoutCancellationTokenSource?.Token ?? cancellationToken;
-            var __effectiveReadResponseAsString = global::Polar.AutoSDKRequestOptionsSupport.GetReadResponseAsString(
-                clientOptions: Options,
-                requestOptions: requestOptions,
-                fallbackValue: ReadResponseAsString);
-            var __maxAttempts = global::Polar.AutoSDKRequestOptionsSupport.GetMaxAttempts(
-                clientOptions: Options,
-                requestOptions: requestOptions,
-                supportsRetry: true);
-
-            global::System.Net.Http.HttpRequestMessage __CreateHttpRequest()
-            {
-
-                            var __pathBuilder = new global::Polar.PathBuilder(
-                                path: $"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/fit",
-                                baseUri: HttpClient.BaseAddress);
-                            var __path = __pathBuilder.ToString();
-                __path = global::Polar.AutoSDKRequestOptionsSupport.AppendQueryParameters(
-                    path: __path,
-                    clientParameters: Options.QueryParameters,
-                    requestParameters: requestOptions?.QueryParameters);
-                var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
-                    method: global::System.Net.Http.HttpMethod.Get,
-                    requestUri: new global::System.Uri(__path, global::System.UriKind.RelativeOrAbsolute));
-#if NET6_0_OR_GREATER
-                __httpRequest.Version = global::System.Net.HttpVersion.Version11;
-                __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
-#endif
-
-            foreach (var __authorization in __authorizations)
-            {
-                if (__authorization.Type == "Http" ||
-                    __authorization.Type == "OAuth2" ||
-                    __authorization.Type == "OpenIdConnect")
-                {
-                    __httpRequest.Headers.Authorization = new global::System.Net.Http.Headers.AuthenticationHeaderValue(
-                        scheme: __authorization.Name,
-                        parameter: __authorization.Value);
-                }
-                else if (__authorization.Type == "ApiKey" &&
-                         __authorization.Location == "Header")
-                {
-                    __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                }
-            }
-                global::Polar.AutoSDKRequestOptionsSupport.ApplyHeaders(
-                    request: __httpRequest,
-                    clientHeaders: Options.Headers,
-                    requestHeaders: requestOptions?.Headers);
-
-                PrepareRequest(
-                    client: HttpClient,
-                    request: __httpRequest);
-                PrepareGetFitRequest(
-                    httpClient: HttpClient,
-                    httpRequestMessage: __httpRequest,
-                    userId: userId,
-                    transactionId: transactionId,
-                    exerciseId: exerciseId);
-
-                return __httpRequest;
-            }
-
-            global::System.Net.Http.HttpRequestMessage? __httpRequest = null;
-            global::System.Net.Http.HttpResponseMessage? __response = null;
-            var __attemptNumber = 0;
-            try
-            {
-                for (var __attempt = 1; __attempt <= __maxAttempts; __attempt++)
-                {
-                    __attemptNumber = __attempt;
-                    __httpRequest = __CreateHttpRequest();
-                    await global::Polar.AutoSDKRequestOptionsSupport.OnBeforeRequestAsync(
-                            clientOptions: Options,
-                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetFit",
-                                methodName: "GetFitAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/fit\"",
-                                httpMethod: "GET",
-                                baseUri: BaseUri,
-                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
-                                response: null,
-                                exception: null,
-                                clientOptions: Options,
-                                requestOptions: requestOptions,
-                                attempt: __attempt,
-                                maxAttempts: __maxAttempts,
-                                willRetry: false,
-                                retryDelay: null,
-                                retryReason: global::System.String.Empty,
-                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
-                    try
-                    {
-                        __response = await HttpClient.SendAsync(
-                request: __httpRequest,
-                completionOption: global::System.Net.Http.HttpCompletionOption.ResponseContentRead,
-                cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
-                    }
-                    catch (global::System.Net.Http.HttpRequestException __exception)
-                    {
-                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
-                            response: null,
-                            attempt: __attempt);
-                        var __willRetry = __attempt < __maxAttempts && !__effectiveCancellationToken.IsCancellationRequested;
-                        await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
-                            clientOptions: Options,
-                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetFit",
-                                methodName: "GetFitAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/fit\"",
-                                httpMethod: "GET",
-                                baseUri: BaseUri,
-                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
-                                response: null,
-                                exception: __exception,
-                                clientOptions: Options,
-                                requestOptions: requestOptions,
-                                attempt: __attempt,
-                                maxAttempts: __maxAttempts,
-                                willRetry: __willRetry,
-                                retryDelay: __willRetry ? __retryDelay : (global::System.TimeSpan?)null,
-                                retryReason: "exception",
-                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
-                        if (!__willRetry)
-                        {
-                            throw;
-                        }
-
-                        __httpRequest.Dispose();
-                        __httpRequest = null;
-                        await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            retryDelay: __retryDelay,
-                            cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
-                        continue;
-                    }
-
-                    if (__response != null &&
-                        __attempt < __maxAttempts &&
-                        global::Polar.AutoSDKRequestOptionsSupport.ShouldRetryStatusCode(__response.StatusCode))
-                    {
-                        var __retryDelay = global::Polar.AutoSDKRequestOptionsSupport.GetRetryDelay(
-                            clientOptions: Options,
-                            requestOptions: requestOptions,
-                            response: __response,
-                            attempt: __attempt);
-                        await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
-                            clientOptions: Options,
-                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetFit",
-                                methodName: "GetFitAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/fit\"",
-                                httpMethod: "GET",
-                                baseUri: BaseUri,
-                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
-                                response: __response,
-                                exception: null,
-                                clientOptions: Options,
-                                requestOptions: requestOptions,
-                                attempt: __attempt,
-                                maxAttempts: __maxAttempts,
-                                willRetry: true,
-                                retryDelay: __retryDelay,
-                                retryReason: "status:" + ((int)__response.StatusCode).ToString(global::System.Globalization.CultureInfo.InvariantCulture),
-                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
-                        __response.Dispose();
-                        __response = null;
-                        __httpRequest.Dispose();
-                        __httpRequest = null;
-                        await global::Polar.AutoSDKRequestOptionsSupport.DelayBeforeRetryAsync(
-                            retryDelay: __retryDelay,
-                            cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
-                        continue;
-                    }
-
-                    break;
-                }
-
-                if (__response == null)
-                {
-                    throw new global::System.InvalidOperationException("No response received.");
-                }
-
-                using (__response)
-                {
-
-                ProcessResponse(
-                    client: HttpClient,
-                    response: __response);
-                ProcessGetFitResponse(
-                    httpClient: HttpClient,
-                    httpResponseMessage: __response);
-                if (__response.IsSuccessStatusCode)
-                {
-                    await global::Polar.AutoSDKRequestOptionsSupport.OnAfterSuccessAsync(
-                            clientOptions: Options,
-                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetFit",
-                                methodName: "GetFitAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/fit\"",
-                                httpMethod: "GET",
-                                baseUri: BaseUri,
-                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
-                                response: __response,
-                                exception: null,
-                                clientOptions: Options,
-                                requestOptions: requestOptions,
-                                attempt: __attemptNumber,
-                                maxAttempts: __maxAttempts,
-                                willRetry: false,
-                                retryDelay: null,
-                                retryReason: global::System.String.Empty,
-                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
-                }
-                else
-                {
-                    await global::Polar.AutoSDKRequestOptionsSupport.OnAfterErrorAsync(
-                            clientOptions: Options,
-                            context: global::Polar.AutoSDKRequestOptionsSupport.CreateHookContext(
-                                operationId: "GetFit",
-                                methodName: "GetFitAsync",
-                                pathTemplate: "$\"/v3/users/{userId}/exercise-transactions/{transactionId}/exercises/{exerciseId}/fit\"",
-                                httpMethod: "GET",
-                                baseUri: BaseUri,
-                                request: __httpRequest ?? throw new global::System.InvalidOperationException("The HTTP request was not created before invoking a request hook."),
-                                response: __response,
-                                exception: null,
-                                clientOptions: Options,
-                                requestOptions: requestOptions,
-                                attempt: __attemptNumber,
-                                maxAttempts: __maxAttempts,
-                                willRetry: false,
-                                retryDelay: null,
-                                retryReason: global::System.String.Empty,
-                                cancellationToken: __effectiveCancellationToken)).ConfigureAwait(false);
-                }
-                            //
-                            if ((int)__response.StatusCode == 403)
-                            {
-                                string? __content_403 = null;
-                                global::System.Exception? __exception_403 = null;
-                                try
-                                {
-                                    if (__effectiveReadResponseAsString)
-                                    {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                    else
-                                    {
-                                        __content_403 = await __response.Content.ReadAsStringAsync(__effectiveCancellationToken).ConfigureAwait(false);
-                                    }
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    __exception_403 = __ex;
-                                }
-
-
-                                throw global::Polar.ApiException.Create(
-                                    statusCode: __response.StatusCode,
-                                    message: __content_403 ?? __response.ReasonPhrase ?? string.Empty,
-                                    innerException: __exception_403,
-                                    responseBody: __content_403,
-                                    responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                        __response.Headers,
-                                        h => h.Key,
-                                        h => h.Value));
-                            }
-
-                            if (__effectiveReadResponseAsString)
-                            {
-                                var __content = await __response.Content.ReadAsByteArrayAsync(
-                #if NET5_0_OR_GREATER
-                                    __effectiveCancellationToken
-                #endif
-                                ).ConfigureAwait(false);
-
-                                ProcessGetFitResponseContent(
-                                    httpClient: HttpClient,
-                                    httpResponseMessage: __response,
-                                    content: ref __content);
-
-                                try
-                                {
-                                    __response.EnsureSuccessStatusCode();
-
-                                    return new global::Polar.AutoSDKHttpResponse<byte[]>(
-                                        statusCode: __response.StatusCode,
-                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
-                                        requestUri: __response.RequestMessage?.RequestUri,
-                                        body: __content);
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    throw global::Polar.ApiException.Create(
-                                        statusCode: __response.StatusCode,
-                                        message: __response.ReasonPhrase ?? string.Empty,
-                                        innerException: __ex,
-                                        responseBody: null,
-                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                            __response.Headers,
-                                            h => h.Key,
-                                            h => h.Value));
-                                }
-                            }
-                            else
-                            {
-                                try
-                                {
-                                    __response.EnsureSuccessStatusCode();
-                                    var __content = await __response.Content.ReadAsByteArrayAsync(
-                #if NET5_0_OR_GREATER
-                                        __effectiveCancellationToken
-                #endif
-                                    ).ConfigureAwait(false);
-
-                                    return new global::Polar.AutoSDKHttpResponse<byte[]>(
-                                        statusCode: __response.StatusCode,
-                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
-                                        requestUri: __response.RequestMessage?.RequestUri,
-                                        body: __content);
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    string? __content = null;
-                                    try
-                                    {
-                                        __content = await __response.Content.ReadAsStringAsync(
-                #if NET5_0_OR_GREATER
-                                            __effectiveCancellationToken
-                #endif
-                                        ).ConfigureAwait(false);
-                                    }
-                                    catch (global::System.Exception)
-                                    {
-                                    }
-
-                                    throw global::Polar.ApiException.Create(
-                                        statusCode: __response.StatusCode,
-                                        message: __content ?? __response.ReasonPhrase ?? string.Empty,
-                                        innerException: __ex,
-                                        responseBody: __content,
-                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                            __response.Headers,
-                                            h => h.Key,
-                                            h => h.Value));
-                                }
-                            }
-
                 }
             }
             finally

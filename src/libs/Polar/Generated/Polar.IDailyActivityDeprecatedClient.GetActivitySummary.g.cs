@@ -13,7 +13,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.Activity> GetActivitySummaryAsync(
+        global::System.Threading.Tasks.Task<global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult> GetActivitySummaryAsync(
             int userId,
             int transactionId,
             int activityId,
@@ -28,7 +28,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.Activity>> GetActivitySummaryAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult>> GetActivitySummaryAsResponseAsync(
             int userId,
             int transactionId,
             int activityId,

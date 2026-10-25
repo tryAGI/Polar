@@ -6,6 +6,38 @@ namespace Polar
     public partial class DailyActivityDeprecatedClient
     {
 
+        /// <summary>
+        /// A successful outcome selected by the actual HTTP status and media type.
+        /// Dispose this result after consuming its binary body to release the HTTP response.
+        /// </summary>
+        public sealed class GetActivitySummaryResult : global::Polar.AutoSDKHttpResponse, global::System.IDisposable
+        {
+            internal GetActivitySummaryResult(
+                global::System.Net.HttpStatusCode statusCode,
+                global::System.Collections.Generic.Dictionary<string, global::System.Collections.Generic.IEnumerable<string>> headers,
+                global::System.Uri? requestUri,
+                global::Polar.Activity? body0 = default,
+                global::System.IO.Stream? body1 = default,
+                object? body2 = default)
+                : base(statusCode, headers, requestUri)
+            {
+                Body200Variant0 = body0;
+                Body200Variant1 = body1;
+                Body204 = body2;
+            }
+            /// <summary>Gets the body for HTTP 200; null for other outcomes.</summary>
+            public global::Polar.Activity? Body200Variant0 { get; }
+            /// <summary>Gets the body for HTTP 200; null for other outcomes.</summary>
+            public global::System.IO.Stream? Body200Variant1 { get; }
+            /// <summary>Gets the body for HTTP 204; null for other outcomes.</summary>
+            public object? Body204 { get; }
+            /// <summary>Releases the binary response stream, if present.</summary>
+            public void Dispose()
+            {
+                Body200Variant1?.Dispose();
+            }
+        }
+
 
         private static readonly global::Polar.EndPointSecurityRequirement s_GetActivitySummarySecurityRequirement0 =
             new global::Polar.EndPointSecurityRequirement
@@ -54,7 +86,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.Activity> GetActivitySummaryAsync(
+        public async global::System.Threading.Tasks.Task<global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult> GetActivitySummaryAsync(
             int userId,
             int transactionId,
             int activityId,
@@ -80,7 +112,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.Activity>> GetActivitySummaryAsResponseAsync(
+        public async global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult>> GetActivitySummaryAsResponseAsync(
             int userId,
             int transactionId,
             int activityId,
@@ -133,10 +165,6 @@ namespace Polar
                 __httpRequest.Version = global::System.Net.HttpVersion.Version11;
                 __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
-
-                __httpRequest.Headers.TryAddWithoutValidation(
-                    "Accept",
-                    "application/json");
 
             foreach (var __authorization in __authorizations)
             {
@@ -204,7 +232,7 @@ namespace Polar
                     {
                         __response = await HttpClient.SendAsync(
                 request: __httpRequest,
-                completionOption: global::System.Net.Http.HttpCompletionOption.ResponseContentRead,
+                completionOption: global::System.Net.Http.HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken: __effectiveCancellationToken).ConfigureAwait(false);
                     }
                     catch (global::System.Net.Http.HttpRequestException __exception)
@@ -293,7 +321,7 @@ namespace Polar
                     throw new global::System.InvalidOperationException("No response received.");
                 }
 
-                using (__response)
+                try
                 {
 
                 ProcessResponse(
@@ -379,94 +407,92 @@ namespace Polar
                                         h => h.Value));
                             }
 
-                            if (__effectiveReadResponseAsString)
+                            if (!__response.IsSuccessStatusCode)
+                            {
+                                var __errorContent = await __response.Content.ReadAsStringAsync(
+                #if NET5_0_OR_GREATER
+                                    __effectiveCancellationToken
+                #endif
+                                ).ConfigureAwait(false);
+                                throw global::Polar.ApiException.Create(
+                                    statusCode: __response.StatusCode,
+                                    message: __errorContent,
+                                    innerException: null,
+                                    responseBody: __errorContent,
+                                    responseHeaders: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response));
+                            }
+                            var __mediaType = __response.Content.Headers.ContentType?.MediaType;
+
+                            if (((int)__response.StatusCode == 200) && (global::System.String.Equals(__mediaType, "application/json", global::System.StringComparison.OrdinalIgnoreCase)))
                             {
                                 var __content = await __response.Content.ReadAsStringAsync(
                 #if NET5_0_OR_GREATER
                                     __effectiveCancellationToken
                 #endif
                                 ).ConfigureAwait(false);
-
-                                ProcessResponseContent(
-                                    client: HttpClient,
-                                    response: __response,
-                                    content: ref __content);
-                                ProcessGetActivitySummaryResponseContent(
-                                    httpClient: HttpClient,
-                                    httpResponseMessage: __response,
-                                    content: ref __content);
-
-                                try
-                                {
-                                    __response.EnsureSuccessStatusCode();
-
-                                    var __value = global::Polar.Activity.FromJson(__content, JsonSerializerContext) ??
-                                        throw new global::System.InvalidOperationException($"Response deserialization failed for \"{__content}\" ");
-                                    return new global::Polar.AutoSDKHttpResponse<global::Polar.Activity>(
-                                        statusCode: __response.StatusCode,
-                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
-                                        requestUri: __response.RequestMessage?.RequestUri,
-                                        body: __value);
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    throw global::Polar.ApiException.Create(
-                                        statusCode: __response.StatusCode,
-                                        message: __content ?? __response.ReasonPhrase ?? string.Empty,
-                                        innerException: __ex,
-                                        responseBody: __content,
-                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                            __response.Headers,
-                                            h => h.Key,
-                                            h => h.Value));
-                                }
+                                var __body = global::Polar.Activity.FromJson(__content, JsonSerializerContext) ?? throw new global::System.InvalidOperationException("Response deserialization failed.");
+                                var __result = new global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult(
+                                    statusCode: __response.StatusCode,
+                                    headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                    requestUri: __response.RequestMessage?.RequestUri,
+                                    body0: __body);
+                                __response.Dispose();
+                                return new global::Polar.AutoSDKHttpResponse<global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult>(
+                                    statusCode: __result.StatusCode,
+                                    headers: __result.Headers,
+                                    requestUri: __result.RequestUri,
+                                    body: __result);
                             }
-                            else
+
+                            if (((int)__response.StatusCode == 200) && (global::System.String.Equals(__mediaType, "application/xml", global::System.StringComparison.OrdinalIgnoreCase)))
                             {
-                                try
-                                {
-                                    __response.EnsureSuccessStatusCode();
-                                    using var __content = await __response.Content.ReadAsStreamAsync(
+                                var __stream = await __response.Content.ReadAsStreamAsync(
                 #if NET5_0_OR_GREATER
-                                        __effectiveCancellationToken
+                                    __effectiveCancellationToken
                 #endif
-                                    ).ConfigureAwait(false);
-
-                                    var __value = await global::Polar.Activity.FromJsonStreamAsync(__content, JsonSerializerContext).ConfigureAwait(false) ??
-                                        throw new global::System.InvalidOperationException("Response deserialization failed.");
-                                    return new global::Polar.AutoSDKHttpResponse<global::Polar.Activity>(
-                                        statusCode: __response.StatusCode,
-                                        headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
-                                        requestUri: __response.RequestMessage?.RequestUri,
-                                        body: __value);
-                                }
-                                catch (global::System.Exception __ex)
-                                {
-                                    string? __content = null;
-                                    try
-                                    {
-                                        __content = await __response.Content.ReadAsStringAsync(
-                #if NET5_0_OR_GREATER
-                                            __effectiveCancellationToken
-                #endif
-                                        ).ConfigureAwait(false);
-                                    }
-                                    catch (global::System.Exception)
-                                    {
-                                    }
-
-                                    throw global::Polar.ApiException.Create(
-                                        statusCode: __response.StatusCode,
-                                        message: __content ?? __response.ReasonPhrase ?? string.Empty,
-                                        innerException: __ex,
-                                        responseBody: __content,
-                                        responseHeaders: global::System.Linq.Enumerable.ToDictionary(
-                                            __response.Headers,
-                                            h => h.Key,
-                                            h => h.Value));
-                                }
+                                ).ConfigureAwait(false);
+                                var __body = new global::Polar.ResponseStream(__response, __stream);
+                                var __result = new global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult(
+                                    statusCode: __response.StatusCode,
+                                    headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                    requestUri: __response.RequestMessage?.RequestUri,
+                                    body1: __body);
+                                return new global::Polar.AutoSDKHttpResponse<global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult>(
+                                    statusCode: __result.StatusCode,
+                                    headers: __result.Headers,
+                                    requestUri: __result.RequestUri,
+                                    body: __result);
                             }
 
+                            if (((int)__response.StatusCode == 204) && (true))
+                            {
+                                object? __body = null;
+                                var __result = new global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult(
+                                    statusCode: __response.StatusCode,
+                                    headers: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response),
+                                    requestUri: __response.RequestMessage?.RequestUri,
+                                    body2: __body);
+                                __response.Dispose();
+                                return new global::Polar.AutoSDKHttpResponse<global::Polar.DailyActivityDeprecatedClient.GetActivitySummaryResult>(
+                                    statusCode: __result.StatusCode,
+                                    headers: __result.Headers,
+                                    requestUri: __result.RequestUri,
+                                    body: __result);
+                            }
+
+                            throw global::Polar.ApiException.Create(
+                                statusCode: __response.StatusCode,
+                                message: "The successful HTTP status and Content-Type do not match a declared response contract.",
+                                innerException: null,
+                                responseBody: null,
+                                responseHeaders: global::Polar.AutoSDKHttpResponse.CreateHeaders(__response));
+
+
+                }
+                catch
+                {
+                    __response.Dispose();
+                    throw;
                 }
             }
             finally

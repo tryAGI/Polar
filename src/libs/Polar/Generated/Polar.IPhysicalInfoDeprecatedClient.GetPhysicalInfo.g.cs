@@ -14,7 +14,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.PhysicalInformation> GetPhysicalInfoAsync(
+        global::System.Threading.Tasks.Task<global::Polar.PhysicalInfoDeprecatedClient.GetPhysicalInfoResult> GetPhysicalInfoAsync(
             int userId,
             int transactionId,
             int physicalInfoId,
@@ -30,7 +30,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.PhysicalInformation>> GetPhysicalInfoAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.PhysicalInfoDeprecatedClient.GetPhysicalInfoResult>> GetPhysicalInfoAsResponseAsync(
             int userId,
             int transactionId,
             int physicalInfoId,

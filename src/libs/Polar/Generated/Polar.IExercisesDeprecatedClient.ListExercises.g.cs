@@ -13,7 +13,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.Exercises> ListExercisesAsync(
+        global::System.Threading.Tasks.Task<global::Polar.ExercisesDeprecatedClient.ListExercisesResult> ListExercisesAsync(
             long transactionId,
             int userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
@@ -27,7 +27,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.Exercises>> ListExercisesAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.ExercisesDeprecatedClient.ListExercisesResult>> ListExercisesAsResponseAsync(
             long transactionId,
             int userId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
