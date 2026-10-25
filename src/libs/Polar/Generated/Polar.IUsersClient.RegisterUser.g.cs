@@ -12,7 +12,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.User> RegisterUserAsync(
+        global::System.Threading.Tasks.Task<global::Polar.UsersClient.RegisterUserResult> RegisterUserAsync(
 
             global::Polar.Register request,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
@@ -25,7 +25,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.User>> RegisterUserAsResponseAsync(
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::Polar.UsersClient.RegisterUserResult>> RegisterUserAsResponseAsync(
 
             global::Polar.Register request,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
@@ -41,7 +41,7 @@ namespace Polar
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::System.InvalidOperationException"></exception>
-        global::System.Threading.Tasks.Task<global::Polar.User> RegisterUserAsync(
+        global::System.Threading.Tasks.Task<global::Polar.UsersClient.RegisterUserResult> RegisterUserAsync(
             string memberId,
             global::Polar.AutoSDKRequestOptions? requestOptions = default,
             global::System.Threading.CancellationToken cancellationToken = default);
