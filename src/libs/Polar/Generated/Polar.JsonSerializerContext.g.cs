@@ -144,6 +144,7 @@ namespace Polar
     #pragma warning restore CS3016
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.JsonSerializerContextTypes))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<object>), TypeInfoPropertyName = "SystemCollectionsGeneric_ObjectList")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(string[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.TrainingLoadProRpeEnum), TypeInfoPropertyName = "TrainingLoadProRpeEnum2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.TrainingLoadProLoadEnum), TypeInfoPropertyName = "TrainingLoadProLoadEnum2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.TrainingLoadProSample))]
