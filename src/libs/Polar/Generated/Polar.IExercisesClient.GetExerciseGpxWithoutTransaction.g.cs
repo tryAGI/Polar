@@ -33,6 +33,19 @@ namespace Polar
         /// GPX file for users exercise without an AccessLink "transaction". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available.
         /// </summary>
         /// <param name="exerciseId"></param>
+        /// <returns>The response metadata and an unbuffered body stream. The caller must dispose Body to release the HTTP response.</returns>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Polar.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Polar.AutoSDKHttpResponse<global::System.IO.Stream>> GetExerciseGpxWithoutTransactionAsStreamAsResponseAsync(
+            string exerciseId,
+            global::Polar.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get exercise GPX<br/>
+        /// GPX file for users exercise without an AccessLink "transaction". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available.
+        /// </summary>
+        /// <param name="exerciseId"></param>
         /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
         /// <param name="cancellationToken">The token to cancel the operation with</param>
         /// <exception cref="global::Polar.ApiException"></exception>
