@@ -5,7 +5,7 @@ info:
   title: Polar AccessLink API
   contact:
     name: Support
-    url: 'https://www.polar.com/accesslink'
+    url: 'https://www.polar.com/business'
     email: b2bhelpdesk@polar.com
   license:
     name: Polar Electro AccessLink Limited License Agreement
@@ -4087,7 +4087,7 @@ components:
             "00:39": 2,
             "00:50": 3,
             "01:23": 5
-          }
+            }
           description: >-
             The time span between when you fell asleep and when you woke up is classified into light,
             deep or REM sleep, or unrecognised or wake in 30-s epochs.
@@ -4101,7 +4101,7 @@ components:
             "00:41": 76,
             "00:46": 77,
             "00:51": 76
-          }
+            }
           description: >-
             5 min average samples of heart rate from the duration of the sleep. Default time between samples is 5
             minutes. There may be periods with samples more often than every 5 minutes. Unit of samples is beats
@@ -4210,7 +4210,7 @@ components:
             "00:41": 14,
             "00:46": 14,
             "00:51": 15
-          }
+            }
           description: >-
             5-minute average samples of heart rate variability. Unit of samples is milliseconds(ms).
 
@@ -4220,7 +4220,7 @@ components:
             "00:39": 13.4,
             "00:44": 13.5,
             "00:49": 13.5
-          }
+            }
           description: >-
             5-minute average samples of breathing rate. Unit of samples is breaths per minute (bpm).
 
