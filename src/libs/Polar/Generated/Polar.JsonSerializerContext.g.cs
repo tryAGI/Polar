@@ -227,6 +227,7 @@ namespace Polar
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadExercise))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadSleep))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadContinuousHeartRate))]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadNightlyRecharge))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadCircadianBedtime))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadAlertness))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Polar.WebhookPayloadActivitySummary))]

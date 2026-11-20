@@ -4,7 +4,7 @@
 namespace Polar
 {
     /// <summary>
-    /// Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
+    /// Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY, PHYSICAL_INFORMATION and NIGHTLY_RECHARGE are supported.
     /// </summary>
     public enum WebhookType
     {
@@ -20,6 +20,10 @@ namespace Polar
         ///
         /// </summary>
         Exercise,
+        /// <summary>
+        ///
+        /// </summary>
+        NightlyRecharge,
         /// <summary>
         ///
         /// </summary>
@@ -53,6 +57,7 @@ namespace Polar
                 WebhookType.ActivitySummary => "ACTIVITY_SUMMARY",
                 WebhookType.ContinuousHeartRate => "CONTINUOUS_HEART_RATE",
                 WebhookType.Exercise => "EXERCISE",
+                WebhookType.NightlyRecharge => "NIGHTLY_RECHARGE",
                 WebhookType.PhysicalInformation => "PHYSICAL_INFORMATION",
                 WebhookType.Sleep => "SLEEP",
                 WebhookType.SleepWiseAlertness => "SLEEP_WISE_ALERTNESS",
@@ -70,6 +75,7 @@ namespace Polar
                 "ACTIVITY_SUMMARY" => WebhookType.ActivitySummary,
                 "CONTINUOUS_HEART_RATE" => WebhookType.ContinuousHeartRate,
                 "EXERCISE" => WebhookType.Exercise,
+                "NIGHTLY_RECHARGE" => WebhookType.NightlyRecharge,
                 "PHYSICAL_INFORMATION" => WebhookType.PhysicalInformation,
                 "SLEEP" => WebhookType.Sleep,
                 "SLEEP_WISE_ALERTNESS" => WebhookType.SleepWiseAlertness,
