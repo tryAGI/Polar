@@ -3730,6 +3730,34 @@ components:
           format: uri
           example: https://www.polaraccesslink.com/v3/users/continuous-heart-rate/2022-09-30
           description: Url to the new available data.
+    webhookPayloadNightlyRecharge:
+      description:
+        Payload example for webhook payload for event type NIGHTLY_RECHARGE. This event is sent when new Nightly Recharge data is available for the user.
+      type: object
+      properties:
+        event:
+          type: string
+          example: NIGHTLY_RECHARGE
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        date:
+          type: string
+          example: '2022-09-30'
+          description: Date of the available Nightly Recharge data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2022-10-01T07:22:24Z'
+          description: Time when webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/nightly-recharge/2022-09-30
+          description: Url to the new available data.
     webhookPayloadCircadianBedtime:
       description:
         Payload example for webhook payload for event type SLEEP_WISE_CIRCADIAN_BEDTIME. This event is sent when new circadian bedtime data is available for the user.
@@ -3891,7 +3919,8 @@ components:
         - SLEEP_WISE_ALERTNESS
         - ACTIVITY_SUMMARY
         - PHYSICAL_INFORMATION
-      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
+        - NIGHTLY_RECHARGE
+      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY, PHYSICAL_INFORMATION and NIGHTLY_RECHARGE are supported.
     zone:
       type: object
       properties:
